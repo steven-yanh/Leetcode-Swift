@@ -464,7 +464,7 @@
 //    public init() { self.val = 0; self.next = nil; }
 //    public init(_ val: Int) { self.val = val; self.next = nil; }
 //    public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
-}
+//}
 //MARK: iterative
 //class Solution {
 //    func reverseList(_ head: ListNode?) -> ListNode? {
@@ -601,3 +601,61 @@
 //        return ans
 //    }
 //}
+//MARK: - 424. Longest Repeating Character Replacement
+//let s = "AABABBA", k = 1
+//let solution = Solution()
+//print(solution.characterReplacement(s, k))
+//MARK: sample solution (17ms)
+//class Solution {
+//    func characterReplacement(_ s: String, _ k: Int) -> Int {
+//        var characterDictionary = [UInt16: Int]() // can also be [Character: Int]
+//        var leftWindowIndex = 0
+//        var largestWindowSize = 0
+//        var longestString = 0
+//        
+//        let arraySlice = ArraySlice<UInt16>(s.utf16)
+//        
+//        for rightWindowIndex in 0..<arraySlice.count {
+//            // making a const here to avoid accessing this twice and readability
+//            let uint16CharacterCount = characterDictionary[arraySlice[rightWindowIndex], default: 0]
+//            // increment character count
+//            characterDictionary[arraySlice[rightWindowIndex]] = uint16CharacterCount + 1
+//            // update largestWindowSize
+//            largestWindowSize = max(largestWindowSize, uint16CharacterCount + 1)
+//            
+//            // if the window is larger than k, we need to increase the left index until it isn't
+//            // once we reach the end of the array we no longer need to do this check
+//            while rightWindowIndex - leftWindowIndex + 1 - largestWindowSize > k , leftWindowIndex != arraySlice.count {
+//                characterDictionary[arraySlice[leftWindowIndex], default: 1] -= 1
+//                leftWindowIndex += 1
+//            }
+//            
+//            // update longest string based on the current window size
+//            longestString = max(longestString, rightWindowIndex - leftWindowIndex + 1)
+//        }
+//        
+//        return longestString
+//    }
+//}
+//MARK: my solution
+//class Solution {
+//    func characterReplacement(_ s: String, _ k: Int) -> Int {
+//        var dict:[Character:Int] = [:]
+//        var result = 0
+//        var left = 0
+//        var maxf = 0
+//        for (r,char) in s.enumerated() {
+//            dict[char, default: 0] += 1
+//            maxf = dict.values.max()!
+//            while (r - left + 1) - maxf > k , left != s.count {
+//                dict[s[s.index(s.startIndex, offsetBy: left)]]! -= 1
+//
+//                left += 1
+//            }
+//            result = max(result, r - left + 1)
+//        }
+//        print(dict)
+//        return result
+//    }
+//}
+
