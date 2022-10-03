@@ -1,6 +1,6 @@
 //  Created by Huang Yan on 8/19/22.
 
-//import Foundation
+import Foundation
 //MARK: playing around stack and queue
 //var stack = Stack<Int>()
 //stack.push(1)
@@ -194,6 +194,29 @@
 //
 //}
 //
+
+//MARK: - 20. Valid Parentheses
+//let s = "()[]{{}"
+//let solution = Solution()
+//print(solution.isValid(s))
+//MARK: - my solution(passed) great 3ms
+//class Solution {
+//    func isValid(_ s: String) -> Bool {
+//        let dict: [Character:Character] = [")":"(",    "]":"[",    "}":"{"]
+//        var stack = [Character]()
+//        for char in s {
+//            if let symbol = dict[char] {
+//                if symbol != stack.popLast() {
+//                    return false
+//                }
+//            } else {
+//                stack.append(char)
+//            }
+//        }
+//        return stack.isEmpty
+//    }
+//}
+
 //MARK: - 36. Valid Sudoku
 //let board: [[Character]] = [["5","3",".",".","7",".",".",".","."],["6",".",".","1","9","5",".",".","."],[".","9","8",".",".",".",".","6","."],["8",".",".",".","6",".",".",".","3"],["4",".",".","8",".","3",".",".","1"],["7",".",".",".","2",".",".",".","6"],[".","6",".",".",".",".","2","8","."],[".",".",".","4","1","9",".",".","5"],[".",".",".",".","8",".",".","7","9"]]
 //let solution = Solution()
