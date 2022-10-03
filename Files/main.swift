@@ -472,6 +472,50 @@ import Foundation
 //    }
 //}
 
+//MARK: - 155. Min Stack
+
+
+class MinStack {
+    
+    var stack = [Int]()
+    var minStack = [Int]()
+    var currentMin: Int?
+    
+    init() {
+        stack = []
+    }
+    
+    func push(_ val: Int) {
+        stack.append(val)
+        if let min = currentMin {
+            if val < min {
+                currentMin = val
+            }
+        } else {
+            currentMin = val
+        }
+        minStack.append(currentMin!)
+    }
+    
+    func pop() {
+        stack.removeLast()
+        minStack.removeLast()
+        if minStack.isEmpty {
+            currentMin = nil
+            return
+        }
+        currentMin = minStack.last!
+    }
+    
+    func top() -> Int {
+        return stack.last!
+    }
+    
+    func getMin() -> Int {
+        return minStack.last!
+    }
+}
+
 //MARK: - 206. Reverse Linked List
 //let node5 = ListNode(5,nil)
 //let node4 = ListNode(4,node5)
