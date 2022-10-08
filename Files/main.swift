@@ -472,49 +472,89 @@ import Foundation
 //    }
 //}
 
-//MARK: - 155. Min Stack
+//MARK: - 150. Evaluate Reverse Polish Notation
 
+let tokens = ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
+let s = Solution()
+print(s.evalRPN(tokens))
 
-class MinStack {
-    
-    var stack = [Int]()
-    var minStack = [Int]()
-    var currentMin: Int?
-    
-    init() {
-        stack = []
-    }
-    
-    func push(_ val: Int) {
-        stack.append(val)
-        if let min = currentMin {
-            if val < min {
-                currentMin = val
+class Solution {
+    func evalRPN(_ tokens: [String]) -> Int {
+        var numStack: [Int] = []
+        for item in tokens {
+            switch item {
+            case "*":
+                let num2 = numStack.removeLast()
+                let num1 = numStack.removeLast()
+                let result = num1 * num2
+                numStack.append(result)
+            case "/":
+                let num2 = numStack.removeLast()
+                let num1 = numStack.removeLast()
+                let result = num1 / num2
+                numStack.append(result)
+            case "+":
+                let num2 = numStack.removeLast()
+                let num1 = numStack.removeLast()
+                let result = num1 + num2
+                numStack.append(result)
+            case "-":
+                let num2 = numStack.removeLast()
+                let num1 = numStack.removeLast()
+                let result = num1 - num2
+                numStack.append(result)
+            default:
+                let num = Int(item)!
+                numStack.append(num)
             }
-        } else {
-            currentMin = val
         }
-        minStack.append(currentMin!)
-    }
-    
-    func pop() {
-        stack.removeLast()
-        minStack.removeLast()
-        if minStack.isEmpty {
-            currentMin = nil
-            return
-        }
-        currentMin = minStack.last!
-    }
-    
-    func top() -> Int {
-        return stack.last!
-    }
-    
-    func getMin() -> Int {
-        return minStack.last!
+        return numStack[0]
     }
 }
+
+//MARK: - 155. Min Stack
+
+//MARK: my solution(great)
+//class MinStack {
+//
+//    var stack = [Int]()
+//    var minStack = [Int]()
+//    var currentMin: Int?
+//
+//    init() {
+//        stack = []
+//    }
+//
+//    func push(_ val: Int) {
+//        stack.append(val)
+//        if let min = currentMin {
+//            if val < min {
+//                currentMin = val
+//            }
+//        } else {
+//            currentMin = val
+//        }
+//        minStack.append(currentMin!)
+//    }
+//
+//    func pop() {
+//        stack.removeLast()
+//        minStack.removeLast()
+//        if minStack.isEmpty {
+//            currentMin = nil
+//            return
+//        }
+//        currentMin = minStack.last!
+//    }
+//
+//    func top() -> Int {
+//        return stack.last!
+//    }
+//
+//    func getMin() -> Int {
+//        return minStack.last!
+//    }
+//}
 
 //MARK: - 206. Reverse Linked List
 //let node5 = ListNode(5,nil)
