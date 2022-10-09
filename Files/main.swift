@@ -217,6 +217,42 @@ import Foundation
 //    }
 //}
 
+//MARK: - 22. Generate Parentheses
+let n = 3
+// ["((()))","(()())","(())()","()(())","()()()"]
+let s = Solution()
+print(s.generateParenthesis(n))
+class Solution {
+    func generateParenthesis(_ n: Int) -> [String] {
+        var ans = [String]()
+        let open = 0
+        let close = 0
+        let string = ""
+        generate(open: open, close: close,n: n ,string: string, ans: &ans)
+
+        return ans
+    }
+    func generate(open: Int, close: Int,n: Int, string: String, ans: inout [String]) {
+        if open == close && close == n {
+            ans.append(string)
+        }
+        if open < n {
+            var str = string
+            str.append("(")
+            var o = open
+            o += 1
+            generate(open: o, close: close, n: n, string: str, ans: &ans)
+        }
+        if close < open {
+            var str = string
+            str.append(")")
+            var c = close
+            c += 1
+            generate(open: open, close: c, n: n, string: str, ans: &ans)
+        }
+    }
+}
+
 //MARK: - 36. Valid Sudoku
 //let board: [[Character]] = [["5","3",".",".","7",".",".",".","."],["6",".",".","1","9","5",".",".","."],[".","9","8",".",".",".",".","6","."],["8",".",".",".","6",".",".",".","3"],["4",".",".","8",".","3",".",".","1"],["7",".",".",".","2",".",".",".","6"],[".","6",".",".",".",".","2","8","."],[".",".",".","4","1","9",".",".","5"],[".",".",".",".","8",".",".","7","9"]]
 //let solution = Solution()
@@ -473,44 +509,44 @@ import Foundation
 //}
 
 //MARK: - 150. Evaluate Reverse Polish Notation
-
-let tokens = ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
-let s = Solution()
-print(s.evalRPN(tokens))
-
-class Solution {
-    func evalRPN(_ tokens: [String]) -> Int {
-        var numStack: [Int] = []
-        for item in tokens {
-            switch item {
-            case "*":
-                let num2 = numStack.removeLast()
-                let num1 = numStack.removeLast()
-                let result = num1 * num2
-                numStack.append(result)
-            case "/":
-                let num2 = numStack.removeLast()
-                let num1 = numStack.removeLast()
-                let result = num1 / num2
-                numStack.append(result)
-            case "+":
-                let num2 = numStack.removeLast()
-                let num1 = numStack.removeLast()
-                let result = num1 + num2
-                numStack.append(result)
-            case "-":
-                let num2 = numStack.removeLast()
-                let num1 = numStack.removeLast()
-                let result = num1 - num2
-                numStack.append(result)
-            default:
-                let num = Int(item)!
-                numStack.append(num)
-            }
-        }
-        return numStack[0]
-    }
-}
+//
+//let tokens = ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
+//let s = Solution()
+//print(s.evalRPN(tokens))
+//MARK: my solution (great)
+//class Solution {
+//    func evalRPN(_ tokens: [String]) -> Int {
+//        var numStack: [Int] = []
+//        for item in tokens {
+//            switch item {
+//            case "*":
+//                let num2 = numStack.removeLast()
+//                let num1 = numStack.removeLast()
+//                let result = num1 * num2
+//                numStack.append(result)
+//            case "/":
+//                let num2 = numStack.removeLast()
+//                let num1 = numStack.removeLast()
+//                let result = num1 / num2
+//                numStack.append(result)
+//            case "+":
+//                let num2 = numStack.removeLast()
+//                let num1 = numStack.removeLast()
+//                let result = num1 + num2
+//                numStack.append(result)
+//            case "-":
+//                let num2 = numStack.removeLast()
+//                let num1 = numStack.removeLast()
+//                let result = num1 - num2
+//                numStack.append(result)
+//            default:
+//                let num = Int(item)!
+//                numStack.append(num)
+//            }
+//        }
+//        return numStack[0]
+//    }
+//}
 
 //MARK: - 155. Min Stack
 
@@ -766,3 +802,39 @@ class Solution {
 //    }
 //}
 
+//MARK: - 739. Daily Temperatures
+//let temperatures = [73,74,75,71,69,72,76,73]
+//let s = Solution()
+//print(s.dailyTemperatures(temperatures))
+
+//MARK: my solution
+//class Solution {
+//    func dailyTemperatures(_ temperatures: [Int]) -> [Int] {
+//        var ans = [Int]()
+//        var changes = [Int]()
+//        for i in 0..<temperatures.count - 1 {
+//            let change = temperatures[i+1] - temperatures[i]
+//            changes.append(change)
+//        }
+//        print(changes)
+//        for i in 0..<changes.count {
+//            var accumulate = 0
+//            var dayCount = 0
+//            for j in i..<changes.count {
+//                dayCount += 1
+//                accumulate += changes[j]
+//                if accumulate >= 1 {
+//                    break
+//                }
+//            }
+//            if accumulate >= 1 {
+//                ans.append(dayCount)
+//            } else {
+//                ans.append(0)
+//            }
+//
+//        }
+//        ans.append(0)
+//        return ans
+//    }
+//}
