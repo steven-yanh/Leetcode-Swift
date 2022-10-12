@@ -218,40 +218,40 @@ import Foundation
 //}
 
 //MARK: - 22. Generate Parentheses
-let n = 3
-// ["((()))","(()())","(())()","()(())","()()()"]
-let s = Solution()
-print(s.generateParenthesis(n))
-class Solution {
-    func generateParenthesis(_ n: Int) -> [String] {
-        var ans = [String]()
-        let open = 0
-        let close = 0
-        let string = ""
-        generate(open: open, close: close,n: n ,string: string, ans: &ans)
-
-        return ans
-    }
-    func generate(open: Int, close: Int,n: Int, string: String, ans: inout [String]) {
-        if open == close && close == n {
-            ans.append(string)
-        }
-        if open < n {
-            var str = string
-            str.append("(")
-            var o = open
-            o += 1
-            generate(open: o, close: close, n: n, string: str, ans: &ans)
-        }
-        if close < open {
-            var str = string
-            str.append(")")
-            var c = close
-            c += 1
-            generate(open: open, close: c, n: n, string: str, ans: &ans)
-        }
-    }
-}
+//let n = 3
+//// ["((()))","(()())","(())()","()(())","()()()"]
+//let s = Solution()
+//print(s.generateParenthesis(n))
+//class Solution {
+//    func generateParenthesis(_ n: Int) -> [String] {
+//        var ans = [String]()
+//        let open = 0
+//        let close = 0
+//        let string = ""
+//        generate(open: open, close: close,n: n ,string: string, ans: &ans)
+//
+//        return ans
+//    }
+//    func generate(open: Int, close: Int,n: Int, string: String, ans: inout [String]) {
+//        if open == close && close == n {
+//            ans.append(string)
+//        }
+//        if open < n {
+//            var str = string
+//            str.append("(")
+//            var o = open
+//            o += 1
+//            generate(open: o, close: close, n: n, string: str, ans: &ans)
+//        }
+//        if close < open {
+//            var str = string
+//            str.append(")")
+//            var c = close
+//            c += 1
+//            generate(open: open, close: c, n: n, string: str, ans: &ans)
+//        }
+//    }
+//}
 
 //MARK: - 36. Valid Sudoku
 //let board: [[Character]] = [["5","3",".",".","7",".",".",".","."],["6",".",".","1","9","5",".",".","."],[".","9","8",".",".",".",".","6","."],["8",".",".",".","6",".",".",".","3"],["4",".",".","8",".","3",".",".","1"],["7",".",".",".","2",".",".",".","6"],[".","6",".",".",".",".","2","8","."],[".",".",".","4","1","9",".",".","5"],[".",".",".",".","8",".",".","7","9"]]
@@ -799,6 +799,110 @@ class Solution {
 //        }
 //        print(dict)
 //        return result
+//    }
+//}
+
+//MARK: - 567. Permutation in String
+let s1 = "adc", s2 = "dcda"
+let s = Solution()
+print(s.checkInclusion(s1, s2))
+
+//MARK: my solution (hinted)
+class Solution {
+    func checkInclusion(_ s1: String, _ s2: String) -> Bool {
+        guard s2.count >= s1.count else { return false}
+        
+        let s1Array = Array(s1)
+        let s2Array = Array(s2)
+        var s1Count = Array(repeating: 0, count: 26)
+        var s2Count = Array(repeating: 0, count: 26)
+        let letterA: Character = "a"
+        let asciiValueOfA = letterA.asciiValue!
+    
+        for i in 0..<s1Array.count {
+            s1Count[Int(s1Array[i].asciiValue! - asciiValueOfA)] += 1
+            s2Count[Int(s2Array[i].asciiValue! - asciiValueOfA)] += 1
+        }
+        var match = 0
+        for i in 0...25 {
+            if s1Count[i] == s2Count[i] {
+                match += 1
+            }
+        }
+        print(match)
+        for i in s1.count..<s2.count {
+            if match == 26 {
+                return true
+            }
+            var index = Int(s2Array[i].asciiValue! - asciiValueOfA)
+            s2Count[index] += 1
+            if s1Count[index] == s2Count[index] {
+                match += 1
+            } else if s1Count[index] + 1 == s2Count[index] {
+                match -= 1
+            }
+            index = Int(s2Array[i-s1.count].asciiValue! - asciiValueOfA)
+            s2Count[index] -= 1
+            if s1Count[index] == s2Count[index] {
+                match += 1
+            } else if s1Count[index] - 1 == s2Count[index] {
+                match -= 1
+            }
+        }
+        
+        
+        return match == 26
+    }
+    
+}
+
+//MARK: my solution(v1) (n^2)
+//class Solution {
+//    func checkInclusion(_ s1: String, _ s2: String) -> Bool {
+//        for i in 0..<s2.count {
+//            var tem1 = s1
+//            var j = i
+//            let index = s2.index(s2.startIndex, offsetBy: j)
+//            var tem2 = s2[index...]
+//            if tem2.count >= tem1.count {
+//                while tem1.contains(tem2.first!) {
+//                    tem1.remove(at: tem1.firstIndex(of: tem2.first!)!)
+//                    let index = s2.index(s2.startIndex, offsetBy: j+1)
+//                    tem2 = s2[index...]
+//                    j += 1
+//                    if tem1.isEmpty {
+//                        return true
+//                    }
+//                }
+//            }
+//        }
+//        return false
+//    }
+//}
+//MARK: my solution (dictionary) still slow
+//class Solution {
+//    func checkInclusion(_ s1: String, _ s2: String) -> Bool {
+//        guard s2.count >= s1.count else { return false}
+//
+//        var s1Dictionary: [Character: Int] = [:]
+//        for char in s1 {
+//            s1Dictionary[char, default: 0] += 1
+//        }
+//        print(s1Dictionary)
+//        for i in 0...s2.count - s1.count {
+//            var s2Dictionary: [Character: Int] = [:]
+//            let startIndex = s2.index(s2.startIndex, offsetBy: i)
+//            let endIndex = s2.index(s2.startIndex, offsetBy: i+s1.count-1)
+//            let s2SubString = s2[startIndex...endIndex]
+//            for char in s2SubString {
+//                s2Dictionary[char, default: 0] += 1
+//            }
+//            if s1Dictionary == s2Dictionary {
+//                return true
+//            }
+//        }
+//
+//        return false
 //    }
 //}
 
