@@ -803,58 +803,58 @@ import Foundation
 //}
 
 //MARK: - 567. Permutation in String
-let s1 = "adc", s2 = "dcda"
-let s = Solution()
-print(s.checkInclusion(s1, s2))
+//let s1 = "adc", s2 = "dcda"
+//let s = Solution()
+//print(s.checkInclusion(s1, s2))
 
 //MARK: my solution (hinted)
-class Solution {
-    func checkInclusion(_ s1: String, _ s2: String) -> Bool {
-        guard s2.count >= s1.count else { return false}
-        
-        let s1Array = Array(s1)
-        let s2Array = Array(s2)
-        var s1Count = Array(repeating: 0, count: 26)
-        var s2Count = Array(repeating: 0, count: 26)
-        let letterA: Character = "a"
-        let asciiValueOfA = letterA.asciiValue!
-    
-        for i in 0..<s1Array.count {
-            s1Count[Int(s1Array[i].asciiValue! - asciiValueOfA)] += 1
-            s2Count[Int(s2Array[i].asciiValue! - asciiValueOfA)] += 1
-        }
-        var match = 0
-        for i in 0...25 {
-            if s1Count[i] == s2Count[i] {
-                match += 1
-            }
-        }
-        print(match)
-        for i in s1.count..<s2.count {
-            if match == 26 {
-                return true
-            }
-            var index = Int(s2Array[i].asciiValue! - asciiValueOfA)
-            s2Count[index] += 1
-            if s1Count[index] == s2Count[index] {
-                match += 1
-            } else if s1Count[index] + 1 == s2Count[index] {
-                match -= 1
-            }
-            index = Int(s2Array[i-s1.count].asciiValue! - asciiValueOfA)
-            s2Count[index] -= 1
-            if s1Count[index] == s2Count[index] {
-                match += 1
-            } else if s1Count[index] - 1 == s2Count[index] {
-                match -= 1
-            }
-        }
-        
-        
-        return match == 26
-    }
-    
-}
+//class Solution {
+//    func checkInclusion(_ s1: String, _ s2: String) -> Bool {
+//        guard s2.count >= s1.count else { return false}
+//
+//        let s1Array = Array(s1)
+//        let s2Array = Array(s2)
+//        var s1Count = Array(repeating: 0, count: 26)
+//        var s2Count = Array(repeating: 0, count: 26)
+//        let letterA: Character = "a"
+//        let asciiValueOfA = letterA.asciiValue!
+//
+//        for i in 0..<s1Array.count {
+//            s1Count[Int(s1Array[i].asciiValue! - asciiValueOfA)] += 1
+//            s2Count[Int(s2Array[i].asciiValue! - asciiValueOfA)] += 1
+//        }
+//        var match = 0
+//        for i in 0...25 {
+//            if s1Count[i] == s2Count[i] {
+//                match += 1
+//            }
+//        }
+//        print(match)
+//        for i in s1.count..<s2.count {
+//            if match == 26 {
+//                return true
+//            }
+//            var index = Int(s2Array[i].asciiValue! - asciiValueOfA)
+//            s2Count[index] += 1
+//            if s1Count[index] == s2Count[index] {
+//                match += 1
+//            } else if s1Count[index] + 1 == s2Count[index] {
+//                match -= 1
+//            }
+//            index = Int(s2Array[i-s1.count].asciiValue! - asciiValueOfA)
+//            s2Count[index] -= 1
+//            if s1Count[index] == s2Count[index] {
+//                match += 1
+//            } else if s1Count[index] - 1 == s2Count[index] {
+//                match -= 1
+//            }
+//        }
+//
+//
+//        return match == 26
+//    }
+//
+//}
 
 //MARK: my solution(v1) (n^2)
 //class Solution {
@@ -940,5 +940,33 @@ class Solution {
 //        }
 //        ans.append(0)
 //        return ans
+//    }
+//}
+//MARK: - 853. Car Fleet
+//let target = 10, position = [6,8], speed = [3,2]
+//let s = Solution()
+//print(s.carFleet(target, position, speed))
+//MARK: my solution (hinted) (passed)
+//class Solution {
+//    func carFleet(_ target: Int, _ position: [Int], _ speed: [Int]) -> Int {
+//        var cars = [(position: Int, time: Double)]()
+//        for i in 0..<position.count {
+//            let time = Double((target - position[i]))/Double(speed[i])
+//            cars.append((position: position[i], time: time))
+//        }
+//        cars = cars.sorted(by: { leftCar, rightCar in
+//            return leftCar.position < rightCar.position
+//        })
+//        print(cars)
+//
+//        var result = [(position: Int, time: Double)]()
+//        result.append(cars.last!)
+//        for i in stride(from: cars.count - 2, through: 0, by: -1) {
+//            if cars[i].time > result.last!.time {
+//                result.append(cars[i])
+//            }
+//        }
+//        print(result)
+//        return result.count
 //    }
 //}
