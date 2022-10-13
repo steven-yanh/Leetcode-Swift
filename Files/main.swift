@@ -681,6 +681,84 @@ import Foundation
 //    }
 //}
 
+//MARK: - 200. Number of Islands
+//let grid: [[Character]] = [
+//    ["1","1","1","1","0"],
+//    ["1","1","0","1","0"],
+//    ["1","1","0","0","0"],
+//    ["0","0","0","0","0"]
+//  ]
+//let s = Solution()
+//print(s.numIslands(grid))
+//MARK: my solution  (recursive)
+//class Solution {
+//    func numIslands(_ grid: [[Character]]) -> Int {
+//        let row = grid.count - 1
+//        let column = grid[0].count - 1
+//        var visitied: [[Int]:Int] = [:]
+//        var result = 0
+//        func bfs(_ r: Int,_ c: Int) {
+//            if r <= row && r >= 0 && c <= column && c >= 0 && grid[r][c] == "1" && visitied[[r,c]] == nil{
+//                visitied[[r,c]] = 1
+//                let directions = [[0,1],[0,-1],[1,0],[-1,0]]
+//                for direction in directions {
+//                    bfs(r + direction[0], c + direction[1])
+//                }
+//            }
+//        }
+//        for r in 0...row {
+//            for c in 0...column {
+//                if grid[r][c] == "1" && visitied[[r,c]] == nil{
+//                    result += 1
+//                    bfs(r, c)
+//                }
+//            }
+//        }
+//        return result
+//
+//    }
+//}
+//MARK: my solution (hinted) (BFS) (Iterative using Queue)
+//class Solution {
+//    func numIslands(_ grid: [[Character]]) -> Int {
+//        let row = grid.count - 1
+//        let column = grid[0].count - 1
+//        var visitied: [[Int]:Int] = [:]
+//        var result = 0
+//        func bfs(_ r: Int,_ c: Int) {
+//            var q: [[Int]] = []
+//            visitied[[r,c], default: 0] += 1
+//            q.append([r, c])
+//            while !q.isEmpty {
+//                let current = q.removeFirst() //deque
+//                var newR = current[0]
+//                var newC = current[1]
+//                visitied[[newR,newC], default: 0] += 1
+//                print("current:\(current)")
+//                let directions = [[0,1],[0,-1],[1,0],[-1,0]] //right, left, down(opposite) , up(visually up)
+//                for direction in directions {
+//                    newR += direction[0]
+//                    newC += direction[1]
+//                    if 0...row ~= newR && 0...column ~= newC && grid[newR][newC] == "1" && visitied[[newR,newC]] == nil {
+//                        q.append([newR,newC])
+//                    }
+//                }
+//            }
+//
+//        }
+//        for r in 0...row {
+//            for c in 0...column {
+//                if grid[r][c] == "1" && visitied[[r,c]] == nil{
+//                    result += 1
+//                    bfs(r, c)
+//                }
+//            }
+//        }
+//        return result
+//
+//    }
+//}
+
 //MARK: - 206. Reverse Linked List
 //let node5 = ListNode(5,nil)
 //let node4 = ListNode(4,node5)
