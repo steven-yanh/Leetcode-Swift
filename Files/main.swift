@@ -253,6 +253,39 @@ import Foundation
 //    }
 //}
 
+//MARK: - 33. Search in Rotated Sorted Array
+//let nums = [4,5,6,7,0,1,2], target = 5
+//let s = Solution()
+//print(s.search(nums, target))
+//MARK: my solution (hinted)
+//class Solution {
+//    func search(_ nums: [Int], _ target: Int) -> Int {
+//        var start = 0
+//        var end = nums.count - 1
+//        while start <= end {
+//            let middle = (start + end) / 2
+//            if nums[middle] == target {
+//                return middle
+//            }
+//
+//            if nums[start] <= nums[middle] {
+//                if target > nums[middle] || target < nums[start]{
+//                    start = middle + 1
+//                } else {
+//                    end = middle - 1
+//                }
+//            } else {
+//                if target > nums[end] || target < nums[middle]{
+//                    end = middle - 1
+//                } else {
+//                    start = middle + 1
+//                }
+//            }
+//        }
+//        return -1
+//    }
+//}
+
 //MARK: - 36. Valid Sudoku
 //let board: [[Character]] = [["5","3",".",".","7",".",".",".","."],["6",".",".","1","9","5",".",".","."],[".","9","8",".",".",".",".","6","."],["8",".",".",".","6",".",".",".","3"],["4",".",".","8",".","3",".",".","1"],["7",".",".",".","2",".",".",".","6"],[".","6",".",".",".",".","2","8","."],[".",".",".","4","1","9",".",".","5"],[".",".",".",".","8",".",".","7","9"]]
 //let solution = Solution()
@@ -260,10 +293,7 @@ import Foundation
 //MARK: my solution (passed)(great)
 //class Solution {
 //    func isValidSudoku(_ board: [[Character]]) -> Bool {
-//
 //        var boxDict = [[[Character:Int]]]()
-//
-//
 //        for (index,arr) in board.enumerated() {
 //            var verticalDict = [Character:Int]()
 //            var dict = [Character:Int]()
