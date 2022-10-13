@@ -1234,3 +1234,56 @@ import Foundation
 //        }
 //    }
 //}
+
+//MARK: - 981. Time Based Key-Value Store
+
+//MARK: my solution (great)
+//class TimeMap {
+//    
+//    var pairArray: [(String,String)]
+//    var timeStamps = [Int]()
+//    init() {
+//        pairArray = []
+//    }
+//    
+//    func set(_ key: String, _ value: String, _ timestamp: Int) {
+//        pairArray.append((key,value))
+//        timeStamps.append(timestamp)
+//    }
+//    
+//    func get(_ key: String, _ timestamp: Int) -> String {
+//        var left = 0
+//        var right = pairArray.count - 1
+//        var middle = (left+right) / 2
+//        var target: Int?
+//        while left <= right {
+//            middle = (left+right) / 2
+//            if timeStamps[middle] <= timestamp {
+//                target = middle
+//            }
+//            if timestamp > timeStamps[middle]{
+//                left = middle + 1
+//            } else {
+//                right = middle - 1
+//            }
+//        }
+//        var result = ""
+//        if let target = target {
+//            for i in stride(from: target, through: 0, by: -1) {
+//                        if key == pairArray[i].0 {
+//                            result = pairArray[i].1
+//                            break
+//                        }
+//                    }
+//        }
+//        
+//        return result
+//    }
+//}
+
+/**
+ * Your TimeMap object will be instantiated and called as such:
+ * let obj = TimeMap()
+ * obj.set(key, value, timestamp)
+ * let ret_2: String = obj.get(key, timestamp)
+ */
