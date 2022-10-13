@@ -397,6 +397,95 @@ import Foundation
 //    }
 //}
 
+//MARK: - 74. Search a 2D Matrix
+//let matrix =  [[1,3,5,7],[10,11,16,20],[23,30,34,60]],target = 34
+//let s = Solution()
+//print(s.searchMatrix(matrix, target))
+//MARK: my solution (great) O(log n)
+//class Solution {
+//    func searchMatrix(_ matrix: [[Int]], _ target: Int) -> Bool {
+//
+//        guard target <= matrix[matrix.count-1].last!, target >= matrix[0][0] else { return false}
+//
+//        var start = 0
+//        var middle = matrix.count / 2
+//        var end = matrix.count - 1
+//        while start <= end {
+//            if matrix[middle][0] <= target && target <= matrix[middle].last!{
+//                print(middle)
+//                break
+//            } else if matrix[middle].last! < target {
+//                start = middle + 1
+//                middle = start + (end - start) / 2
+//            } else {
+//                end = middle - 1
+//                middle = (end - start) / 2
+//            }
+//        }
+//        let row = matrix[middle]
+//        start = 0
+//        middle = row.count / 2
+//        end = row.count - 1
+//        while start <= end {
+//            if row[middle] == target {
+//                return true
+//            }
+//            if row[middle] > target {
+//                end = middle - 1
+//                middle = (end - start) / 2
+//            } else {
+//                start = middle + 1
+//                middle = start + (end - start) / 2
+//            }
+//        }
+//        return false
+//    }
+//}
+
+//MARK: my solution (passed)
+//class Solution {
+//    func searchMatrix(_ matrix: [[Int]], _ target: Int) -> Bool {
+////        var start = 0
+////        var middle = matrix.count / 2
+////        var end = matrix.count - 1
+////        while start <= end {
+////            if matrix[middle][0] > target {
+////                end = middle - 1
+////                middle = (end - start) / 2
+////            } else {
+////                start = middle + 1
+////                middle = start + (end - start) / 2
+////            }
+////        }
+//        var rowNum: Int = 0
+//        for i in 0..<matrix.count - 1 {
+//            if target >= matrix[i][0] && target < matrix[i+1][0] {
+//                rowNum = i
+//            }
+//        }
+//        if target >= matrix.last![0] {
+//            rowNum = matrix.count - 1
+//        }
+//        let row = matrix[rowNum]
+//        var start = 0
+//        var middle = row.count / 2
+//        var end = row.count - 1
+//        while start <= end {
+//            if row[middle] == target {
+//                return true
+//            }
+//            if row[middle] > target {
+//                end = middle - 1
+//                middle = (end - start) / 2
+//            } else {
+//                start = middle + 1
+//                middle = start + (end - start) / 2
+//            }
+//        }
+//        return false
+//    }
+//}
+
 //MARK: - 121. Best Time to Buy and Sell Stock
 //let prices = [7,1,5,3,6,4]
 //let solution = Solution()
