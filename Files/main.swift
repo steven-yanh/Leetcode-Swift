@@ -627,12 +627,14 @@ import Foundation
 //    }
 //}
 
+
+
 //MARK: - 150. Evaluate Reverse Polish Notation
 //
 //let tokens = ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
 //let s = Solution()
 //print(s.evalRPN(tokens))
-//MARK: my solution (great)
+//MARK: my solution (passed) (great)
 //class Solution {
 //    func evalRPN(_ tokens: [String]) -> Int {
 //        var numStack: [Int] = []
@@ -664,6 +666,37 @@ import Foundation
 //            }
 //        }
 //        return numStack[0]
+//    }
+//}
+
+//MARK: - 153. Find Minimum in Rotated Sorted Array
+//let nums = [3,4,5,1,2]
+//let s = Solution()
+//print(s.findMin(nums))
+//MARK: my solution (passed) (great)
+//class Solution {
+//    func findMin(_ nums: [Int]) -> Int {
+//        var left = 0
+//        var right = nums.count - 1
+//        var middle = (left+right) / 2
+//        while left <= right {
+//            middle = (left+right) / 2
+//            if nums[left] > nums[right] {
+//                if nums[middle] < nums[right] {
+//                    if middle - 1 >= 0 && nums[middle-1] > nums[middle] {
+//                        left = middle
+//                    } else {
+//                        right = middle - 1
+//                    }
+//                    right = middle - 1
+//                } else {
+//                    left = middle + 1
+//                }
+//            } else {
+//                right = middle - 1
+//            }
+//        }
+//        return nums[middle]
 //    }
 //}
 
