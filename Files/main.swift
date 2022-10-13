@@ -1059,3 +1059,37 @@ import Foundation
 //        return result.count
 //    }
 //}
+
+//MARK: - 875. Koko Eating Bananas
+//let piles = [3,6,7,11], h = 8
+//let s = Solution()
+//print(s.minEatingSpeed(piles, h))
+//MARK: my solution (hinted)
+//class Solution {
+//    func minEatingSpeed(_ piles: [Int], _ h: Int) -> Int {
+//        var left = 1
+//        var right = piles.max()!
+//        var k = piles.max()!
+//        while left <= right {
+//            let middle = (left+right) / 2
+//            if isValidK(piles, h, middle) {
+//                k = middle
+//                right = middle - 1
+//            } else {
+//                left = middle + 1
+//            }
+//        }
+//        return k
+//    }
+//    func isValidK(_ piles: [Int], _ h: Int,_ k: Int) -> Bool {
+//        var totalTime = 0.0
+//        for i in 0..<piles.count {
+//            totalTime += ceil(Double(piles[i])/Double(k))
+//        }
+//        if totalTime > Double(h) {
+//            return false
+//        } else {
+//            return true
+//        }
+//    }
+//}
