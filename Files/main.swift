@@ -217,6 +217,72 @@ import Foundation
 //    }
 //}
 
+//MARK: - 21. Merge Two Sorted Lists
+
+
+public class ListNode {
+    public var val: Int
+    public var next: ListNode?
+    public init() { self.val = 0; self.next = nil; }
+    public init(_ val: Int) { self.val = val; self.next = nil; }
+    public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
+}
+class Solution {
+    func mergeTwoLists(_ list1: ListNode?, _ list2: ListNode?) -> ListNode? {
+        var newNode: ListNode?
+        var travalNode: ListNode?
+        var currentNode1 = list1
+        var currentNode2 = list2
+        while currentNode1 != nil && currentNode2 != nil {
+            if currentNode1!.val < currentNode2!.val {
+                if newNode == nil {
+                    newNode = ListNode(currentNode1!.val)
+                    travalNode = newNode
+                    currentNode1 = currentNode1?.next
+                } else {
+                    travalNode?.next = ListNode(currentNode1!.val)
+                    travalNode = travalNode?.next
+                    currentNode1 = currentNode1?.next
+                }
+            } else {
+                if newNode == nil {
+                    newNode = ListNode(currentNode2!.val)
+                    travalNode = newNode
+                    currentNode2 = currentNode2?.next
+                } else {
+                    travalNode?.next = ListNode(currentNode2!.val)
+                    travalNode = travalNode?.next
+                    currentNode2 = currentNode2?.next
+                }
+            }
+        }
+        while currentNode1 != nil {
+            if newNode == nil {
+                newNode = ListNode(currentNode1!.val)
+                travalNode = newNode
+                currentNode1 = currentNode1?.next
+            } else {
+            travalNode?.next = ListNode(currentNode1!.val)
+            travalNode = travalNode?.next
+            currentNode1 = currentNode1?.next
+            }
+        }
+        while currentNode2 != nil {
+            if newNode == nil {
+                newNode = ListNode(currentNode2!.val)
+                travalNode = newNode
+                currentNode2 = currentNode2?.next
+            } else {
+            travalNode?.next = ListNode(currentNode2!.val)
+            travalNode = travalNode?.next
+            currentNode2 = currentNode2?.next
+            }
+        }
+        
+        return newNode
+    }
+}
+
 //MARK: - 22. Generate Parentheses
 //let n = 3
 //// ["((()))","(()())","(())()","()(())","()()()"]
@@ -1239,18 +1305,18 @@ import Foundation
 
 //MARK: my solution (great)
 //class TimeMap {
-//    
+//
 //    var pairArray: [(String,String)]
 //    var timeStamps = [Int]()
 //    init() {
 //        pairArray = []
 //    }
-//    
+//
 //    func set(_ key: String, _ value: String, _ timestamp: Int) {
 //        pairArray.append((key,value))
 //        timeStamps.append(timestamp)
 //    }
-//    
+//
 //    func get(_ key: String, _ timestamp: Int) -> String {
 //        var left = 0
 //        var right = pairArray.count - 1
@@ -1276,7 +1342,7 @@ import Foundation
 //                        }
 //                    }
 //        }
-//        
+//
 //        return result
 //    }
 //}
