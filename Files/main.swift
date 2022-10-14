@@ -941,14 +941,30 @@ import Foundation
 //let node2 = ListNode(2,node3)
 //let node1 = ListNode(1,node2)
 //let solution = Solution()
-//print(solution.reverseList(node1)?.val)
-//
+//let node = solution.reverseList(node1)
+//node?.print()
 //public class ListNode {
 //    public var val: Int
 //    public var next: ListNode?
 //    public init() { self.val = 0; self.next = nil; }
 //    public init(_ val: Int) { self.val = val; self.next = nil; }
 //    public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
+//}
+//MARK: attemp 2 (great)
+//class Solution {
+//    func reverseList(_ head: ListNode?) -> ListNode? {
+//        guard head != nil else {return nil}
+//        var prev: ListNode? = nil
+//        var headNode = head
+//        while headNode?.next != nil {
+//            let temp = headNode?.next
+//            headNode?.next = prev
+//            prev = headNode
+//            headNode = temp
+//        }
+//        headNode?.next = prev
+//        return headNode
+//    }
 //}
 //MARK: iterative
 //class Solution {
