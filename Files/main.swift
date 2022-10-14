@@ -199,7 +199,7 @@ import Foundation
 //let s = "()[]{{}"
 //let solution = Solution()
 //print(solution.isValid(s))
-//MARK: - my solution(passed) great 3ms
+//MARK:  my solution(passed) great 3ms
 //class Solution {
 //    func isValid(_ s: String) -> Bool {
 //        let dict: [Character:Character] = [")":"(",    "]":"[",    "}":"{"]
@@ -218,76 +218,77 @@ import Foundation
 //}
 
 //MARK: - 21. Merge Two Sorted Lists
-
-
-public class ListNode {
-    public var val: Int
-    public var next: ListNode?
-    public init() { self.val = 0; self.next = nil; }
-    public init(_ val: Int) { self.val = val; self.next = nil; }
-    public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
-}
-class Solution {
-    func mergeTwoLists(_ list1: ListNode?, _ list2: ListNode?) -> ListNode? {
-        var newNode: ListNode?
-        var travalNode: ListNode?
-        var currentNode1 = list1
-        var currentNode2 = list2
-        while currentNode1 != nil && currentNode2 != nil {
-            if currentNode1!.val < currentNode2!.val {
-                if newNode == nil {
-                    newNode = ListNode(currentNode1!.val)
-                    travalNode = newNode
-                    currentNode1 = currentNode1?.next
-                } else {
-                    travalNode?.next = ListNode(currentNode1!.val)
-                    travalNode = travalNode?.next
-                    currentNode1 = currentNode1?.next
-                }
-            } else {
-                if newNode == nil {
-                    newNode = ListNode(currentNode2!.val)
-                    travalNode = newNode
-                    currentNode2 = currentNode2?.next
-                } else {
-                    travalNode?.next = ListNode(currentNode2!.val)
-                    travalNode = travalNode?.next
-                    currentNode2 = currentNode2?.next
-                }
-            }
-        }
-        while currentNode1 != nil {
-            if newNode == nil {
-                newNode = ListNode(currentNode1!.val)
-                travalNode = newNode
-                currentNode1 = currentNode1?.next
-            } else {
-            travalNode?.next = ListNode(currentNode1!.val)
-            travalNode = travalNode?.next
-            currentNode1 = currentNode1?.next
-            }
-        }
-        while currentNode2 != nil {
-            if newNode == nil {
-                newNode = ListNode(currentNode2!.val)
-                travalNode = newNode
-                currentNode2 = currentNode2?.next
-            } else {
-            travalNode?.next = ListNode(currentNode2!.val)
-            travalNode = travalNode?.next
-            currentNode2 = currentNode2?.next
-            }
-        }
-        
-        return newNode
-    }
-}
+//
+//MARK: my solution
+//public class ListNode {
+//    public var val: Int
+//    public var next: ListNode?
+//    public init() { self.val = 0; self.next = nil; }
+//    public init(_ val: Int) { self.val = val; self.next = nil; }
+//    public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
+//}
+//class Solution {
+//    func mergeTwoLists(_ list1: ListNode?, _ list2: ListNode?) -> ListNode? {
+//        var newNode: ListNode?
+//        var travalNode: ListNode?
+//        var currentNode1 = list1
+//        var currentNode2 = list2
+//        while currentNode1 != nil && currentNode2 != nil {
+//            if currentNode1!.val < currentNode2!.val {
+//                if newNode == nil {
+//                    newNode = ListNode(currentNode1!.val)
+//                    travalNode = newNode
+//                    currentNode1 = currentNode1?.next
+//                } else {
+//                    travalNode?.next = ListNode(currentNode1!.val)
+//                    travalNode = travalNode?.next
+//                    currentNode1 = currentNode1?.next
+//                }
+//            } else {
+//                if newNode == nil {
+//                    newNode = ListNode(currentNode2!.val)
+//                    travalNode = newNode
+//                    currentNode2 = currentNode2?.next
+//                } else {
+//                    travalNode?.next = ListNode(currentNode2!.val)
+//                    travalNode = travalNode?.next
+//                    currentNode2 = currentNode2?.next
+//                }
+//            }
+//        }
+//        while currentNode1 != nil {
+//            if newNode == nil {
+//                newNode = ListNode(currentNode1!.val)
+//                travalNode = newNode
+//                currentNode1 = currentNode1?.next
+//            } else {
+//            travalNode?.next = ListNode(currentNode1!.val)
+//            travalNode = travalNode?.next
+//            currentNode1 = currentNode1?.next
+//            }
+//        }
+//        while currentNode2 != nil {
+//            if newNode == nil {
+//                newNode = ListNode(currentNode2!.val)
+//                travalNode = newNode
+//                currentNode2 = currentNode2?.next
+//            } else {
+//            travalNode?.next = ListNode(currentNode2!.val)
+//            travalNode = travalNode?.next
+//            currentNode2 = currentNode2?.next
+//            }
+//        }
+//
+//        return newNode
+//    }
+//}
 
 //MARK: - 22. Generate Parentheses
 //let n = 3
 //// ["((()))","(()())","(())()","()(())","()()()"]
 //let s = Solution()
 //print(s.generateParenthesis(n))
+//MARK: my solution (great) (pass by reference)
 //class Solution {
 //    func generateParenthesis(_ n: Int) -> [String] {
 //        var ans = [String]()
@@ -693,8 +694,53 @@ class Solution {
 //    }
 //}
 
-
-
+//MARK: - 143. Reorder List
+//let n1 = ListNode(1)
+//let n2 = ListNode(2)
+//let n3 = ListNode(3)
+//let n4 = ListNode(4)
+//let n5 = ListNode(5)
+//n1.next = n2
+//n2.next = n3
+//n3.next = n4
+//n4.next = n5
+//let solution = Solution()
+//solution.reorderList(n1)
+//n1.print()
+//MARK: my solution(great)
+//class Solution {
+//    func reorderList(_ head: ListNode?) {
+//        var travalNode = head
+//        var nodeArr = [ListNode]()
+//        while travalNode?.next != nil {
+//            nodeArr.append(travalNode!)
+//            travalNode = travalNode?.next
+//        }
+//        nodeArr.append(travalNode!)
+//        for i in 0..<nodeArr.count / 2 {
+//            nodeArr[i].next = nodeArr[nodeArr.count - 1 - i]
+//            nodeArr[nodeArr.count-1-i].next = nodeArr[i+1]
+//        }
+//        nodeArr[nodeArr.count/2].next = nil
+//    }
+//}
+//MARK: my solution 1 (correct but not effeicent)
+//class Solution {
+//    func reorderList(_ head: ListNode?) {
+//        var startNode = head
+//        var travalNode = head
+//        while startNode != nil && startNode?.next != nil && startNode?.next?.next != nil {
+//            while travalNode?.next?.next != nil {
+//                travalNode = travalNode?.next
+//            }
+//            travalNode?.next?.next = startNode?.next
+//            startNode?.next = travalNode?.next
+//            startNode = travalNode?.next?.next
+//            travalNode?.next = nil
+//            travalNode = startNode
+//        }
+//    }
+//}
 //MARK: - 150. Evaluate Reverse Polish Notation
 //
 //let tokens = ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
