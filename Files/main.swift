@@ -195,6 +195,71 @@ import Foundation
 //}
 //
 
+//MARK: - 19. Remove Nth Node From End of List
+
+//MARK: my solution (great) put all nodes in array
+//class Solution {
+//    func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
+//        var travelNode = head
+//        var nodeArray = [travelNode]
+//        while travelNode?.next != nil {
+//            nodeArray.append(travelNode?.next)
+//            travelNode = travelNode?.next
+//        }
+//        if n == nodeArray.count && n != 1 {
+//            return nodeArray[1]
+//        }
+//        if n != 1 {
+//            let prev = nodeArray[nodeArray.count - n - 1]
+//            prev?.next = prev?.next?.next
+//        } else if nodeArray.count != 1{
+//            nodeArray[nodeArray.count - 2]?.next = nil
+//        } else {
+//            return nil
+//        }
+//        return head
+//    }
+//}
+//MARK: my solution (great) traditional way by reversing list twice
+//class Solution {
+//    func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
+//        //reverse LinkedList
+//        var prev:ListNode? = nil
+//        var travelNode = head
+//        while travelNode?.next != nil {
+//            let temp = travelNode?.next
+//            travelNode?.next = prev
+//            prev = travelNode
+//            travelNode = temp
+//        }
+//        var newHead = travelNode
+//        travelNode?.next = prev
+//        if n == 1 {
+//            newHead = newHead?.next
+//        } else {
+//            var count = 1
+//            prev = nil
+//            while count < n {
+//                prev = travelNode
+//                travelNode = travelNode?.next
+//                count += 1
+//            }
+//            prev?.next = travelNode?.next
+//        }
+//        //reverse back
+//        prev = nil
+//        //        travelNode = newHead
+//        while newHead?.next != nil {
+//            let temp = newHead?.next
+//            newHead?.next = prev
+//            prev = newHead
+//            newHead = temp
+//        }
+//        newHead?.next = prev
+//        return newHead
+//    }
+//}
+
 //MARK: - 20. Valid Parentheses
 //let s = "()[]{{}"
 //let solution = Solution()
@@ -858,10 +923,10 @@ import Foundation
 
 //MARK: - 200. Number of Islands
 //let grid: [[Character]] = [
-//    ["1","1","1","1","0"],
-//    ["1","1","0","1","0"],
 //    ["1","1","0","0","0"],
-//    ["0","0","0","0","0"]
+//    ["1","1","0","0","0"],
+//    ["0","0","1","0","0"],
+//    ["0","0","0","1","1"]
 //  ]
 //let s = Solution()
 //print(s.numIslands(grid))
@@ -905,7 +970,7 @@ import Foundation
 //            visitied[[r,c], default: 0] += 1
 //            q.append([r, c])
 //            while !q.isEmpty {
-//                let current = q.removeFirst() //deque
+//                let current = q.removeFirst() //deque Note: deque -> bfs , pop -> dfs
 //                var newR = current[0]
 //                var newC = current[1]
 //                visitied[[newR,newC], default: 0] += 1
