@@ -6,16 +6,16 @@
 //
 
 import Foundation
-
-class Node<T> {
-    var value: T
-    var next: Node?
-    
-    init(_ value: T) {
-        self.value = value
-    }
-    
-}
+//
+//class Node<T> {
+//    var value: T
+//    var next: Node?
+//    
+//    init(_ value: T) {
+//        self.value = value
+//    }
+//    
+//}
 public class ListNode {
     public var val: Int
     public var next: ListNode?
@@ -31,3 +31,15 @@ public class ListNode {
         }
     }
 }
+
+public class Node {
+    public var val: Int
+    public var next: Node?
+    public var random: Node?
+    public init(_ val: Int) {
+        self.val = val
+        self.next = nil
+        self.random = nil
+    }
+}
+

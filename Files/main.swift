@@ -759,6 +759,54 @@ import Foundation
 //    }
 //}
 
+//MARK: - 138. Copy List with Random Pointer
+//MARK: my solution ( two pointer compare operater === )
+//class Solution {
+//    func copyRandomList(_ head: Node?) -> Node? {
+////        var originalNodeArray = [(node: Node?, index: Int?)]() // tuple with index
+////        var copyNodeArray = [Node?]()
+//        var travelOriginalNode = head
+//        var resultHeadNode: Node? = nil
+////        if travelOriginalNode != nil {
+////            resultHeadNode = Node(resultHeadNode!.val)
+////        }
+//        var travelCopyNode = resultHeadNode
+//        var prev: Node? = nil
+////        var nodeIndex = 0 //tag each Node with index
+//        while travelOriginalNode != nil {
+//            let newCopyNode = Node(travelOriginalNode!.val)
+//            if resultHeadNode == nil {
+//                resultHeadNode = newCopyNode
+//            }
+//            travelCopyNode = newCopyNode
+//            prev?.next = newCopyNode
+//            travelOriginalNode = travelOriginalNode?.next
+//            prev = travelCopyNode
+////            travelCopyNode = travelCopyNode?.next // to be nil?
+//        }
+//
+//        //reset both list back to head
+//        travelOriginalNode = head
+//        travelCopyNode = resultHeadNode
+//        while travelOriginalNode != nil {
+//            if let ramdomNode = travelOriginalNode?.random {
+//                var travelRandomNode = head
+//                var travelRandomCopyNode = resultHeadNode
+//                while travelRandomNode !== ramdomNode {
+//                    travelRandomNode = travelRandomNode?.next
+//                    travelRandomCopyNode = travelRandomCopyNode?.next
+//                }
+//                travelCopyNode?.random = travelRandomCopyNode
+//            }
+//            travelOriginalNode = travelOriginalNode?.next
+//            travelCopyNode = travelCopyNode?.next
+//        }
+//
+//
+//        return resultHeadNode
+//    }
+//}
+
 //MARK: - 143. Reorder List
 //let n1 = ListNode(1)
 //let n2 = ListNode(2)
@@ -878,6 +926,7 @@ import Foundation
 //}
 
 //MARK: - 155. Min Stack
+
 
 //MARK: my solution(great)
 //class MinStack {
