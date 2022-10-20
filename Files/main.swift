@@ -648,6 +648,82 @@ import Foundation
 //    }
 //}
 
+//MARK: - 92. Reverse Linked List II
+let n1 = ListNode(1)
+let n2 = ListNode(2)
+let n3 = ListNode(3)
+let n4 = ListNode(4)
+let n5 = ListNode(5)
+n1.next = n2
+n2.next = n3
+n3.next = n4
+n4.next = n5
+
+let left = 2, right = 4
+let s = Solution()
+s.reverseBetween(n1, left, right)?.print()
+//n5.print()
+class Solution {
+    func reverseBetween(_ head: ListNode?, _ left: Int, _ right: Int) -> ListNode? {
+        var current = head
+        var prev: ListNode? = nil
+        var count = 1
+        while count < left {
+            prev = current
+            current = current?.next
+            count += 1
+        }
+        let prevToReverse = prev
+        let headOfReverse = current
+        var temp = current?.next
+        while count < right {
+//            current?.pValue()
+            temp = current?.next
+            current?.next = prev
+            prev = current
+            current = temp
+            count += 1
+            if count == right {
+                temp = current?.next
+            }
+        }
+        current?.next = prev
+        prevToReverse?.next = current
+        headOfReverse?.next = temp
+//        prevToReverse?.pValue()
+        
+                
+        if left == 1 {
+            return current
+        } else {
+            return head
+        }
+    }
+}
+
+
+//class Solution {
+//    func reverseBetween(_ head: ListNode?, _ left: Int, _ right: Int) -> ListNode? {
+//        var count = 1
+//        var result = recursion(head?.next)
+//        head?.next = result
+//        var arr = [1,2,3,4,5]
+//        let res = arr[1...4]
+//        print(res)
+//        func recursion(_ nextNode: ListNode?) -> ListNode? {
+//            count += 1
+//            if count == right {
+//                return nextNode
+//            }
+//            recursion(nextNode?.next)?.next = nextNode
+//            return recursion(nextNode?.next)
+//        }
+//        return head
+//    }
+//
+//}
+
+
 //MARK: - 121. Best Time to Buy and Sell Stock
 //let prices = [7,1,5,3,6,4]
 //let solution = Solution()
@@ -1161,6 +1237,44 @@ import Foundation
 //            }
 //        }
 //        return []
+//    }
+//}
+
+//MARK: - 239. Sliding Window Maximum
+//let nums = [1,-1], k = 1
+//let s = Solution()
+//print(s.maxSlidingWindow(nums, k))
+//class Solution {
+//    func maxSlidingWindow(_ nums: [Int], _ k: Int) -> [Int] {
+//        var currentMax = nums[0]
+//        var result = [Int]()
+//        for i in 0..<k-1 {
+//            currentMax = max(currentMax, nums[i])
+////            print(i)
+//        }
+//        for index in k-1..<nums.count {
+////            print(index)
+//            if index < k {
+//                currentMax = max(currentMax, nums[index])
+//                result.append(currentMax)
+//            } else {
+//                if nums[index-k] >= currentMax {
+//                    let removedMax = currentMax
+//                    currentMax = nums[index-(k-1)]
+//                    for i in index-(k-1)...index { // look for another num that is equal
+//                        currentMax = max(currentMax, nums[i])
+//                        if nums[i] >= removedMax {
+//                            currentMax = nums[i]
+//                            break
+//                        }
+//                    }
+//                } else {
+//                    currentMax = max(currentMax, nums[index])
+//                }
+//                result.append(currentMax)
+//            }
+//        }
+//        return result
 //    }
 //}
 

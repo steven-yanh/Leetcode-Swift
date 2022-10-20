@@ -24,11 +24,13 @@ public class ListNode {
     public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
     func print() {
         var travelNode: ListNode? = self
-        Swift.print(travelNode?.val)
-        while travelNode?.next != nil {
+        while travelNode != nil {
+            Swift.print(travelNode?.val ?? -999)
             travelNode = travelNode?.next
-            Swift.print(travelNode?.val)
         }
+    }
+    func pValue() {
+        Swift.print(val)
     }
 }
 
