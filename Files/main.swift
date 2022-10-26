@@ -725,9 +725,9 @@ import Foundation
 
 
 //MARK: - 121. Best Time to Buy and Sell Stock
-let prices = [1,2]
-let solution = Solution()
-print(solution.maxProfit(prices))
+//let prices = [7,1,5,3,6]
+//let solution = Solution()
+//print(solution.maxProfit(prices))
 //MARK: my solution (passed)
 //class Solution {
 //    func maxProfit(_ prices: [Int]) -> Int {
@@ -746,22 +746,50 @@ print(solution.maxProfit(prices))
 //}
 
 //MARK:  retry (great)
-class Solution {
-    func maxProfit(_ prices: [Int]) -> Int {
-        var right = 0
-        var maxProfit = 0
-        var minPrice = prices[0]
-        while right < prices.count {
-            let price = prices[right]
-            let purchase = prices[right]
-            right += 1
-            minPrice = min(minPrice,purchase)
-            let profit = price - minPrice
-            maxProfit = max(maxProfit, profit)
-        }
-        return maxProfit
-    }
-}
+//class Solution {
+//    func maxProfit(_ prices: [Int]) -> Int {
+//        var right = 0
+//        var maxProfit = 0
+//        var minPrice = prices[0]
+//        while right < prices.count {
+//            let price = prices[right]
+//            let purchase = prices[right]
+//            right += 1
+//            minPrice = min(minPrice,purchase)
+//            let profit = price - minPrice
+//            maxProfit = max(maxProfit, profit)
+//        }
+//        return maxProfit
+//    }
+//}
+//MARK: dp solution (great)
+//class Solution {
+//    func maxProfit(_ prices: [Int]) -> Int {
+//        let n = prices.count
+//        var dp_i_0 = 0, dp_i_1 = Int.min
+//        for i in 0..<n {
+//            dp_i_0 = max(dp_i_0, dp_i_1 + prices[i])
+//            dp_i_1 = max(dp_i_1, -prices[i])
+//        }
+//
+//        return dp_i_0
+//    }
+//}
+//MARK: - 122. Best Time to Buy and Sell Stock II
+//MARK: my solution *dp (great)
+//class Solution {
+//    func maxProfit(_ prices: [Int]) -> Int {
+//        let n = prices.count
+//        var dp_i_0 = 0, dp_i_1 = Int.min
+//        for i in 0..<n {
+//            let temp = dp_i_0
+//            dp_i_0 = max(dp_i_0, dp_i_1 + prices[i])
+//            dp_i_1 = max(dp_i_1, temp - prices[i])
+//        }
+//        return dp_i_0
+//    }
+//}
+
 
 //MARK: - 125. Valid Palindrome
 //let s = "A          man, a plan, a canal: Panama"
