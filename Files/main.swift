@@ -649,57 +649,57 @@ import Foundation
 //}
 
 //MARK: - 92. Reverse Linked List II
-let n1 = ListNode(1)
-let n2 = ListNode(2)
-let n3 = ListNode(3)
-let n4 = ListNode(4)
-let n5 = ListNode(5)
-n1.next = n2
-n2.next = n3
-n3.next = n4
-n4.next = n5
-
-let left = 2, right = 4
-let s = Solution()
-s.reverseBetween(n1, left, right)?.print()
+//let n1 = ListNode(1)
+//let n2 = ListNode(2)
+//let n3 = ListNode(3)
+//let n4 = ListNode(4)
+//let n5 = ListNode(5)
+//n1.next = n2
+//n2.next = n3
+//n3.next = n4
+//n4.next = n5
+//
+//let left = 2, right = 4
+//let s = Solution()
+//s.reverseBetween(n1, left, right)?.print()
 //n5.print()
-class Solution {
-    func reverseBetween(_ head: ListNode?, _ left: Int, _ right: Int) -> ListNode? {
-        var current = head
-        var prev: ListNode? = nil
-        var count = 1
-        while count < left {
-            prev = current
-            current = current?.next
-            count += 1
-        }
-        let prevToReverse = prev
-        let headOfReverse = current
-        var temp = current?.next
-        while count < right {
-//            current?.pValue()
-            temp = current?.next
-            current?.next = prev
-            prev = current
-            current = temp
-            count += 1
-            if count == right {
-                temp = current?.next
-            }
-        }
-        current?.next = prev
-        prevToReverse?.next = current
-        headOfReverse?.next = temp
-//        prevToReverse?.pValue()
-        
-                
-        if left == 1 {
-            return current
-        } else {
-            return head
-        }
-    }
-}
+//class Solution {
+//    func reverseBetween(_ head: ListNode?, _ left: Int, _ right: Int) -> ListNode? {
+//        var current = head
+//        var prev: ListNode? = nil
+//        var count = 1
+//        while count < left {
+//            prev = current
+//            current = current?.next
+//            count += 1
+//        }
+//        let prevToReverse = prev
+//        let headOfReverse = current
+//        var temp = current?.next
+//        while count < right {
+////            current?.pValue()
+//            temp = current?.next
+//            current?.next = prev
+//            prev = current
+//            current = temp
+//            count += 1
+//            if count == right {
+//                temp = current?.next
+//            }
+//        }
+//        current?.next = prev
+//        prevToReverse?.next = current
+//        headOfReverse?.next = temp
+////        prevToReverse?.pValue()
+//        
+//                
+//        if left == 1 {
+//            return current
+//        } else {
+//            return head
+//        }
+//    }
+//}
 
 
 //class Solution {
@@ -725,9 +725,9 @@ class Solution {
 
 
 //MARK: - 121. Best Time to Buy and Sell Stock
-//let prices = [7,1,5,3,6,4]
-//let solution = Solution()
-//print(solution.maxProfit(prices))
+let prices = [1,2]
+let solution = Solution()
+print(solution.maxProfit(prices))
 //MARK: my solution (passed)
 //class Solution {
 //    func maxProfit(_ prices: [Int]) -> Int {
@@ -744,6 +744,24 @@ class Solution {
 //        return maxProfit
 //    }
 //}
+
+//MARK:  retry (great)
+class Solution {
+    func maxProfit(_ prices: [Int]) -> Int {
+        var right = 0
+        var maxProfit = 0
+        var minPrice = prices[0]
+        while right < prices.count {
+            let price = prices[right]
+            let purchase = prices[right]
+            right += 1
+            minPrice = min(minPrice,purchase)
+            let profit = price - minPrice
+            maxProfit = max(maxProfit, profit)
+        }
+        return maxProfit
+    }
+}
 
 //MARK: - 125. Valid Palindrome
 //let s = "A          man, a plan, a canal: Panama"
