@@ -1350,6 +1350,25 @@ import Foundation
 //
 //}
 
+//MARK: - 309. Best Time to Buy and Sell Stock with Cooldown
+let prices = [1,2,3,0,2]
+let s = Solution()
+print(s.maxProfit(prices))
+class Solution {
+    func maxProfit(_ prices: [Int]) -> Int {
+        var dp_i_0 = 0
+        var dp_i_1 = Int.min
+        var dp_prev_0 = 0
+        for i in 0..<prices.count {
+            let temp = dp_i_0
+            dp_i_0 = max(dp_i_0, dp_i_1 + prices[i])
+            dp_i_1 = max(dp_i_1, dp_prev_0 - prices[i])
+            dp_prev_0 = temp
+        }
+        return dp_i_0
+    }
+}
+
 //MARK: - 347. Top K Frequent Elements
 //var nums = [4,1,-1,2,-1,2,3], k = 2
 //let solution = Solution()
