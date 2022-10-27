@@ -1,6 +1,7 @@
 //  Created by Huang Yan on 8/19/22.
 
 import Foundation
+let start = CFAbsoluteTimeGetCurrent()
 //MARK: playing around stack and queue
 //var stack = Stack<Int>()
 //stack.push(1)
@@ -61,7 +62,7 @@ import Foundation
 //}
 
 //MARK: - 3. Longest Substring Without Repeating Characters
-//let s = "pwwkew"
+//let s = "bbbbbbb"
 //let solution = Solution()
 //print(solution.lengthOfLongestSubstring(s))
 
@@ -90,7 +91,27 @@ import Foundation
 //        return maxLen
 //    }
 //}
-
+//MARK: retry with frame work
+//class Solution {
+//    func lengthOfLongestSubstring(_ s: String) -> Int {
+//        var window:[Character:Int] = [:] //swift dictionary is kind of slow? Ans: dictionary is not slow String.count is O(n)
+//        let array = Array(s)
+//        var res = 0
+//        var left = 0, right = 0
+//        while right < array.count {
+//            let rightChar = array[right]
+//            right += 1
+//            window[rightChar, default: 0] += 1
+//            while window[rightChar]! > 1 {
+//                let leftChar = array[left]
+//                window[leftChar, default: 0] -= 1
+//                left += 1
+//            }
+//            res = max(res, right - left)
+//        }
+//        return res
+//    }
+//}
 //MARK: - 11. Container With Most Water
 //let height = [1,8,6,2,5,4,8,25,7]
 //let solution = Solution()
@@ -645,6 +666,57 @@ import Foundation
 //            }
 //        }
 //        return false
+//    }
+//}
+
+//MARK: - 76. Minimum Window Substring
+//let s = "a", t = "a"
+//let so = Solution()
+//print(so.minWindow(s, t))
+
+//MARK: my solution (pass)
+//class Solution {
+//    func minWindow(_ s: String, _ t: String) -> String {
+//        guard s.count >= t.count else {
+//            return ""
+//        }
+//        var window: [Character: Int] = [:]
+//        var need: [Character: Int] = [:]
+//        var resLeft = 0
+//        var resRight = 0
+//        var range = Int.max
+//        for char in t {
+//            need[char, default: 0] += 1
+//        }
+//        var valid = 0
+//        let array = Array(s)
+//        var left = 0, right = 0
+//        while right < array.count {
+//            window[array[right], default: 0] += 1
+//            if window[array[right]]! == need[array[right]] ?? 0 {
+//                valid += 1
+//            }
+//            right += 1
+//            while valid == need.count && left < right {
+//                window[array[left]]! -= 1
+//                if window[array[left]]! < need[array[left]] ?? 0 {
+//                    valid -= 1
+//                }
+//                if right-left-1 < range {
+//                    range = right-left
+//                    resLeft = left
+//                    resRight = right - 1
+//                }
+//                print(resLeft,resRight)
+//                left += 1
+//            }
+//        }
+//        if range == Int.max {
+//            return ""
+//        } else {
+//            return String(array[resLeft...resRight])
+//        }
+//
 //    }
 //}
 
@@ -1290,15 +1362,17 @@ import Foundation
 //let nums = [1,-1], k = 1
 //let s = Solution()
 //print(s.maxSlidingWindow(nums, k))
+//MARK: my solution (can be improved by setting up a MAX Stack)
 //class Solution {
 //    func maxSlidingWindow(_ nums: [Int], _ k: Int) -> [Int] {
 //        var currentMax = nums[0]
+//        let n = nums.count
 //        var result = [Int]()
 //        for i in 0..<k-1 {
 //            currentMax = max(currentMax, nums[i])
 ////            print(i)
 //        }
-//        for index in k-1..<nums.count {
+//        for index in k-1..<n {
 ////            print(index)
 //            if index < k {
 //                currentMax = max(currentMax, nums[index])
@@ -1351,23 +1425,27 @@ import Foundation
 //}
 
 //MARK: - 309. Best Time to Buy and Sell Stock with Cooldown
-let prices = [1,2,3,0,2]
-let s = Solution()
-print(s.maxProfit(prices))
-class Solution {
-    func maxProfit(_ prices: [Int]) -> Int {
-        var dp_i_0 = 0
-        var dp_i_1 = Int.min
-        var dp_prev_0 = 0
-        for i in 0..<prices.count {
-            let temp = dp_i_0
-            dp_i_0 = max(dp_i_0, dp_i_1 + prices[i])
-            dp_i_1 = max(dp_i_1, dp_prev_0 - prices[i])
-            dp_prev_0 = temp
-        }
-        return dp_i_0
-    }
-}
+//let prices = [1,2,3,0,2]
+//let s = Solution()
+//print(s.maxProfit(prices))
+////MARK: my solution (*dp) (great)
+//class Solution {
+//    func maxProfit(_ prices: [Int]) -> Int {
+//        var dp_i_0 = 0
+//        var dp_i_1 = Int.min
+//        var dp_prev_0 = 0
+//        for i in 0..<prices.count {
+//            let temp = dp_i_0
+//            dp_i_0 = max(dp_i_0, dp_i_1 + prices[i])
+//            print(dp_i_0)
+//            dp_i_1 = max(dp_i_1, dp_prev_0 - prices[i])
+//            print("*",dp_i_1)
+//            dp_prev_0 = temp
+//            print(dp_prev_0,"\n")
+//        }
+//        return dp_i_0
+//    }
+//}
 
 //MARK: - 347. Top K Frequent Elements
 //var nums = [4,1,-1,2,-1,2,3], k = 2
@@ -1434,22 +1512,24 @@ class Solution {
 //MARK: my solution
 //class Solution {
 //    func characterReplacement(_ s: String, _ k: Int) -> Int {
-//        var dict:[Character:Int] = [:]
-//        var result = 0
-//        var left = 0
+//        let array = Array(s)
+//        var window:[Character:Int] = [:]
+//        var res = 0
 //        var maxf = 0
-//        for (r,char) in s.enumerated() {
-//            dict[char, default: 0] += 1
-//            maxf = dict.values.max()!
-//            while (r - left + 1) - maxf > k , left != s.count {
-//                dict[s[s.index(s.startIndex, offsetBy: left)]]! -= 1
-//
+//        var left = 0
+//        for i in 0..<s.count {
+//            let rightChar = array[i]
+//            window[rightChar, default: 0] += 1
+//            let count = window[rightChar]!
+//            maxf = max(maxf,count)
+//            while (i - left - 1) - maxf > k {
+//                window[array[left]]! -= 1
 //                left += 1
 //            }
-//            result = max(result, r - left + 1)
+//            res = max(res, (i-left)+1)
 //        }
-//        print(dict)
-//        return result
+//
+//        return res
 //    }
 //}
 
@@ -1530,26 +1610,71 @@ class Solution {
 //        return false
 //    }
 //}
-//MARK: my solution (dictionary) still slow
-//class Solution {
+//MARK: my solution (dictionary) works!
+//class Solution { //"adc" "dcda"
 //    func checkInclusion(_ s1: String, _ s2: String) -> Bool {
 //        guard s2.count >= s1.count else { return false}
-//
-//        var s1Dictionary: [Character: Int] = [:]
+//        let array2 = Array(s2), array1 = Array(s1)
+//        var window: [Character: Int] = [:]
+//        var need: [Character: Int] = [:]
 //        for char in s1 {
-//            s1Dictionary[char, default: 0] += 1
+//            need[char, default: 0] += 1
 //        }
-//        print(s1Dictionary)
-//        for i in 0...s2.count - s1.count {
-//            var s2Dictionary: [Character: Int] = [:]
-//            let startIndex = s2.index(s2.startIndex, offsetBy: i)
-//            let endIndex = s2.index(s2.startIndex, offsetBy: i+s1.count-1)
-//            let s2SubString = s2[startIndex...endIndex]
-//            for char in s2SubString {
-//                s2Dictionary[char, default: 0] += 1
+//        var left = 0, right = 0
+//        var valid = 0
+//        while right < array2.count {
+//            window[array2[right], default: 0] += 1
+//            if window[array2[right]]! == need[array2[right]] ?? 0 {
+//                valid += 1
 //            }
-//            if s1Dictionary == s2Dictionary {
-//                return true
+//            while valid == need.count {
+//                let char = array2[left]
+//                window[char]! -= 1
+//                if window[char]! + 1 == need[char] ?? -1 {
+//                    valid -= 1
+//                }
+//                if right - left + 1 == array1.count {
+//                    return true
+//                }
+//                left += 1
+//            }
+//            right += 1
+//        }
+//
+//        return false
+//    }
+//}
+//MARK: optimized solution (dictionary)
+//class Solution {
+//    func checkInclusion(_ s1: String, _ s2: String) -> Bool {
+//        let array2 = Array(s2), array1 = Array(s1)
+//        var window = [Character: Int]()
+//        var need = [Character: Int]()
+//        for c in s1 {
+//            need[c, default: 0] += 1
+//        }
+//        var left = 0, right = 0, valid = 0
+//        while right < array2.count {
+//            let c = array2[right]
+//            right += 1
+//            if need[c, default: 0] > 0 {
+//                window[c, default: 0] += 1
+//                if window[c] == need[c] {
+//                    valid += 1
+//                }
+//            }
+//            while valid == need.count {
+//                if right - left == array1.count {
+//                    return true
+//                }
+//                let c = array2[left]
+//                left += 1
+//                if need[c, default: 0] > 0 {
+//                    window[c, default: 0] -= 1
+//                    if window[c, default: 0] < need[c, default: 0] {
+//                        valid -= 1
+//                    }
+//                }
 //            }
 //        }
 //
@@ -1708,3 +1833,54 @@ class Solution {
  * obj.set(key, value, timestamp)
  * let ret_2: String = obj.get(key, timestamp)
  */
+
+
+
+//MARK: - 1838. Frequency of the Most Frequent Element
+//let nums = [1,4,8,13], k = 5
+//let s = Solution()
+//print(s.maxFrequency(nums, k))
+//class Solution { // correct, not effeicent
+//    func maxFrequency(_ nums: [Int], _ k: Int) -> Int {
+//        let nums: [Int] = nums.sorted()
+//        var res = 0
+//        var left = 0, right = 0, total = 0
+//        while right < nums.count {
+//            total += nums[right]
+//            while (right-left + 1)*nums[right] > total + k {
+//                total -= nums[left]
+//                left += 1
+//            }
+//            res = max(res, right - left + 1)
+//            right += 1
+//        }
+//        return res
+//    }
+//}
+//class Solution {
+//    func maxFrequency(_ nums: [Int], _ k: Int) -> Int {
+//        let sorted: [Int] = nums.sorted()
+//        var res = 1
+//        for r in stride(from: sorted.count - 1, through: 0, by: -1) {
+//            var l = r
+//            var cost = k
+//            while l > 0 {
+//                l -= 1
+//                if l != -1 { //base case
+//                    let gap = sorted[r] - sorted[l]
+//                    if cost - gap >= 0 {
+//                        cost -= gap
+//                        res = max(res, r - l + 1)
+//                    } else {
+//                        break
+//                    }
+//                }
+//            }
+//        }
+//        return res
+//    }
+//}
+
+
+let diff = (CFAbsoluteTimeGetCurrent() - start) * 1000
+print("\n\n\(diff) seconds")
