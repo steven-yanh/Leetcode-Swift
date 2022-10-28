@@ -1533,6 +1533,57 @@ let start = CFAbsoluteTimeGetCurrent()
 //    }
 //}
 
+//MARK: - 🟡443. String Compression
+//MARK: trick: (start from second) keep track of last repeated letter in the result and comparing through the array, if same count++ otherwise convert to String string = String(count) and append them to your result
+//var chars: [Character] = ["a","a","a","a","a","a","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","c","c","c","c","c","c","c","c","c","c","c","c","c","c"]
+//let s = Solution()
+//print(s.compress(&chars))
+//print(chars)
+//class Solution {
+//    func compress(_ chars: inout [Character]) -> Int {
+//        var res = [Character]()
+//        res.append(chars[0])
+//        var lastOfRes = res.last!
+//        var count = 1
+//        for i in 1..<chars.count {
+//            if chars[i] == lastOfRes {
+//                count += 1
+//////                let last = res.last!
+//////                if last.isNumber {
+//////                    let num = last.wholeNumberValue!
+//////                    if num == 9 {
+//////                        res.removeLast()
+//////                        res.append("1")
+//////                        res.append("0")
+//////                    } else {
+//////                        res.removeLast()
+//////                        res.append(Character(String(num+1)))
+//////                    }
+//////                } else {
+//////                    res.append("2")
+//////                }
+//            } else {
+//                if count != 1 {
+//                    let string = String(count)
+//                    for char in string {
+//                        res.append(char)
+//                    }
+//                }
+//                count = 1
+//                lastOfRes = chars[i]
+//                res.append(chars[i])
+//            }
+//        }
+//        if count != 1 {
+//            let string = String(count)
+//            for char in string {
+//                res.append(char)
+//            }
+//        }
+//        chars = res
+//        return res.count
+//    }
+//}
 //MARK: - 567. Permutation in String
 //let s1 = "adc", s2 = "dcda"
 //let s = Solution()
@@ -1847,12 +1898,12 @@ let start = CFAbsoluteTimeGetCurrent()
 //        var left = 0, right = 0, total = 0
 //        while right < nums.count {
 //            total += nums[right]
-//            while (right-left + 1)*nums[right] > total + k {
+//            right += 1
+//            while (right-left)*nums[right - 1] > total + k {
 //                total -= nums[left]
 //                left += 1
 //            }
 //            res = max(res, right - left + 1)
-//            right += 1
 //        }
 //        return res
 //    }
