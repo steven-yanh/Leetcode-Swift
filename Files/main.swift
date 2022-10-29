@@ -795,8 +795,20 @@ let start = CFAbsoluteTimeGetCurrent()
 //
 //}
 
+//MARK: - 104. 🟢Maximum Depth of Binary Tree
+//MARK: post order return after find the leftMax and rightMax
+//class Solution {
+//    func maxDepth(_ root: TreeNode?) -> Int {
+//        guard let root = root else {
+//            return 0
+//        }
+//        let leftMax = maxDepth(root.left) + 1
+//        let rightMax = maxDepth(root.right) + 1
+//        return max(leftMax,rightMax)
+//    }
+//}
 
-//MARK: - 121. Best Time to Buy and Sell Stock
+//MARK: - 121. 🟢Best Time to Buy and Sell Stock
 //let prices = [7,1,5,3,6]
 //let solution = Solution()
 //print(solution.maxProfit(prices))
