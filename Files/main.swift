@@ -1314,6 +1314,22 @@ let start = CFAbsoluteTimeGetCurrent()
 //    }
 //}
 
+//MARK: - 🟢226. Invert Binary Tree
+//MARK: prefix the tree make modification first then return at the postfix order
+//class Solution {
+//    func invertTree(_ root: TreeNode?) -> TreeNode? {
+//        if root == nil {
+//            return nil
+//        }
+//        let temp = root?.left
+//        root?.left = root?.right
+//        root?.right = temp
+//        invertTree(root?.left)
+//        invertTree(root?.right)
+//        return root
+//    }
+//}
+
 //MARK: - 238. Product of Array Except Self
 //let nums = [1,2,3,4]
 //let solution = Solution()
