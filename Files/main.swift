@@ -795,6 +795,27 @@ let start = CFAbsoluteTimeGetCurrent()
 //
 //}
 
+//MARK: - 🟢100. Same Tree
+//MARK: same approach as post order but slightly different that if left is return false then it will return directly and won't go to next node.
+class Solution {
+    func isSameTree(_ p: TreeNode?, _ q: TreeNode?) -> Bool {
+        if p == nil, q == nil {
+            return true
+        }
+        if p?.val != q?.val {
+            return false
+        }
+        
+        if !isSameTree(p?.left, q?.left) {
+            return false
+        }
+        if !isSameTree(p?.right, q?.right) {
+            return false
+        }
+        return true
+    }
+}
+
 //MARK: - 104. 🟢Maximum Depth of Binary Tree
 //MARK: post order return after find the leftMax and rightMax
 //class Solution {
