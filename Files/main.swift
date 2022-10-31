@@ -797,24 +797,24 @@ let start = CFAbsoluteTimeGetCurrent()
 
 //MARK: - 🟢100. Same Tree
 //MARK: same approach as post order but slightly different that if left is return false then it will return directly and won't go to next node.
-class Solution {
-    func isSameTree(_ p: TreeNode?, _ q: TreeNode?) -> Bool {
-        if p == nil, q == nil {
-            return true
-        }
-        if p?.val != q?.val {
-            return false
-        }
-        
-        if !isSameTree(p?.left, q?.left) {
-            return false
-        }
-        if !isSameTree(p?.right, q?.right) {
-            return false
-        }
-        return true
-    }
-}
+//class Solution {
+//    func isSameTree(_ p: TreeNode?, _ q: TreeNode?) -> Bool {
+//        if p == nil, q == nil {
+//            return true
+//        }
+//        if p?.val != q?.val {
+//            return false
+//        }
+//        
+//        if !isSameTree(p?.left, q?.left) {
+//            return false
+//        }
+//        if !isSameTree(p?.right, q?.right) {
+//            return false
+//        }
+//        return true
+//    }
+//}
 
 //MARK: - 104. 🟢Maximum Depth of Binary Tree
 //MARK: post order return after find the leftMax and rightMax
@@ -1781,6 +1781,40 @@ class Solution {
 //        return false
 //    }
 //}
+
+//MARK: - 🟢572. Subtree of Another Tree
+//MARK: define a isSameTree(root, other) then check if current root is subtree if not then check left or right if none of these work then return false meaning that we treaversed all the node from root and none of it is subtree.
+//class Solution {
+//    func isSubtree(_ root: TreeNode?, _ subRoot: TreeNode?) -> Bool {
+//        if isSame(root, subRoot) {
+//            return true
+//        }
+//        if root?.left != nil && isSubtree(root?.left, subRoot) {
+//            return true
+//        }
+//        if root?.right != nil && isSubtree(root?.right, subRoot) {
+//            return true
+//        }
+//        return false
+//    }
+//    func isSame(_ root: TreeNode?, _ other: TreeNode?) -> Bool {
+//        if root == nil && other == nil {
+//            return true
+//        }
+//        if root?.val != other?.val {
+//            return false
+//        }
+//        if !isSame(root?.left, other?.left) {
+//            return false
+//        }
+//        if !isSame(root?.right, other?.right) {
+//            return false
+//        }
+//
+//        return true
+//
+//    }
+}
 
 //MARK: - 739. Daily Temperatures
 //let temperatures = [73,74,75,71,69,72,76,73]
