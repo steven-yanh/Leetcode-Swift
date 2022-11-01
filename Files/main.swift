@@ -805,7 +805,7 @@ let start = CFAbsoluteTimeGetCurrent()
 //        if p?.val != q?.val {
 //            return false
 //        }
-//        
+//
 //        if !isSameTree(p?.left, q?.left) {
 //            return false
 //        }
@@ -1360,6 +1360,45 @@ let start = CFAbsoluteTimeGetCurrent()
 //        invertTree(root?.left)
 //        invertTree(root?.right)
 //        return root
+//    }
+//}
+
+//MARK: - 🟢235. Lowest Common Ancestor of a Binary Search Tree
+//MARK: 1.make a contains function to make sure if current node is valid 2. travers the tree preorder first if current node is valid then try left and right node, but if current node fails just return directly(more effieient)
+//class Solution {
+//    func lowestCommonAncestor(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+//        if root == nil {
+//            return nil
+//        }
+//        var res: TreeNode? = nil
+//        if contains(root, p!.val) && contains(root, q!.val) {
+//            res = root
+//        } else {
+//            return nil
+//        }
+//        if let node = lowestCommonAncestor(root?.left, p, q) {
+//            res = node
+//        }
+//        if let node = lowestCommonAncestor(root?.right, p, q) {
+//            res = node
+//        }
+//        return res
+//
+//    }
+//    func contains(_ root: TreeNode?, _ val: Int) -> Bool {
+//        if root == nil {
+//            return false
+//        }
+//        if root?.val == val {
+//            return true
+//        }
+//        if root!.val > val {
+//            return contains(root?.left, val)
+//        }
+//        if root!.val < val {
+//            return contains(root?.right, val)
+//        }
+//        return false
 //    }
 //}
 
