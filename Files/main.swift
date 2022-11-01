@@ -1347,6 +1347,28 @@ let start = CFAbsoluteTimeGetCurrent()
 //    }
 //}
 
+//MARK: - 🟡209. Minimum Size Subarray Sum
+//MARK: very typical sliding window question maintain the framework and make shrink condition.
+//let target = 11, nums = [1,1,1,1,1,1,1,1]
+//let s = Solution()
+//print(s.minSubArrayLen(target, nums))
+//class Solution {
+//    func minSubArrayLen(_ target: Int, _ nums: [Int]) -> Int {
+//        var right = 0, left = 0, total = 0
+//        var res = Int.max
+//        while right < nums.count {
+//            let rightNumber = nums[right]
+//            total += rightNumber
+//            right += 1
+//            while total >= target {
+//                res = min(res,right - left)
+//                total -= nums[left]
+//                left += 1
+//            }
+//        }
+//        return res != Int.max ? res : 0
+//    }
+//}
 //MARK: - 🟢226. Invert Binary Tree
 //MARK: prefix the tree make modification first then return at the postfix order
 //class Solution {
@@ -1853,7 +1875,7 @@ let start = CFAbsoluteTimeGetCurrent()
 //        return true
 //
 //    }
-}
+//}
 
 //MARK: - 739. Daily Temperatures
 //let temperatures = [73,74,75,71,69,72,76,73]
