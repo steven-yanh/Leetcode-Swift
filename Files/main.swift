@@ -2,7 +2,8 @@
 
 import Foundation
 let start = CFAbsoluteTimeGetCurrent()
-//MARK: playing around stack and queue
+//MARK: playing around anything
+// Stacks && Queue
 //var stack = Stack<Int>()
 //stack.push(1)
 //stack.push(2)
@@ -11,6 +12,47 @@ let start = CFAbsoluteTimeGetCurrent()
 //print(stack.pop())
 //print(stack.count)
 //print(stack.last?.value)
+
+
+// Node (classes)
+//let n1 = ListNode(1)
+//let n2 = ListNode(2)
+//let n3 = ListNode(3)
+//let n4 = ListNode(4)
+//let n5 = ListNode(5)
+//n1.next = n2
+//n2.next = n3
+//n3.next = n4
+//n4.next = n5
+//let refN4 = n3.next
+//let arr = [n1,n2,n3,n5]
+//if arr.contains(where: { node in // triple equal comparing the reference of data
+//    return refN4 === node
+//}) {
+//    print(true)
+//} else {
+//    print(false)
+//}
+//print(refN4 === n4)
+//n1.print()
+//n1.next = n1 // valid, a node can point to it self and cause infinity loop
+//n1.print()
+
+// Struct
+//struct StructA {
+//    let val: Int
+//}
+//let s1 = StructA(val: 1)
+//let s2 = StructA(val: 1)
+//let int1 = 1
+//let int2 = 2
+//let int3 = 3
+//let intRef = int1
+//print(s1 == s2)
+
+
+
+
 //MARK: - 1. Two Sum
 //let nums = [3,2,4], target = 6
 //let solotion = Solution()
@@ -822,7 +864,7 @@ let start = CFAbsoluteTimeGetCurrent()
 //class Solution {
 //    func levelOrder(_ root: TreeNode?) -> [[Int]] {
 //        guard let root = root else { return [] }
-//    
+//
 //        var result: [[TreeNode]] = [[root]]
 //        var array: [TreeNode] = [root]
 //
@@ -838,9 +880,9 @@ let start = CFAbsoluteTimeGetCurrent()
 //                    temp.append(right)
 //                }
 //            }
-//            
+//
 //            array = temp
-//            
+//
 //            if !array.isEmpty {
 //                result.append(array)
 //            }
@@ -1093,6 +1135,49 @@ let start = CFAbsoluteTimeGetCurrent()
 //
 //
 //        return resultHeadNode
+//    }
+//}
+
+//MARK: - 🟢141. Linked List Cycle
+//MARK: trick: use fast-slow pointer if there is a cycle then the fast will point to the slow
+/// sample solution
+//class Solution {
+//    func hasCycle(_ head: ListNode?) -> Bool {
+//        guard head != nil else { return false }
+//
+//        var slow = head
+//        var fast = head?.next
+//
+//        while !(slow === fast) {
+//            slow = slow?.next
+//            fast = fast?.next?.next
+//
+//            if slow == nil || fast == nil { return false }
+//        }
+//
+//        return true
+//    }
+//}
+//class Solution { //head = [3,2,0,-4], pos = 1
+//    func hasCycle(_ head: ListNode?) -> Bool {
+//        guard head != nil, head?.next != nil else {
+//            return false
+//        }
+//        var arr = [ListNode]()
+//        var travalNode = head
+//        while travalNode != nil {
+//            arr.append(travalNode!)
+//            if let nextNode = travalNode?.next {
+//                if arr.contains(where: { node in
+//                    nextNode === node
+//                }) {
+//                    return true
+//                }
+//            }
+//            travalNode = travalNode?.next
+//        }
+//
+//        return false
 //    }
 //}
 
