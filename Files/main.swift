@@ -816,7 +816,69 @@ let start = CFAbsoluteTimeGetCurrent()
 //    }
 //}
 
-//MARK: - 104. 🟢Maximum Depth of Binary Tree
+//MARK: - 🟡102. Binary Tree Level Order Traversal
+//MARK: BFS from the root of the tree and iterate through the while loop, keep track of current length of the queue because this tells us how many node will be on this level and is counted by previous iteration. 2. make tempArray to collect all of result in current level and add next level's node to queue.
+/// sample example:
+//class Solution {
+//    func levelOrder(_ root: TreeNode?) -> [[Int]] {
+//        guard let root = root else { return [] }
+//    
+//        var result: [[TreeNode]] = [[root]]
+//        var array: [TreeNode] = [root]
+//
+//        while !array.isEmpty {
+//            var temp: [TreeNode] = []
+//
+//            array.forEach { item in
+//                if let left = item.left {
+//                    temp.append(left)
+//                }
+//
+//                if let right = item.right {
+//                    temp.append(right)
+//                }
+//            }
+//            
+//            array = temp
+//            
+//            if !array.isEmpty {
+//                result.append(array)
+//            }
+//        }
+//
+//        return result.map { $0.map { $0.val } }
+//    }
+//}
+/// my solution
+//class Solution {
+//    func levelOrder(_ root: TreeNode?) -> [[Int]] {
+//        var q = [TreeNode?]()
+//        var res = [[Int]]()
+//        if root != nil {
+//            q.append(root)
+//        }
+//        while !q.isEmpty {
+//            let length = q.count
+//            var levelRes = [Int]()
+//            for _ in 0..<length {
+//                let node = q.removeFirst()!
+//                levelRes.append(node.val)
+//                if node.left != nil {
+//                    q.append(node.left)
+//                }
+//                if node.right != nil {
+//                    q.append(node.right)
+//                }
+//            }
+//            if !levelRes.isEmpty {
+//                res.append(levelRes)
+//            }
+//        }
+//        return res
+//    }
+//}
+
+//MARK: - 🟢104. Maximum Depth of Binary Tree
 //MARK: post order return after find the leftMax and rightMax
 //class Solution {
 //    func maxDepth(_ root: TreeNode?) -> Int {
