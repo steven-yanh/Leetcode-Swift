@@ -12,8 +12,6 @@ let start = CFAbsoluteTimeGetCurrent()
 //print(stack.pop())
 //print(stack.count)
 //print(stack.last?.value)
-
-
 // Node (classes)
 //let n1 = ListNode(1)
 //let n2 = ListNode(2)
@@ -837,6 +835,45 @@ let start = CFAbsoluteTimeGetCurrent()
 //
 //}
 
+//MARK: - 🟡98. Validate Binary Search Tree
+//MARK: 1.helper method to find max of left and comparing to root.val and min of right 2.traverse the tree and make sure of conditions and recursively call it self
+//class Solution {
+//    func isValidBST(_ root: TreeNode?) -> Bool {
+//        guard let root = root else {
+//            return true
+//        }
+//        if let left = root.left {
+//            if maxVal(left) >= root.val {
+//                return false
+//            }
+//        }
+//        if let right = root.right {
+//            if minVal(right) <= root.val {
+//                return false
+//            }
+//        }
+//        if isValidBST(root.left) && isValidBST(root.right) {
+//            return true
+//        } else {
+//            return false
+//        }
+//    }
+//    func minVal(_ root: TreeNode?) -> Int {
+//        guard let root = root else {
+//            return Int.max
+//        }
+//        let minVal = min(minVal(root.left), minVal(root.right))
+//        return min(root.val,minVal)
+//
+//    }
+//    func maxVal(_ root: TreeNode?) -> Int {
+//        guard let root = root else {
+//            return Int.min
+//        }
+//        let maxVal = max(maxVal(root.left), maxVal(root.right))
+//        return max(root.val,maxVal)
+//    }
+//}
 //MARK: - 🟢100. Same Tree
 //MARK: same approach as post order but slightly different that if left is return false then it will return directly and won't go to next node.
 //class Solution {
