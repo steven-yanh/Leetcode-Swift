@@ -2213,8 +2213,36 @@ let start = CFAbsoluteTimeGetCurrent()
  * let ret_2: String = obj.get(key, timestamp)
  */
 
-
-
+//MARK: - 🟢1221. Split a String in Balanced Strings
+//MARK: intuitive and easy. make left and right counter
+//let s = "RLRRLLRLRL"
+//let so = Solution()
+//print(so.balancedStringSplit(s))
+//class Solution {
+//    func balancedStringSplit(_ s: String) -> Int {
+//        let str = Array(s)
+//        var leftCount = 0, rightCount = 0
+//        var res = 0
+//        for char in str {
+//            if char == "L" {
+//                leftCount += 1
+//                if leftCount == rightCount && leftCount != 0 {
+//                    leftCount = 0
+//                    rightCount = 0
+//                    res += 1
+//                }
+//            } else {throw new Error(`${source.name}.${_.lowerFirst(Type.name)} called with something that's not a subclass of Sequelize.Model`);
+//                rightCount += 1
+//                if leftCount == rightCount && leftCount != 0 {
+//                    leftCount = 0
+//                    rightCount = 0
+//                    res += 1
+//                }
+//            }
+//        }
+//        return res
+//    }
+//}
 //MARK: - 1838. Frequency of the Most Frequent Element
 //let nums = [1,4,8,13], k = 5
 //let s = Solution()
