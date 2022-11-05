@@ -1569,6 +1569,61 @@ let start = CFAbsoluteTimeGetCurrent()
 //    }
 //}
 
+//MARK: - 🟡230. Kth Smallest Element in a BST
+//MARK: 1. inorder traverse a BST will give you ordered array 2. make helper method to pass around the rank var to keep track of which rank we are now.
+//class Solution { // return by Int
+//    func kthSmallest(_ root: TreeNode?, _ k: Int) -> Int {
+//        var rank = 0
+//        return traverse(root, k, &rank)
+//    }
+//    func traverse(_ root: TreeNode?, _ k: Int, _ rank: inout Int) -> Int {
+//        guard let root = root else {
+//            return -1
+//        }
+//        var res = traverse(root.left, k, &rank)
+//        if res != -1 {
+//            return res
+//        }
+//        rank += 1
+//        if rank == k {
+//            return root.val
+//        }
+//        res = traverse(root.right, k, &rank)
+//        if res != -1 {
+//            return res
+//        }
+//        return -1
+//    }
+//}
+//class Solution { // return by TreeNode?
+//    func kthSmallest(_ root: TreeNode?, _ k: Int) -> Int {
+//        var rank = 0
+//        if let res = traverse(root, k, &rank) {
+//            return res.val
+//        } else {
+//            return -1
+//        }
+//    }
+//    func traverse(_ root: TreeNode?, _ k: Int, _ rank: inout Int) -> TreeNode? {
+//        guard let root = root else {
+//            return nil
+//        }
+//        var res = traverse(root.left, k, &rank)
+//        if res != nil {
+//            return res
+//        }
+//        rank += 1
+//        if rank == k {
+//            return root
+//        }
+//        res = traverse(root.right, k, &rank)
+//        if res != nil{
+//            return res
+//        }
+//        return nil
+//    }
+//}
+
 //MARK: - 🟢235. Lowest Common Ancestor of a Binary Search Tree
 //MARK: 1.make a contains function to make sure if current node is valid 2. travers the tree preorder first if current node is valid then try left and right node, but if current node fails just return directly(more effieient)
 //class Solution {
