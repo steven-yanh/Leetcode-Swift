@@ -995,7 +995,36 @@ let start = CFAbsoluteTimeGetCurrent()
 //    }
 //}
 
-//MARK: - 121. 🟢Best Time to Buy and Sell Stock
+//MARK: - 🟢110. Balanced Binary Tree
+//MARK:
+class Solution {
+    func isBalanced(_ root: TreeNode?) -> Bool {
+        if root == nil {
+            return true
+        }
+        let leftMaxDepth = maxDepth(root?.left)
+        let rightMaxDepth = maxDepth(root?.right)
+        if abs(leftMaxDepth - rightMaxDepth) > 1 {
+            return false
+        }
+        if !isBalanced(root?.left) {
+            return false
+        }
+        if !isBalanced(root?.right) {
+            return false
+        }
+        return true
+    }
+    func maxDepth(_ root: TreeNode?) -> Int {
+        if root == nil {
+            return 0
+        }
+        let leftDepth = maxDepth(root?.left)
+        let rightDepth = maxDepth(root?.right)
+        return 1 + max(leftDepth, rightDepth)
+    }
+}
+//MARK: - 121. 🟢Best Time to Buy and Sell Stock (DP)
 //let prices = [7,1,5,3,6]
 //let solution = Solution()
 //print(solution.maxProfit(prices))
@@ -2109,26 +2138,26 @@ let start = CFAbsoluteTimeGetCurrent()
 
 //MARK: - 🟢543. Diameter of Binary Tree
 //MARK: postorder to update max diameter
-class Solution {
-    func diameterOfBinaryTree(_ root: TreeNode?) -> Int {
-        if root == nil {
-            return 0
-        }
-        var res = 0
-        depth(root, &res)
-        return res
-    }
-    func depth(_ root: TreeNode?, _ maxDiameter: inout Int) -> Int {
-        if root == nil {
-            return 0
-        }
-        let leftDepth = depth(root?.left, &maxDiameter)
-        let rightDepth = depth(root?.right, &maxDiameter)
-        
-        maxDiameter = max(maxDiameter, leftDepth + rightDepth)
-        return 1 + max(leftDepth, rightDepth)
-    }
-}
+//class Solution {
+//    func diameterOfBinaryTree(_ root: TreeNode?) -> Int {
+//        if root == nil {
+//            return 0
+//        }
+//        var res = 0
+//        depth(root, &res)
+//        return res
+//    }
+//    func depth(_ root: TreeNode?, _ maxDiameter: inout Int) -> Int {
+//        if root == nil {
+//            return 0
+//        }
+//        let leftDepth = depth(root?.left, &maxDiameter)
+//        let rightDepth = depth(root?.right, &maxDiameter)
+//
+//        maxDiameter = max(maxDiameter, leftDepth + rightDepth)
+//        return 1 + max(leftDepth, rightDepth)
+//    }
+//}
 
 //MARK: - 🟢572. Subtree of Another Tree
 //MARK: define a isSameTree(root, other) then check if current root is subtree if not then check left or right if none of these work then return false meaning that we treaversed all the node from root and none of it is subtree.
