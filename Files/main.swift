@@ -970,6 +970,31 @@ let start = CFAbsoluteTimeGetCurrent()
 //    }
 //}
 
+//MARK: - 🟡105. Construct Binary Tree from Preorder and Inorder Traversal
+//MARK: 1.map inorder array with index 2. first element of preorder is the root value of current tree 3. inorder will help us find the left portion and right portion
+//let preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
+//let s = Solution()
+//print(s.buildTree(preorder, inorder))
+//class Solution {
+//    func buildTree(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+//        var inorderDict = [Int: Int]()
+//        for i in 0..<inorder.count {
+//            inorderDict[inorder[i]] = i
+//        }
+//        var preorderIndex = 0
+//        return build(&inorderDict, &preorderIndex, preorder, left: 0, right: preorder.count - 1)
+//    }
+//    func build(_ dict: inout [Int: Int], _ preorderIndex: inout Int,_ preorder: [Int], left: Int, right: Int) -> TreeNode? {
+//        guard left <= right else { return nil }
+//        let root = TreeNode(preorder[preorderIndex])
+//        let index = dict[preorder[preorderIndex]]!
+//        preorderIndex += 1
+//        root.left = build(&dict, &preorderIndex, preorder, left: left, right: index - 1)
+//        root.right = build(&dict, &preorderIndex, preorder, left: index + 1, right: right)
+//        return root
+//    }
+//}
+
 //MARK: - 121. 🟢Best Time to Buy and Sell Stock
 //let prices = [7,1,5,3,6]
 //let solution = Solution()
