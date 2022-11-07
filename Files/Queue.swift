@@ -6,7 +6,8 @@
 //
 
 import Foundation
-//class Queue<T> {
+//MARK: - Node Queue
+//struct Queue<T> {
 //    var head: Node<T>?
 //    var first: Node<T>? {
 //        return head
@@ -51,5 +52,29 @@ import Foundation
 //            return nil
 //        }
 //    }
-//   
+//
+//}
+//MARK: - Array Queue
+//public struct Queue<T> {
+//    public var elements: [T] = []
+//    
+//    public init(_ elements: [T]) {
+//        self.elements = elements
+//    }
+//    
+//    public var isEmpty: Bool {
+//        elements.isEmpty
+//    }
+//    
+//    public var count: Int {
+//        elements.count
+//    }
+//    
+//    public mutating func enqueue(_ element: T) {
+//        elements.append(element)
+//    }
+//    
+//    public mutating func dequeue() -> T? {
+//        elements.removeFirst()
+//    }
 //}

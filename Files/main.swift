@@ -48,6 +48,22 @@ let start = CFAbsoluteTimeGetCurrent()
 //let intRef = int1
 //print(s1 == s2)
 
+// Tree
+// initTree
+//let tNode1 = TreeNode(1)
+//let tNode2 = TreeNode(2)
+//let tNode3 = TreeNode(3)
+//let tNode4 = TreeNode(4)
+//let tNode5 = TreeNode(5)
+//let tNode6 = TreeNode(6)
+//let tNode7 = TreeNode(7)
+//tNode1.left = tNode2
+//tNode1.right = tNode3
+//tNode2.left = tNode4
+//tNode2.right = tNode5
+//tNode3.left = tNode6
+//tNode3.right = tNode7
+
 
 
 
@@ -996,34 +1012,34 @@ let start = CFAbsoluteTimeGetCurrent()
 //}
 
 //MARK: - 🟢110. Balanced Binary Tree
-//MARK:
-class Solution {
-    func isBalanced(_ root: TreeNode?) -> Bool {
-        if root == nil {
-            return true
-        }
-        let leftMaxDepth = maxDepth(root?.left)
-        let rightMaxDepth = maxDepth(root?.right)
-        if abs(leftMaxDepth - rightMaxDepth) > 1 {
-            return false
-        }
-        if !isBalanced(root?.left) {
-            return false
-        }
-        if !isBalanced(root?.right) {
-            return false
-        }
-        return true
-    }
-    func maxDepth(_ root: TreeNode?) -> Int {
-        if root == nil {
-            return 0
-        }
-        let leftDepth = maxDepth(root?.left)
-        let rightDepth = maxDepth(root?.right)
-        return 1 + max(leftDepth, rightDepth)
-    }
-}
+//MARK: 1.traverse preorder for isBalanced for timeComplexity 2.traverse postorder for maxDepth of a node (we need to know it's left and right child's maxDepth to know current's max depth)
+//class Solution {
+//    func isBalanced(_ root: TreeNode?) -> Bool {
+//        if root == nil {
+//            return true
+//        }
+//        let leftMaxDepth = maxDepth(root?.left)
+//        let rightMaxDepth = maxDepth(root?.right)
+//        if abs(leftMaxDepth - rightMaxDepth) > 1 {
+//            return false
+//        }
+//        if !isBalanced(root?.left) {
+//            return false
+//        }
+//        if !isBalanced(root?.right) {
+//            return false
+//        }
+//        return true
+//    }
+//    func maxDepth(_ root: TreeNode?) -> Int {
+//        if root == nil {
+//            return 0
+//        }
+//        let leftDepth = maxDepth(root?.left)
+//        let rightDepth = maxDepth(root?.right)
+//        return 1 + max(leftDepth, rightDepth)
+//    }
+//}
 //MARK: - 121. 🟢Best Time to Buy and Sell Stock (DP)
 //let prices = [7,1,5,3,6]
 //let solution = Solution()
@@ -1432,6 +1448,46 @@ class Solution {
 //
 //    func getMin() -> Int {
 //        return minStack.last!
+//    }
+//}
+
+//MARK: - 🟡199. Binary Tree Right Side View
+//let tNode1 = TreeNode(1)
+//let tNode2 = TreeNode(2)
+//let tNode3 = TreeNode(3)
+//let tNode4 = TreeNode(4)
+//let tNode5 = TreeNode(5)
+//tNode1.left = tNode2
+//tNode1.right = tNode3
+//tNode2.right = tNode5
+//tNode3.right = tNode4
+//let s = Solution()
+//print(s.rightSideView(tNode1))
+//class Solution {
+//    func rightSideView(_ root: TreeNode?) -> [Int] {
+//        var res = [Int]()
+//        var q = [TreeNode?]()
+//        if root != nil {
+//            q.append(root)
+//        }
+//        while !q.isEmpty {
+//            var count = 0
+//            let length = q.count
+//            for _ in 0..<length {
+//                let cur = q.removeFirst()!
+//                if count == 0 {
+//                    res.append(cur.val)
+//                    count += 1
+//                }
+//                if cur.right != nil {
+//                    q.append(cur.right)
+//                }
+//                if cur.left != nil {
+//                    q.append(cur.left)
+//                }
+//            }
+//        }
+//        return res
 //    }
 //}
 
