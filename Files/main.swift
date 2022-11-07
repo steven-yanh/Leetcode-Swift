@@ -2,6 +2,7 @@
 
 import Foundation
 let start = CFAbsoluteTimeGetCurrent()
+let solution = Solution()
 //MARK: playing around anything
 // Stacks && Queue
 //var stack = Stack<Int>()
@@ -2431,6 +2432,32 @@ let start = CFAbsoluteTimeGetCurrent()
 //        return res
 //    }
 //}
+
+//MARK: - 🟡1448. Count Good Nodes in Binary Tree
+//MARK: 1.inorder traversal if current node is a goode node and plus the left total good node and right total good node
+//print(solution.goodNodes(nil))
+//class Solution { // root = [3,1,4,3,null,1,5]
+//    func goodNodes(_ root: TreeNode?) -> Int {
+//        return traverse(root, Int.min)
+//    }
+//    func traverse(_ root: TreeNode?, _ parentVal: Int) -> Int{
+//        guard let root = root else {
+//            return 0
+//        }
+//        var res = 0
+//        if root.val >= parentVal { //good node
+//            res += 1
+//        }
+//        if root.left != nil {
+//            res += traverse(root.left, max(root.val, parentVal))
+//        }
+//        if root.right != nil {
+//            res += traverse(root.right, max(root.val, parentVal))
+//        }
+//        return res
+//    }
+//}
+
 //MARK: - 1838. Frequency of the Most Frequent Element
 //let nums = [1,4,8,13], k = 5
 //let s = Solution()
@@ -2478,38 +2505,38 @@ let start = CFAbsoluteTimeGetCurrent()
 
 //MARK: - Other Practice
 
-// Amazon OA question 2
-let stockPrice = [1,2,7,7,4,3,6], k = 3
-let s = Solution()
-print(s.findMaxSum(stockPrice, k))
-class Solution {
-    func findMaxSum(_ stockPrice: [Int],_ k: Int) -> Int {
-        var left = 0, right = 0, res = -1
-        var map = [Int: Int]()
-        while right < stockPrice.count {
-            let rightPrice = stockPrice[right]
-            map[rightPrice, default: 0] += 1
-            while right - left >= k {
-                let leftPrice = stockPrice[left]
-                print(leftPrice)
-                if map[leftPrice]! == 1 {
-                    map.removeValue(forKey: leftPrice)
-                } else {
-                    map[leftPrice]! -= 1
-                }
-                left += 1
-            }
-            if map.count == k { // no duplicates
-                let sum = map.reduce(0) { partialResult, pair in // reduce function to calculate valid sum
-                    partialResult + pair.key
-                }
-                res = max(res, sum)
-            }
-            right += 1
-        }
-        return res
-    }
-}
+//MARK: Amazon OA question 2 | sliding window question 
+//let stockPrice = [1,2,7,7,4,3,6], k = 3
+//let s = Solution()
+//print(s.findMaxSum(stockPrice, k))
+//class Solution {
+//    func findMaxSum(_ stockPrice: [Int],_ k: Int) -> Int {
+//        var left = 0, right = 0, res = -1
+//        var map = [Int: Int]()
+//        while right < stockPrice.count {
+//            let rightPrice = stockPrice[right]
+//            map[rightPrice, default: 0] += 1
+//            while right - left >= k {
+//                let leftPrice = stockPrice[left]
+//                print(leftPrice)
+//                if map[leftPrice]! == 1 {
+//                    map.removeValue(forKey: leftPrice)
+//                } else {
+//                    map[leftPrice]! -= 1
+//                }
+//                left += 1
+//            }
+//            if map.count == k { // no duplicates
+//                let sum = map.reduce(0) { partialResult, pair in // reduce function to calculate valid sum
+//                    partialResult + pair.key
+//                }
+//                res = max(res, sum)
+//            }
+//            right += 1
+//        }
+//        return res
+//    }
+//}
 
 let diff = (CFAbsoluteTimeGetCurrent() - start) * 1000
 print("\n\n\(diff) seconds")
