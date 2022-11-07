@@ -2476,6 +2476,40 @@ let start = CFAbsoluteTimeGetCurrent()
 //    }
 //}
 
+//MARK: - Other Practice
+
+// Amazon OA question 2
+let stockPrice = [1,2,7,7,4,3,6], k = 3
+let s = Solution()
+print(s.findMaxSum(stockPrice, k))
+class Solution {
+    func findMaxSum(_ stockPrice: [Int],_ k: Int) -> Int {
+        var left = 0, right = 0, res = -1
+        var map = [Int: Int]()
+        while right < stockPrice.count {
+            let rightPrice = stockPrice[right]
+            map[rightPrice, default: 0] += 1
+            while right - left >= k {
+                let leftPrice = stockPrice[left]
+                print(leftPrice)
+                if map[leftPrice]! == 1 {
+                    map.removeValue(forKey: leftPrice)
+                } else {
+                    map[leftPrice]! -= 1
+                }
+                left += 1
+            }
+            if map.count == k { // no duplicates
+                let sum = map.reduce(0) { partialResult, pair in // reduce function to calculate valid sum
+                    partialResult + pair.key
+                }
+                res = max(res, sum)
+            }
+            right += 1
+        }
+        return res
+    }
+}
 
 let diff = (CFAbsoluteTimeGetCurrent() - start) * 1000
 print("\n\n\(diff) seconds")
