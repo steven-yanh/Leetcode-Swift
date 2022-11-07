@@ -1107,6 +1107,28 @@ let solution = Solution()
 //    }
 //}
 
+//MARK: - 🔴124. Binary Tree Maximum Path Sum
+//MARK: 1.DP question rather than Tree question 2. make sure your state and selection ie: max(a,b) 3. traverse will help you find the max sum by its defination and look for left and right compare to zero meaning it gets larger or no then in the postorder to figure out the largest from left subtree and right subtree plus root itself 4. return value to return the root value plus larger path from left or right
+class Solution {
+    func maxPathSum(_ root: TreeNode?) -> Int {
+        guard let root = root else {
+            return Int.min
+        }
+
+        var maxSum = Int.min
+        traverse(root, &maxSum)
+        return maxSum
+    }
+    func traverse(_ root: TreeNode?, _ maxSum: inout Int) -> Int {
+        guard let root = root else {
+            return 0
+        }
+        let leftRes = max(0, traverse(root.left, &maxSum))
+        let rightRes = max(0, traverse(root.right, &maxSum))
+        maxSum = max(maxSum, leftRes + rightRes + root.val)
+        return max(leftRes, rightRes) + root.val
+    }
+}
 
 //MARK: - 125. Valid Palindrome
 //let s = "A          man, a plan, a canal: Panama"
