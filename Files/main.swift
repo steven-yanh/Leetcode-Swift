@@ -2337,6 +2337,105 @@ let solution = Solution()
 //    }
 //}
 
+//MARK: - 🟡930. Binary Subarrays With Sum
+//MARK: Note: Permutation of a substring works like this: (valid prefix + 1) * (valid postfix + 1) every front times every rear.
+//let nums = [0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0], goal = 3
+//print(solution.numSubarraysWithSum(nums, goal))
+//class Solution { // sample solution
+//    func numSubarraysWithSum(_ nums: [Int], _ goal: Int) -> Int {
+//        var map = [0: 1]
+//        var res = 0
+//        var sum = 0
+//        for num in nums {
+//            sum += num
+//            if let count = map[-goal+sum] {
+//                print("***   \(count)")
+//                res += count
+//            }
+//            map[sum, default: 0] += 1
+//            print(map, res)
+//        }
+//        return res
+//    }
+//}
+//class Solution { // optimized beats 100%
+//    func numSubarraysWithSum(_ nums: [Int], _ goal: Int) -> Int {
+//        let n = nums.count
+//        var queue = [Int]()
+//        var res = 0, oneCount = 0, zeroCount = 1
+//        for i in 0..<n {
+//            let num = nums[i]
+//            if num == 0 {
+//                zeroCount += 1
+//            } else {
+//                oneCount += 1
+//                queue.append(zeroCount)
+//                zeroCount = 1
+//            }
+//        }
+//        queue.append(zeroCount)
+//        guard queue.count > goal else {
+//            return 0
+//        }
+//        if goal != 0 {
+//            for i in goal..<queue.count {
+//                res += queue[i-goal]*queue[i]
+//            }
+//        } else {
+//            for var num in queue {
+//                num -= 1
+//                while num != 0 {
+//                    res += num
+//                    num -= 1
+//                }
+//            }
+//        }
+//
+//        return res
+//    }
+//}
+//class Solution { // beats 15%
+//    func numSubarraysWithSum(_ nums: [Int], _ goal: Int) -> Int {
+//        let n = nums.count
+//        var queue = [Int]()
+//        var res = 0, left = 0, right = 0, oneCount = 0, zeroCount = 1
+//        if goal != 0 {
+//            for i in 0..<nums.count {
+//                let num = nums[i]
+//                if num == 0 {
+//                    zeroCount += 1
+//                } else {
+//                    oneCount += 1
+//                    queue.append(zeroCount)
+//                    zeroCount = 1
+//                    if oneCount == goal || oneCount > goal {
+//                        let prefix = queue.removeFirst()
+//                        var trailing = 1, right = i + 1
+//                        while right < n && nums[right] != 1 {
+//                            trailing += 1
+//                            right += 1
+//                        }
+//                        print(prefix, trailing)
+//                        res += prefix * trailing
+//                    }
+//                }
+//            }
+//        } else {
+//            zeroCount = 0
+//            for num in nums {
+//                if num == 0 {
+//                    zeroCount += 1
+//                    res += zeroCount
+//                } else {
+//                    zeroCount = 0
+//                }
+//            }
+//        }
+//
+//        return res
+//    }
+//}
+
 //MARK: - 875. Koko Eating Bananas
 //let piles = [3,6,7,11], h = 8
 //let s = Solution()
