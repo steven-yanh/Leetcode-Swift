@@ -2703,7 +2703,8 @@ let solution = Solution()
 //    }
 //}
 
-//MARK: - Hackerrank: timeConversion (Passed)
+//MARK: - Hackerrank
+//MARK: - timeConversion (Passed)
 //MARK: 12:00:00AM on a 12-hour clock is 00:00:00 on a 24-hour clock. - 12:00:00PM on a 12-hour clock is 12:00:00 on a 24-hour clock.
 //print(solution.timeConversion(s: "12:00:00AM"))
 //class Solution {
@@ -2728,6 +2729,26 @@ let solution = Solution()
 //            return "\(hour):\(min):\(second)"
 //        }
 //    }
+//}
+
+//MARK: - matchingStrings
+//MARK: use HashMap
+//let strings = ["aba","baba","aba","xzxb"]
+//let queries = ["aba","xzxb","ab"]
+//func matchingStrings(strings: [String], queries: [String]) -> [Int] {
+//    var res = [Int]()
+//    var map = [String: Int]()
+//    for string in strings {
+//        map[string, default: 0] += 1
+//    }
+//    for query in queries {
+//        if let count = map[query] {
+//            res.append(count)
+//        } else {
+//            res.append(0)
+//        }
+//    }
+//    return res
 //}
 let diff = (CFAbsoluteTimeGetCurrent() - start) * 1000
 print("\n\n\(diff) seconds")
