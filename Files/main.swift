@@ -2600,6 +2600,28 @@ let solution = Solution()
 //    }
 //}
 
+//MARK: - 🟡1513. Number of Substrings With Only 1s
+//let s = "0110111"
+//print(solution.numSub(s))
+//class Solution {
+//    func numSub(_ s: String) -> Int {
+//        let str = Array(s)
+//        var oneCount = 0, res = 0
+//        for char in str {
+//            switch char {
+//            case "1":
+//                oneCount += 1
+//                res += oneCount
+//            case "0":
+//                oneCount = 0
+//            default:
+//                break
+//            }
+//        }
+//        return res % 1000000007
+//    }
+//}
+
 //MARK: - 1838. Frequency of the Most Frequent Element
 //let nums = [1,4,8,13], k = 5
 //let s = Solution()
