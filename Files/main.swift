@@ -2601,6 +2601,7 @@ let solution = Solution()
 //}
 
 //MARK: - 🟡1513. Number of Substrings With Only 1s
+//MARK: Ramanujan Summation that adds up the number from 1 to n (correspond to permutation of same element)
 //let s = "0110111"
 //print(solution.numSub(s))
 //class Solution {
@@ -2702,5 +2703,31 @@ let solution = Solution()
 //    }
 //}
 
+//MARK: - Hackerrank: timeConversion (Passed)
+//MARK: 12:00:00AM on a 12-hour clock is 00:00:00 on a 24-hour clock. - 12:00:00PM on a 12-hour clock is 12:00:00 on a 24-hour clock.
+//print(solution.timeConversion(s: "12:00:00AM"))
+//class Solution {
+//    func timeConversion(s: String) -> String {
+//        // Write your code here
+//        let str = Array(s)
+//        let AorP: Character = str[str.count-2]
+//        var hour: String = "\(str[0])\(str[1])"
+//        let min = "\(str[3])\(str[4])"
+//        let second = "\(str[6])\(str[7])"
+//        var hourInt = Int(hour)!
+//        if AorP == "A" {
+//            if hour == "12" {
+//                hour = "00"
+//            }
+//            return "\(hour):\(min):\(second)"
+//        } else {
+//            if hour != "12" {
+//                hourInt += 12
+//            }
+//            hour = "\(hourInt)"
+//            return "\(hour):\(min):\(second)"
+//        }
+//    }
+//}
 let diff = (CFAbsoluteTimeGetCurrent() - start) * 1000
 print("\n\n\(diff) seconds")
