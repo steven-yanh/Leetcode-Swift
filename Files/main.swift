@@ -777,7 +777,125 @@ let solution = Solution()
 //    }
 //}
 
-//MARK: - 92. Reverse Linked List II
+//MARK: - (Backtracing)🟡79. Word Search
+//MARK: 1.Think of it as a graph, we look for a (* path) that leads us to be the target  2. traverse all the coordinate in the graph as starting point  3. comparing chars one by one if some word in the middle was wrong return false immediately  4.(base case) if we reached the end of the word (index == word.count) meaning found the word
+//let board: [[Character]] = [["A","B","C","E"],
+//                            ["S","F","C","S"],
+//                            ["A","D","E","E"]], word = "ABCCED"
+//print(solution.exist(board, word))
+//class Solution { // !nested function (pass by reference) this is faster? 400ms; can be improved using visited 150ms
+//    func exist(_ board: [[Character]], _ word: String) -> Bool { // m X n; m >= 1   so board[0] will never out of bounds
+//        let row = board.count
+//        let col = board[0].count
+////        var onPath = [(Int, Int)]() // onPath is used to finding a path
+//        var visited = Array(repeating: Array(repeating: false, count: col), count: row) // more efficient to check if certain coordinate has visited
+//        var wordArr = Array(word)
+//        for r in 0..<row {
+//            for c in 0..<col {
+//                if dfs(board, r, c, &visited, 0, &wordArr) {
+//                    return true
+//                }
+//            }
+//        }
+//        return false
+//    }
+//    func dfs(_ board: [[Character]],_ r: Int, _ c: Int, _ visited: inout [[Bool]], _ index: Int, _ word: inout [Character]) -> Bool {
+//        if index == word.count {
+//            return true
+//        }
+//        if r < 0 || c < 0 || r == board.count || c == board[0].count || visited[r][c] || board[r][c] != word[index] {
+//            return false
+//        }
+////        onPath.append((r, c))
+//        visited[r][c] = true
+//        if  dfs(board, r+1, c, &visited, index + 1, &word) ||
+//                dfs(board, r-1, c, &visited, index + 1, &word) ||
+//                dfs(board, r, c+1, &visited, index + 1, &word) ||
+//                dfs(board, r, c-1, &visited, index + 1, &word) {
+//            return true
+//        }
+//        //        onPath.removeAll(where: {$0 == (r, c)}) // Same result but this is o(n)
+////        onPath.removeLast() // o(1)
+//        visited[r][c] = false
+//        return false
+//    }
+//}
+
+//class Solution { // use global variable 800ms
+//    var onPath = [(Int, Int)]()
+//
+//    func exist(_ board: [[Character]], _ word: String) -> Bool { // m X n; m >= 1   so board[0] will never out of bounds
+//        let row = board.count
+//        let col = board[0].count
+//        var wordArr = Array(word)
+//
+//        for r in 0..<row {
+//            for c in 0..<col {
+//                if dfs(board, r, c, 0, &wordArr) {
+//                    return true
+//                }
+//            }
+//        }
+//        return false
+//    }
+//    func dfs(_ board: [[Character]], _ r: Int, _ c: Int, _ index: Int, _ target: inout [Character]) -> Bool {
+//        if index == target.count {
+//            return true
+//        }
+//        if r < 0 || c < 0 || r == board.count || c == board[0].count || onPath.contains(where: {$0 == (r, c)}) || board[r][c] != target[index] {
+//            return false
+//        }
+//        onPath.append((r, c))
+//        if  dfs(board, r+1, c, index + 1, &target) ||
+//                dfs(board, r-1, c, index + 1, &target) ||
+//                dfs(board, r, c+1, index + 1, &target) ||
+//                dfs(board, r, c-1, index + 1, &target) {
+//            return true
+//        }
+//        //        onPath.removeAll(where: {$0 == (r, c)}) // Same result but this is o(n)
+//        onPath.removeLast() // o(1)
+//        return false
+//    }
+//}
+
+//class Solution { // nested function  1500ms
+//    func exist(_ board: [[Character]], _ word: String) -> Bool { // m X n; m >= 1   so board[0] will never out of bounds
+//        let row = board.count
+//        let col = board[0].count
+//        var onPath = [(Int, Int)]()
+//        let wordArr = Array(word)
+//        func dfs(_ r: Int, _ c: Int, _ index: Int) -> Bool {
+//            if index == wordArr.count {
+//                return true
+//            }
+//            if r < 0 || c < 0 || r == board.count || c == board[0].count || onPath.contains(where: {$0 == (r, c)}) || board[r][c] != wordArr[index] {
+//                return false
+//            }
+//            onPath.append((r, c))
+//            if  dfs(r+1, c, index + 1) ||
+//                    dfs(r-1, c, index + 1) ||
+//                    dfs(r, c+1, index + 1) ||
+//                    dfs(r, c-1, index + 1) {
+//                return true
+//            }
+//            //        onPath.removeAll(where: {$0 == (r, c)}) // Same result but this is o(n)
+//            onPath.removeLast() // o(1)
+//            return false
+//        }
+//        for r in 0..<row {
+//            for c in 0..<col {
+//                if dfs(r, c, 0) {
+//                    return true
+//                }
+//            }
+//        }
+//        return false
+//
+//
+//    }
+//}
+
+//MARK: - 🟡92. Reverse Linked List II
 //let n1 = ListNode(1)
 //let n2 = ListNode(2)
 //let n3 = ListNode(3)
@@ -2750,5 +2868,26 @@ let solution = Solution()
 //    }
 //    return res
 //}
+
+//MARK: - lonelyinteger
+//func lonelyinteger(a: [Int]) -> Int {
+//    var map = [Int: Int]()
+//    for num in a {
+//        map[num, default: 0] += 1
+//    }
+//    // for num in a {
+//    //     if let count = map[num] {
+//    //         if count == 1 {
+//    //             return num
+//    //         }
+//    //     }
+//    // }
+//    let res = map.filter({ return $0.value == 1})
+//    for key in res.keys {
+//        return key
+//    }
+//    return 0
+//}
+
 let diff = (CFAbsoluteTimeGetCurrent() - start) * 1000
 print("\n\n\(diff) seconds")
