@@ -1148,6 +1148,31 @@ let solution = Solution()
 //    }
 //}
 
+//MARK: - 🟢108. Convert Sorted Array to Binary Search Tree
+let nums = [-10,-3,0,5,9]
+print(solution.sortedArrayToBST(nums)?.right?.val)
+class Solution { // 12ms
+    func sortedArrayToBST(_ nums: [Int]) -> TreeNode? {
+        traverse(nums, 0, nums.count - 1)
+    }
+    func traverse(_ nums: [Int], _ left: Int, _ right: Int) -> TreeNode? {
+
+//        if left > right {
+//            return nil
+//        }
+        guard left <= right else { //if left > right === guard left <= right (if is faster)
+            return nil
+        }
+        let mid = (left+right)/2
+        let root = TreeNode(nums[mid])
+        root.left = traverse(nums, left, mid-1)
+
+        root.right = traverse(nums, mid+1, right)
+
+        return root
+    }
+}
+
 //MARK: - 🟢110. Balanced Binary Tree
 //MARK: 1.traverse preorder for isBalanced for timeComplexity 2.traverse postorder for maxDepth of a node (we need to know it's left and right child's maxDepth to know current's max depth)
 //class Solution {
