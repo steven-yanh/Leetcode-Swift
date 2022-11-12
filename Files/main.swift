@@ -2426,6 +2426,36 @@ let solution = Solution()
 //        return ans
 //    }
 //}
+
+//MARK: - 🟡797. All Paths From Source to Target
+//MARK: 1.dfs for each node to find a possible path to last node of the graph(n-1)   2. for if statement(checking correct result) there are three things to be sure a)reached last node. b)starting node is 0. c)Path is not empty otherwise it will crash when checking first node
+//let graph = [[4,3,1],[3,2,4],[3],[4],[]]
+//print(solution.allPathsSourceTarget(graph))
+//class Solution { // 79ms 82%
+//    var res = [[Int]]()
+//    var onPath = [Int]()
+//    func allPathsSourceTarget(_ graph: [[Int]]) -> [[Int]] {
+//        for i in 0..<graph.count {
+//            dfs(graph, i)
+//        }
+//        return res
+//    }
+//    func dfs(_ graph: [[Int]], _ index: Int) {
+//        if index == graph.count - 1 && onPath.count > 0 && onPath[0] == 0 {
+//            onPath.append(index)
+//            res.append(onPath)
+//            onPath.removeLast()
+//            return
+//        }
+//        onPath.append(index)
+//        for next in graph[index] {
+//            dfs(graph, next)
+//        }
+//        onPath.removeLast()
+//    }
+//}
+
+
 //MARK: - 853. Car Fleet
 //let target = 10, position = [6,8], speed = [3,2]
 //let s = Solution()
