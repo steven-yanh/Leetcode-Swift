@@ -2455,6 +2455,31 @@ let solution = Solution()
 //    }
 //}
 
+//MARK: - 🟢606. Construct String from Binary Tree
+// Input: root = [1,2,3,4]
+// Output: "1(2(4))(3)"
+//class Solution { // 63ms 100%
+//    func tree2str(_ root: TreeNode?) -> String {
+//        guard let root = root else {
+//            return ""
+//        }
+//        if root.left == nil && root.right == nil { // leaf
+//            return "\(root.val)"
+//        }
+//        let leftStr = tree2str(root.left)
+//        let rightStr = tree2str(root.right)
+//
+//        if root.left != nil && root.right == nil {
+//            return "\(root.val)(\(leftStr))"
+//        }
+//        if root.left == nil && root.right != nil {
+//            return "\(root.val)()(\(rightStr))"
+//        }
+//        return "\(root.val)(\(leftStr))(\(rightStr))"
+//    }
+//}
+
+
 //MARK: - 🟢617. Merge Two Binary Trees
 //class Solution { // 97 ms 82%
 //    func mergeTrees(_ root1: TreeNode?, _ root2: TreeNode?) -> TreeNode? {
