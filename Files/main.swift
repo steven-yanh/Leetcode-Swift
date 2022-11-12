@@ -970,6 +970,24 @@ let solution = Solution()
 //
 //}
 
+//MARK: - 🟢94. Binary Tree Inorder Traversal
+//MARK: is better to pass by reference? faster?
+//class Solution { // 0 ms
+//    func inorderTraversal(_ root: TreeNode?) -> [Int] {
+//        var res = [Int]()
+//        traverse(root, &res)
+//        return res
+//    }
+//    func traverse(_ root: TreeNode?, _ res: inout [Int]) {
+//        guard let root = root else {
+//            return
+//        }
+//        traverse(root.left, &res)
+//        res.append(root.val)
+//        traverse(root.right, &res)
+//    }
+//}
+
 //MARK: - 🟡98. Validate Binary Search Tree
 //MARK: 1.helper method to find max of left and comparing to root.val and min of right 2.traverse the tree and make sure of conditions and recursively call it self
 //class Solution {
