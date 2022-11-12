@@ -1149,29 +1149,29 @@ let solution = Solution()
 //}
 
 //MARK: - 🟢108. Convert Sorted Array to Binary Search Tree
-let nums = [-10,-3,0,5,9]
-print(solution.sortedArrayToBST(nums)?.right?.val)
-class Solution { // 12ms
-    func sortedArrayToBST(_ nums: [Int]) -> TreeNode? {
-        traverse(nums, 0, nums.count - 1)
-    }
-    func traverse(_ nums: [Int], _ left: Int, _ right: Int) -> TreeNode? {
-
-//        if left > right {
+//let nums = [-10,-3,0,5,9]
+//print(solution.sortedArrayToBST(nums)?.right?.val)
+//class Solution { // 12ms
+//    func sortedArrayToBST(_ nums: [Int]) -> TreeNode? {
+//        traverse(nums, 0, nums.count - 1)
+//    }
+//    func traverse(_ nums: [Int], _ left: Int, _ right: Int) -> TreeNode? {
+//
+////        if left > right {
+////            return nil
+////        }
+//        guard left <= right else { //if left > right === guard left <= right (if is faster)
 //            return nil
 //        }
-        guard left <= right else { //if left > right === guard left <= right (if is faster)
-            return nil
-        }
-        let mid = (left+right)/2
-        let root = TreeNode(nums[mid])
-        root.left = traverse(nums, left, mid-1)
-
-        root.right = traverse(nums, mid+1, right)
-
-        return root
-    }
-}
+//        let mid = (left+right)/2
+//        let root = TreeNode(nums[mid])
+//        root.left = traverse(nums, left, mid-1)
+//
+//        root.right = traverse(nums, mid+1, right)
+//
+//        return root
+//    }
+//}
 
 //MARK: - 🟢110. Balanced Binary Tree
 //MARK: 1.traverse preorder for isBalanced for timeComplexity 2.traverse postorder for maxDepth of a node (we need to know it's left and right child's maxDepth to know current's max depth)
@@ -2430,6 +2430,22 @@ class Solution { // 12ms
 //
 //        return true
 //
+//    }
+//}
+
+//MARK: - 🟢617. Merge Two Binary Trees
+//class Solution { // 97 ms
+//    func mergeTrees(_ root1: TreeNode?, _ root2: TreeNode?) -> TreeNode? {
+//        if root1 == nil && root2 == nil {
+//            return nil
+//        }
+//        // can be improved by adding if else then return the node directly
+//        let val = (root1?.val ?? 0) + (root2?.val ?? 0)
+//        let root = TreeNode(val)
+//        root.left = mergeTrees(root1?.left, root2?.left)
+//        root.right = mergeTrees(root1?.right, root2?.right)
+//
+//        return root
 //    }
 //}
 
