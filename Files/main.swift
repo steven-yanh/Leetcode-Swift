@@ -1202,6 +1202,28 @@ let solution = Solution()
 //        return 1 + max(leftDepth, rightDepth)
 //    }
 //}
+
+//MARK: - 🟢(Tree) 112. Path Sum
+//class Solution { // 29ms 98%
+//    func hasPathSum(_ root: TreeNode?, _ targetSum: Int) -> Bool {
+//        traverse(root, targetSum, 0)
+//    }
+//    func traverse(_ root: TreeNode?, _ target: Int, _ parentSum: Int) -> Bool {
+//        guard let root = root else {
+//            return false
+//        }
+//        if root.left == nil && root.right == nil {
+//            return parentSum + root.val == target
+//        }
+//        if traverse(root.left, target, parentSum + root.val) || traverse(root.right, target, parentSum + root.val) {
+//            return true
+//        }
+//
+//        return false
+//    }
+//}
+
+
 //MARK: - 121. 🟢Best Time to Buy and Sell Stock (DP)
 //let prices = [7,1,5,3,6]
 //let solution = Solution()
@@ -2434,7 +2456,7 @@ let solution = Solution()
 //}
 
 //MARK: - 🟢617. Merge Two Binary Trees
-//class Solution { // 97 ms
+//class Solution { // 97 ms 82%
 //    func mergeTrees(_ root1: TreeNode?, _ root2: TreeNode?) -> TreeNode? {
 //        if root1 == nil && root2 == nil {
 //            return nil
