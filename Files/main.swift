@@ -1478,7 +1478,34 @@ let solution = Solution()
 //    }
 //}
 
-//MARK: - 138. Copy List with Random Pointer
+//MARK: - 🟡129. Sum Root to Leaf Numbers
+//MARK: 1. DFS the entire tree and calculate the result when reach the leaf    2. find a way to transfer Int to String and concatenate with another "Int" and convert it back to int ie. 1+2 = "1" + "2" = "12" = 12
+class Solution { // 0ms 100%
+    var res = 0
+    func sumNumbers(_ root: TreeNode?) -> Int {
+        guard let root = root else {
+            return 0
+        }
+
+        traverse(root, "")
+        return res
+    }
+    func traverse(_ root: TreeNode?,_ parentString: String) {
+        guard let root = root else {
+            return
+        }
+        if root.left == nil && root.right == nil { //leaf
+            let currentString = parentString + "\(root.val)"
+            res += Int(currentString)!
+        }
+        let currentString = parentString + "\(root.val)"
+        traverse(root.left, currentString)
+        traverse(root.right, currentString)
+    }
+}
+
+
+//MARK: - 🟡138. Copy List with Random Pointer
 //MARK: my solution ( two pointer compare operater === )
 //class Solution {
 //    func copyRandomList(_ head: Node?) -> Node? {
