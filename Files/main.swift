@@ -621,59 +621,70 @@ let solution = Solution()
 
 //MARK: - 🟡47. Permutations II
 //MARK:
-let nums = [1,1,2]
-print(solution.permuteUnique(nums))
-class Solution {
-    var res = [[Int]]()
-    func permuteUnique(_ nums: [Int]) -> [[Int]] {
-        var visited = Array(repeating: false, count: nums.count)
-        var onPath = [Int]()
-        backtrack(nums, &visited, &onPath)
-        return res
-    }
-    func backtrack(_ nums: [Int], _ visited: inout [Bool], _ onPath: inout [Int]) {
-        if onPath.count == nums.count && !res.contains(onPath) {
-            res.append(onPath)
-        }
-        for i in 0..<nums.count {
-            if visited[i] == true {
-                // already chosen, try other paths
-                continue
-            }
-            visited[i] = true
-            onPath.append(nums[i])
-            backtrack(nums, &visited, &onPath)
-            visited[i] = false
-            onPath.removeLast()
-        }
-    }
-}
+//let nums = [1,1,2]
+//print(solution.permuteUnique(nums))
+//class Solution {
+//    var res = [[Int]]()
+//    func permuteUnique(_ nums: [Int]) -> [[Int]] {
+//        var visited = Array(repeating: false, count: nums.count)
+//        var onPath = [Int]()
+//        backtrack(nums, &visited, &onPath)
+//        return res
+//    }
+//    func backtrack(_ nums: [Int], _ visited: inout [Bool], _ onPath: inout [Int]) {
+//        if onPath.count == nums.count && !res.contains(onPath) {
+//            res.append(onPath)
+//        }
+//        for i in 0..<nums.count {
+//            if visited[i] == true {
+//                // already chosen, try other paths
+//                continue
+//            }
+//            visited[i] = true
+//            onPath.append(nums[i])
+//            backtrack(nums, &visited, &onPath)
+//            visited[i] = false
+//            onPath.removeLast()
+//        }
+//    }
+//}
 
-//MARK: - 49. Group Anagrams
-//let solution = Solution()
+//MARK: - 🟡49. Group Anagrams
 //let strs = ["eat","tea","tan","ate","nat","bat"]
 //print(solution.groupAnagrams(strs))
+//MARK: retry
+//class Solution {
+//    func groupAnagrams(_ strs: [String]) -> [[String]] {
+//        var map = [String: [String]]()
+//        for str in strs {
+//            let sortedString = String(str.sorted())
+//            if var array = map[sortedString] {
+//                array.append(str)
+//                map[sortedString] = array
+//            } else {
+//                map[sortedString] = [str]
+//            }
+//        }
+//        return Array(map.values)
+//    }
+//}
 //MARK: sample version
 //class Solution {
 //    func groupAnagrams(_ strs: [String]) -> [[String]] {
-//
-//        var dict = [String: [String]]()
-//        // var result = [[String]]()
-//
-//        for str in strs {
-//            let sortStr = String(str.sorted(by: { $0 < $1 }))
-//            if dict[sortStr] != nil {
-//                var array = dict[sortStr]
-//                array?.append(str)
-//                dict[sortStr] = array
-//            } else {
-//                dict[sortStr] = [str]
+//        var output: [[String]] = []
+//        var sortedChars: [[Character]: Int] = [:]
+//        var groupID = 0
+//        for (i, str) in strs.enumerated() {
+//            let sorted = Array(str).sorted()
+//            if let group = sortedChars[sorted] {
+//                output[group].append(str)
+//            } else { // DNE so make new group and set groupID to key(sortedString) value(groupID)
+//                sortedChars[sorted] = groupNumber
+//                groupID += 1
+//                output.append([str])
 //            }
 //        }
-//        // for (_, value) in dict {
-//        //     result.append(value)
-//        // }
-//        return Array(dict.values)
+//        return output
 //    }
 //}
 
