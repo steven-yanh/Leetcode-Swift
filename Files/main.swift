@@ -585,6 +585,40 @@ let solution = Solution()
 //        return totalRain
 //    }
 //}
+
+//MARK: - 🟡46. Permutations
+//MARK: (Backtrack) think of it as a tree and traverse the whole tree, for each dicision(go to next level) check if selection is already used.
+//let nums = [1,2,3]
+//print(solution.permute(nums))
+//class Solution { // 16ms 77%
+//    var res = [[Int]]()
+//    func permute(_ nums: [Int]) -> [[Int]] {
+//        var visited = Array(repeating: false, count: nums.count)
+//        var onPath = [Int]()
+//        backtrack(nums, &visited, &onPath)
+//        return res
+//    }
+//    func backtrack(_ nums: [Int], _ visited: inout [Bool], _ onPath: inout [Int]) {
+//        if onPath.count == nums.count {
+//            res.append(onPath)
+//        }
+//        for i in 0..<nums.count {
+//            let num = nums[i]
+//            if visited[i] == true {
+//                // already chosen, try other paths
+//                continue
+//            }
+//            // make choice
+//            visited[i] = true
+//            onPath.append(num)
+//            backtrack(nums, &visited, &onPath)
+//            // withdraw choice
+//            visited[i] = false
+//            onPath.removeLast()
+//        }
+//    }
+//}
+
 //MARK: - 49. Group Anagrams
 //let solution = Solution()
 //let strs = ["eat","tea","tan","ate","nat","bat"]
