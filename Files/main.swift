@@ -619,6 +619,36 @@ let solution = Solution()
 //    }
 //}
 
+//MARK: - 🟡47. Permutations II
+//MARK:
+let nums = [1,1,2]
+print(solution.permuteUnique(nums))
+class Solution {
+    var res = [[Int]]()
+    func permuteUnique(_ nums: [Int]) -> [[Int]] {
+        var visited = Array(repeating: false, count: nums.count)
+        var onPath = [Int]()
+        backtrack(nums, &visited, &onPath)
+        return res
+    }
+    func backtrack(_ nums: [Int], _ visited: inout [Bool], _ onPath: inout [Int]) {
+        if onPath.count == nums.count && !res.contains(onPath) {
+            res.append(onPath)
+        }
+        for i in 0..<nums.count {
+            if visited[i] == true {
+                // already chosen, try other paths
+                continue
+            }
+            visited[i] = true
+            onPath.append(nums[i])
+            backtrack(nums, &visited, &onPath)
+            visited[i] = false
+            onPath.removeLast()
+        }
+    }
+}
+
 //MARK: - 49. Group Anagrams
 //let solution = Solution()
 //let strs = ["eat","tea","tan","ate","nat","bat"]
