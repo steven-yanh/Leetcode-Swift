@@ -549,6 +549,35 @@ tNode3.right = tNode7
 //    }
 //}
 
+//MARK: -(Backtrack)39. Combination Sum
+//MARK: 1. sometimes we need to sort the input but we don't need it for this question.    2.the real optimized is starting from current position instead of using previous all over again
+let candidates = [6,2,3,7], target = 7
+print(solution.combinationSum(candidates, target))
+class Solution { // 14ms 90% the real optimized is starting from current position instead of using previous all over again
+    func combinationSum(_ candidates: [Int], _ target: Int) -> [[Int]] {
+        var res = [[Int]]()
+        var track = [Int]() // tracking path
+        backtrack(candidates, &res, &track, target, 0, 0)
+        return res
+    }
+    func backtrack(_ nums: [Int], _ res: inout [[Int]],_ track: inout [Int],_ target: Int, _ sum: Int, _ start: Int) {
+        if sum == target {
+            let sortedTrack = track.sorted()
+            if !res.contains(sortedTrack) {
+                res.append(sortedTrack)
+            }
+        }
+        if sum > target {
+            return
+        }
+        for i in start..<nums.count {
+            track.append(nums[i])
+            backtrack(nums, &res, &track, target, sum + nums[i], i)
+            track.removeLast()
+        }
+    }
+}
+
 //MARK: - 42. Trapping Rain Water
 //let height = [0,1,0,2,1,0,1,3,2,1,2,1]
 //let solution = Solution()
@@ -854,34 +883,36 @@ tNode3.right = tNode7
 
 //MARK: -(Backtrack)🟡77. Combinations
 //MARK: classical combinational problem it's also a tree structure but think of it as the result is on the K level
-let n = 4, k = 2
-print(solution.combine(n, k))
-class Solution {
-    var res = [[Int]]()
-    var track = [Int]()
-    func combine(_ n: Int, _ k: Int) -> [[Int]] {
-        backtrack(n, k, 1)
-        return res
-    }
-    func backtrack(_ n: Int, _ k: Int, _ start: Int) {
-        print(track)
-        if track.count == k {
-            res.append(track)
-            return // this is important because we don't need to go forward with more elemetns
-        }
-        for i in start..<n+1 {
-            track.append(i)
-            backtrack(n, k, i+1)
-            track.removeLast()
-        }
-    }
-}
+//let n = 4, k = 2
+//print(solution.combine(n, k))
+//class Solution { //64ms 93%    improved by passing inout variable instead of creating data members
+//    // O(n!)
+//    func combine(_ n: Int, _ k: Int) -> [[Int]] {
+//        var res = [[Int]]()
+//        var track = [Int]()
+//        backtrack(n, k, 1, &res, &track)
+//        return res
+//    }
+//    func backtrack(_ n: Int, _ k: Int, _ start: Int, _ res: inout [[Int]], _ track: inout [Int]) {
+//        print(track)
+//        if track.count == k {
+//            res.append(track)
+//            return // this is important because we don't need to go forward with more elemetns
+//        }
+//        for i in start..<n+1 {
+//            track.append(i)
+//            backtrack(n, k, i+1, &res, &track)
+//            track.removeLast()
+//        }
+//    }
+//}
 
 //MARK: - (BackTrack)🟡78. Subsets
 //MARK: DFS 1. think of it as tree   2. element not duplicated and can be selected only once
 //let nums = [1,2,3]
 //print(solution.subsets(nums))
 //class Solution { // 3ms 99%
+//    // O(n!)
 //    var res = [[Int]]()
 //    var track = [Int]()
 //    func subsets(_ nums: [Int]) -> [[Int]] {
