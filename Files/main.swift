@@ -852,7 +852,27 @@ tNode3.right = tNode7
 //    }
 //}
 
-//MARK: - (Backtracing)🟡79. Word Search
+//MARK: - (BackTrack)🟡78. Subsets
+//MARK: DFS 1. think of it as tree   2. element not duplicated and can be selected only once
+let nums = [1,2,3]
+print(solution.subsets(nums))
+class Solution { // 3ms 99%
+    var res = [[Int]]()
+    var track = [Int]()
+    func subsets(_ nums: [Int]) -> [[Int]] {
+        backtrack(nums, 0)
+        return res
+    }
+    func backtrack(_ nums: [Int], _ start: Int) { //avoid duplicate use
+        res.append(track)
+        for i in start..<nums.count {
+            track.append(nums[i])
+            backtrack(nums, i + 1) // !!! i + 1
+            track.removeLast()
+        }
+    }
+}
+//MARK: - (Backtrack)🟡79. Word Search
 //MARK: 1.Think of it as a graph, we look for a (* path) that leads us to be the target  2. traverse all the coordinate in the graph as starting point  3. comparing chars one by one if some word in the middle was wrong return false immediately  4.(base case) if we reached the end of the word (index == word.count) meaning found the word
 //let board: [[Character]] = [["A","B","C","E"],
 //                            ["S","F","C","S"],
@@ -2216,28 +2236,28 @@ tNode3.right = tNode7
 
 //MARK: - 🟡337. House Robber III
 //MARK: DFS this is actually a dp question that we need to do the smaller problem to solve the bigger one.
-print(solution.rob(tNode1))
-class Solution { //33ms 97%
-    func rob(_ root: TreeNode?) -> Int {
-        guard let root = root else {
-            return 0
-        }
-        let res = traverse(root)
-        return max(res.withoutroot, res.withroot)
-    }
-    func traverse(_ root: TreeNode?) -> (withroot: Int, withoutroot: Int) {
-        guard let root = root else {
-            return (0,0)
-        }
-        let leftRes = traverse(root.left)
-        let rightRes = traverse(root.right)
-
-        let withroot = max(leftRes.withoutroot + rightRes.withoutroot + root.val, leftRes.withroot + rightRes.withroot)
-        let withoutroot = leftRes.withroot + rightRes.withroot
-        print(withroot, withoutroot)
-        return (withroot, withoutroot)
-    }
-}
+//print(solution.rob(tNode1)) //res: 23
+//class Solution { //33ms 97%
+//    func rob(_ root: TreeNode?) -> Int {
+//        guard let root = root else {
+//            return 0
+//        }
+//        let res = traverse(root)
+//        return max(res.withoutroot, res.withroot)
+//    }
+//    func traverse(_ root: TreeNode?) -> (withroot: Int, withoutroot: Int) {
+//        guard let root = root else {
+//            return (0,0)
+//        }
+//        let leftRes = traverse(root.left)
+//        let rightRes = traverse(root.right)
+//
+//        let withroot = max(leftRes.withoutroot + rightRes.withoutroot + root.val, leftRes.withroot + rightRes.withroot)
+//        let withoutroot = leftRes.withroot + rightRes.withroot
+//        print(withroot, withoutroot)
+//        return (withroot, withoutroot)
+//    }
+//}
 
 //MARK: - 347. Top K Frequent Elements5
 //var nums = [4,1,-1,2,-1,2,3], k = 2
