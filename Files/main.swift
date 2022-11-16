@@ -852,26 +852,51 @@ tNode3.right = tNode7
 //    }
 //}
 
-//MARK: - (BackTrack)🟡78. Subsets
-//MARK: DFS 1. think of it as tree   2. element not duplicated and can be selected only once
-let nums = [1,2,3]
-print(solution.subsets(nums))
-class Solution { // 3ms 99%
+//MARK: -(Backtrack)🟡77. Combinations
+//MARK: classical combinational problem it's also a tree structure but think of it as the result is on the K level
+let n = 4, k = 2
+print(solution.combine(n, k))
+class Solution {
     var res = [[Int]]()
     var track = [Int]()
-    func subsets(_ nums: [Int]) -> [[Int]] {
-        backtrack(nums, 0)
+    func combine(_ n: Int, _ k: Int) -> [[Int]] {
+        backtrack(n, k, 1)
         return res
     }
-    func backtrack(_ nums: [Int], _ start: Int) { //avoid duplicate use
-        res.append(track)
-        for i in start..<nums.count {
-            track.append(nums[i])
-            backtrack(nums, i + 1) // !!! i + 1
+    func backtrack(_ n: Int, _ k: Int, _ start: Int) {
+        print(track)
+        if track.count == k {
+            res.append(track)
+            return // this is important because we don't need to go forward with more elemetns
+        }
+        for i in start..<n+1 {
+            track.append(i)
+            backtrack(n, k, i+1)
             track.removeLast()
         }
     }
 }
+
+//MARK: - (BackTrack)🟡78. Subsets
+//MARK: DFS 1. think of it as tree   2. element not duplicated and can be selected only once
+//let nums = [1,2,3]
+//print(solution.subsets(nums))
+//class Solution { // 3ms 99%
+//    var res = [[Int]]()
+//    var track = [Int]()
+//    func subsets(_ nums: [Int]) -> [[Int]] {
+//        backtrack(nums, 0)
+//        return res
+//    }
+//    func backtrack(_ nums: [Int], _ start: Int) { //avoid duplicate use
+//        res.append(track)
+//        for i in start..<nums.count {
+//            track.append(nums[i])
+//            backtrack(nums, i + 1) // !!! i + 1
+//            track.removeLast()
+//        }
+//    }
+//}
 //MARK: - (Backtrack)🟡79. Word Search
 //MARK: 1.Think of it as a graph, we look for a (* path) that leads us to be the target  2. traverse all the coordinate in the graph as starting point  3. comparing chars one by one if some word in the middle was wrong return false immediately  4.(base case) if we reached the end of the word (index == word.count) meaning found the word
 //let board: [[Character]] = [["A","B","C","E"],
