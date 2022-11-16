@@ -51,19 +51,19 @@ let solution = Solution()
 
 // Tree
 // initTree
-//let tNode1 = TreeNode(1)
-//let tNode2 = TreeNode(2)
-//let tNode3 = TreeNode(3)
-//let tNode4 = TreeNode(4)
-//let tNode5 = TreeNode(5)
-//let tNode6 = TreeNode(6)
-//let tNode7 = TreeNode(7)
-//tNode1.left = tNode2
-//tNode1.right = tNode3
-//tNode2.left = tNode4
-//tNode2.right = tNode5
-//tNode3.left = tNode6
-//tNode3.right = tNode7
+let tNode1 = TreeNode(1)
+let tNode2 = TreeNode(2)
+let tNode3 = TreeNode(3)
+let tNode4 = TreeNode(4)
+let tNode5 = TreeNode(5)
+let tNode6 = TreeNode(6)
+let tNode7 = TreeNode(7)
+tNode1.left = tNode2
+tNode1.right = tNode3
+tNode2.left = tNode4
+tNode2.right = tNode5
+tNode3.left = tNode6
+tNode3.right = tNode7
 
 
 
@@ -1480,29 +1480,29 @@ let solution = Solution()
 
 //MARK: - 🟡129. Sum Root to Leaf Numbers
 //MARK: 1. DFS the entire tree and calculate the result when reach the leaf    2. find a way to transfer Int to String and concatenate with another "Int" and convert it back to int ie. 1+2 = "1" + "2" = "12" = 12
-class Solution { // 0ms 100%
-    var res = 0
-    func sumNumbers(_ root: TreeNode?) -> Int {
-        guard let root = root else {
-            return 0
-        }
-
-        traverse(root, "")
-        return res
-    }
-    func traverse(_ root: TreeNode?,_ parentString: String) {
-        guard let root = root else {
-            return
-        }
-        if root.left == nil && root.right == nil { //leaf
-            let currentString = parentString + "\(root.val)"
-            res += Int(currentString)!
-        }
-        let currentString = parentString + "\(root.val)"
-        traverse(root.left, currentString)
-        traverse(root.right, currentString)
-    }
-}
+//class Solution { // 0ms 100%
+//    var res = 0
+//    func sumNumbers(_ root: TreeNode?) -> Int {
+//        guard let root = root else {
+//            return 0
+//        }
+//
+//        traverse(root, "")
+//        return res
+//    }
+//    func traverse(_ root: TreeNode?,_ parentString: String) {
+//        guard let root = root else {
+//            return
+//        }
+//        if root.left == nil && root.right == nil { //leaf
+//            let currentString = parentString + "\(root.val)"
+//            res += Int(currentString)!
+//        }
+//        let currentString = parentString + "\(root.val)"
+//        traverse(root.left, currentString)
+//        traverse(root.right, currentString)
+//    }
+//}
 
 
 //MARK: - 🟡138. Copy List with Random Pointer
@@ -2214,7 +2214,32 @@ class Solution { // 0ms 100%
 //    }
 //}
 
-//MARK: - 347. Top K Frequent Elements
+//MARK: - 🟡337. House Robber III
+//MARK: DFS this is actually a dp question that we need to do the smaller problem to solve the bigger one.
+print(solution.rob(tNode1))
+class Solution { //33ms 97%
+    func rob(_ root: TreeNode?) -> Int {
+        guard let root = root else {
+            return 0
+        }
+        let res = traverse(root)
+        return max(res.withoutroot, res.withroot)
+    }
+    func traverse(_ root: TreeNode?) -> (withroot: Int, withoutroot: Int) {
+        guard let root = root else {
+            return (0,0)
+        }
+        let leftRes = traverse(root.left)
+        let rightRes = traverse(root.right)
+
+        let withroot = max(leftRes.withoutroot + rightRes.withoutroot + root.val, leftRes.withroot + rightRes.withroot)
+        let withoutroot = leftRes.withroot + rightRes.withroot
+        print(withroot, withoutroot)
+        return (withroot, withoutroot)
+    }
+}
+
+//MARK: - 347. Top K Frequent Elements5
 //var nums = [4,1,-1,2,-1,2,3], k = 2
 //let solution = Solution()
 //print(solution.topKFrequent(nums, k))
@@ -3125,6 +3150,66 @@ class Solution { // 0ms 100%
 //        return key
 //    }
 //    return 0
+//}
+
+//MARK: - flippingBits
+//print(solution.flippingBits(n: 1))
+//class Solution {
+//    func flippingBits(n: Int) -> Int {
+//        var arr = Array(repeating: 0, count: 32)
+//        var varN = n
+//        var index = 0
+//        var res = 0
+//        while varN != 0 {
+//            let remainder = varN % 2
+//            arr[index] = remainder
+//            index += 1
+//            varN /= 2
+//        }
+//        for i in 0..<arr.count {
+//            arr[i] = arr[i] == 1 ? 0 : 1
+//        }
+//        var valueAtIndex = 1
+//        for i in 0..<arr.count {
+//            valueAtIndex *= i != 0 ? 2 : 1
+//            res += arr[i] == 1 ? valueAtIndex : 0
+//        }
+//        print(valueAtIndex)
+//        return res
+//    }
+//}
+
+//MARK: - diagonalDifference
+//MARK: the question will always provide a n x n matrix 2. zp meaning leftbutton to rightupper | qm meaning leftupper to rightbutton
+//print(solution.diagonalDifference(arr: [[11,2,4],  //0
+//                                        [4,5,6],  //1
+//                                        [10,8,-12]]))//2
+//class Solution {
+//    func diagonalDifference(arr: [[Int]]) -> Int {
+//        let side = arr.count
+//        var zp = 0
+//        var qm = 0
+//        for i in 0..<side {
+//            qm += arr[i][i]
+//        }
+//        var j = 0
+//        for i in stride(from: side - 1, through: 0, by: -1) {
+//            zp += arr[i][j]
+//            j += 1
+//        }
+//        return abs(zp - qm)
+//    }
+//}
+
+//MARK: - countingSort
+//class Solution {
+//    func countingSort(arr: [Int]) -> [Int] {
+//        var res = Array(repeating: 0, count: 100)
+//        for num in arr {
+//            res[num] += 1
+//        }
+//        return res
+//    }
 //}
 
 let diff = (CFAbsoluteTimeGetCurrent() - start) * 1000
