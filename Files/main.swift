@@ -549,36 +549,69 @@ tNode3.right = tNode7
 //    }
 //}
 
-//MARK: -(Backtrack)39. Combination Sum
+//MARK: -(Backtrack)🟡39. Combination Sum
 //MARK: 1. sometimes we need to sort the input but we don't need it for this question.    2.the real optimized is starting from current position instead of using previous all over again
-let candidates = [6,2,3,7], target = 7
-print(solution.combinationSum(candidates, target))
-class Solution { // 14ms 90% the real optimized is starting from current position instead of using previous all over again
-    func combinationSum(_ candidates: [Int], _ target: Int) -> [[Int]] {
-        var res = [[Int]]()
-        var track = [Int]() // tracking path
-        backtrack(candidates, &res, &track, target, 0, 0)
-        return res
-    }
-    func backtrack(_ nums: [Int], _ res: inout [[Int]],_ track: inout [Int],_ target: Int, _ sum: Int, _ start: Int) {
-        if sum == target {
-            let sortedTrack = track.sorted()
-            if !res.contains(sortedTrack) {
-                res.append(sortedTrack)
-            }
-        }
-        if sum > target {
-            return
-        }
-        for i in start..<nums.count {
-            track.append(nums[i])
-            backtrack(nums, &res, &track, target, sum + nums[i], i)
-            track.removeLast()
-        }
-    }
-}
+//let candidates = [6,2,3,7], target = 7
+//print(solution.combinationSum(candidates, target))
+//class Solution { // 14ms 90% the real optimized is starting from current position instead of using previous all over again
+//    func combinationSum(_ candidates: [Int], _ target: Int) -> [[Int]] {
+//        var res = [[Int]]()
+//        var track = [Int]() // tracking path
+//        backtrack(candidates, &res, &track, target, 0, 0)
+//        return res
+//    }
+//    func backtrack(_ nums: [Int], _ res: inout [[Int]],_ track: inout [Int],_ target: Int, _ sum: Int, _ start: Int) {
+//        if sum == target {
+//            let sortedTrack = track.sorted()
+//            if !res.contains(sortedTrack) {
+//                res.append(sortedTrack)
+//            }
+//        }
+//        if sum > target {
+//            return
+//        }
+//        for i in start..<nums.count {
+//            track.append(nums[i])
+//            backtrack(nums, &res, &track, target, sum + nums[i], i)
+//            track.removeLast()
+//        }
+//    }
+//}
 
-//MARK: - 42. Trapping Rain Water
+//MARK: -🟡40. Combination Sum II
+//let candidates = [10,1,2,7,6,1,5], target = 8
+//print(solution.combinationSum2(candidates, target))
+//class Solution { // 14ms 86% by using break will increse speed; was 300 ms
+//    func combinationSum2(_ candidates: [Int], _ target: Int) -> [[Int]] {
+//        var res = [[Int]]()
+//        var track = [Int]()
+//        let candidates = candidates.sorted()
+//
+//        func backtrack(_ start: Int, _ sum: Int) {
+//            if sum == target {
+//                let sortedTrack = track.sorted()
+//                if !res.contains(sortedTrack) {
+//                    res.append(sortedTrack)
+//                }
+//            }
+//            for i in start..<candidates.count {
+//                if i > start && candidates[i] == candidates[i - 1] {
+//                    continue
+//                }
+//                if sum + candidates[i] > target {
+//                    break
+//                }
+//                track.append(candidates[i])
+//                backtrack(i+1, sum+candidates[i])
+//                track.removeLast()
+//            }
+//        }
+//        backtrack(0, 0)
+//        return res
+//    }
+//}
+
+//MARK: - 42. 🔴Trapping Rain Water
 //let height = [0,1,0,2,1,0,1,3,2,1,2,1]
 //let solution = Solution()
 //print(solution.trap(height))
@@ -1045,6 +1078,9 @@ class Solution { // 14ms 90% the real optimized is starting from current positio
 //
 //    }
 //}
+
+//MARK: -(Backtrack)🟡90. Subsets II
+//let nums = [1,2,2]
 
 //MARK: - 🟡92. Reverse Linked List II
 //let n1 = ListNode(1)
@@ -1580,6 +1616,51 @@ class Solution { // 14ms 90% the real optimized is starting from current positio
 //    }
 //}
 
+//MARK: - (Backtrack)🟡131. Palindrome Partitioning
+//MARK: - DFS from starting position. key points: 1. Cut a word based on a range(start to iterating i) 2. check if word is palindrome
+let s = "aab"
+print(solution.partition(s))
+class Solution { // 773ms 98%
+    var res = [[String]]()
+    var path = [String]()
+    var word = [Character]()
+    func partition(_ s: String) -> [[String]] {
+        let s: [Character] = Array(s)
+        func backtrack(_ start: Int) {
+            if start == s.count { //reached end (all letters are used)
+                res.append(path)
+                return
+            }
+            for i in start..<s.count {
+                
+                // cut out the word in 3 lines
+                let startIndex = s.index(s.startIndex, offsetBy: start)
+                let endIndex = s.index(s.startIndex, offsetBy: i)
+                word = Array(s[startIndex...endIndex])
+                
+                if isValid(word) { // checking if word is valid
+                    path.append(String(word)) // standard 3 step (1.Make decision making)(2.next decision tree making)(3.undo decision)
+                    backtrack(i+1)
+                    path.removeLast()
+                }
+            }
+        }
+        backtrack(0)
+        return res
+    }
+    
+    func isValid(_ str: [Character]) -> Bool {
+        var left = 0, right = str.count-1
+        while left <= right {
+            if str[left] != str[right] {
+                return false
+            }
+            left += 1
+            right -= 1
+        }
+        return true
+    }
+}
 
 //MARK: - 🟡138. Copy List with Random Pointer
 //MARK: my solution ( two pointer compare operater === )
