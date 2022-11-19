@@ -2031,7 +2031,27 @@ tNode3.right = tNode7
 //    }
 //}
 
+//MARK: - 🟡198. House Robber
+//let nums = [2,1,1,2] // res: 4
+//print(solution.rob(nums))
+class Solution { // 0ms 100% (Recursive)
+    func rob(_ nums: [Int]) -> Int {
+        let res = dp(nums, 0)
+        return max(res.rob, res.skip)
+    }
+    func dp(_ nums: [Int], _ start: Int) -> (rob: Int, skip: Int) {
+        if start == nums.count {
+            return (0, 0)
+        }
+        let next = dp(nums, start+1)
+        let rob = next.skip + nums[start]
+        let skip = next.rob
+        return (max(rob, skip), skip)
+    }
+}
+
 //MARK: - 🟡199. Binary Tree Right Side View
+//MARK: BFS 1.for each level and append to queue from right to left  2. set a bool or int variable to mark if we appended the level yet or not
 //let tNode1 = TreeNode(1)
 //let tNode2 = TreeNode(2)
 //let tNode3 = TreeNode(3)
