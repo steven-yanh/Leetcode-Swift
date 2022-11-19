@@ -2,7 +2,7 @@
 
 import Foundation
 let start = CFAbsoluteTimeGetCurrent()
-let solution = Solution()
+//let solution = Solution()
 //MARK: playing around anything
 // Stacks && Queue
 //var stack = Stack<Int>()
@@ -460,6 +460,27 @@ tNode3.right = tNode7
 //            c += 1
 //            generate(open: open, close: c, n: n, string: str, ans: &ans)
 //        }
+//    }
+//}
+
+//MARK: - 🟢26. Remove Duplicates from Sorted Array
+class Solution { // sample solution 41ms
+    func removeDuplicates(_ nums: inout [Int]) -> Int {
+        nums = Array(Set(nums)).sorted()
+        return nums.count
+    }
+}
+//class Solution { // 49ms 97%
+//    func removeDuplicates(_ nums: inout [Int]) -> Int {
+//        var slow = 0, fast = 0
+//        while fast < nums.count {
+//            if nums[slow] != nums[fast] {
+//                slow += 1
+//                nums[slow] = nums[fast]
+//            }
+//            fast += 1
+//        }
+//        return slow + 1
 //    }
 //}
 
@@ -1618,49 +1639,49 @@ tNode3.right = tNode7
 
 //MARK: - (Backtrack)🟡131. Palindrome Partitioning
 //MARK: - DFS from starting position. key points: 1. Cut a word based on a range(start to iterating i) 2. check if word is palindrome
-let s = "aab"
-print(solution.partition(s))
-class Solution { // 773ms 98%
-    var res = [[String]]()
-    var path = [String]()
-    var word = [Character]()
-    func partition(_ s: String) -> [[String]] {
-        let s: [Character] = Array(s)
-        func backtrack(_ start: Int) {
-            if start == s.count { //reached end (all letters are used)
-                res.append(path)
-                return
-            }
-            for i in start..<s.count {
-                
-                // cut out the word in 3 lines
-                let startIndex = s.index(s.startIndex, offsetBy: start)
-                let endIndex = s.index(s.startIndex, offsetBy: i)
-                word = Array(s[startIndex...endIndex])
-                
-                if isValid(word) { // checking if word is valid
-                    path.append(String(word)) // standard 3 step (1.Make decision making)(2.next decision tree making)(3.undo decision)
-                    backtrack(i+1)
-                    path.removeLast()
-                }
-            }
-        }
-        backtrack(0)
-        return res
-    }
-    
-    func isValid(_ str: [Character]) -> Bool {
-        var left = 0, right = str.count-1
-        while left <= right {
-            if str[left] != str[right] {
-                return false
-            }
-            left += 1
-            right -= 1
-        }
-        return true
-    }
-}
+//let s = "aab"
+//print(solution.partition(s))
+//class Solution { // 773ms 98%
+//    var res = [[String]]()
+//    var path = [String]()
+//    var word = [Character]()
+//    func partition(_ s: String) -> [[String]] {
+//        let s: [Character] = Array(s)
+//        func backtrack(_ start: Int) {
+//            if start == s.count { //reached end (all letters are used)
+//                res.append(path)
+//                return
+//            }
+//            for i in start..<s.count {
+//
+//                // cut out the word in 3 lines
+//                let startIndex = s.index(s.startIndex, offsetBy: start)
+//                let endIndex = s.index(s.startIndex, offsetBy: i)
+//                word = Array(s[startIndex...endIndex])
+//
+//                if isValid(word) { // checking if word is valid
+//                    path.append(String(word)) // standard 3 step (1.Make decision making)(2.next decision tree making)(3.undo decision)
+//                    backtrack(i+1)
+//                    path.removeLast()
+//                }
+//            }
+//        }
+//        backtrack(0)
+//        return res
+//    }
+//
+//    func isValid(_ str: [Character]) -> Bool {
+//        var left = 0, right = str.count-1
+//        while left <= right {
+//            if str[left] != str[right] {
+//                return false
+//            }
+//            left += 1
+//            right -= 1
+//        }
+//        return true
+//    }
+//}
 
 //MARK: - 🟡138. Copy List with Random Pointer
 //MARK: my solution ( two pointer compare operater === )
@@ -3369,5 +3390,120 @@ class Solution { // 773ms 98%
 //    }
 //}
 
+//MARK: - pangrams ( Array 26 letter count ) check if all the letter used at least once
+//class Solution {
+//    func pangrams(s: String) -> String {
+//        // Write your code here
+//        let lowercased = s.lowercased()
+//        let A: Character = "a"
+//        let asciiOfA = Int(A.asciiValue!)
+//        var array = Array(repeating: 0, count: 26)
+//        var isPangrams = true
+//        for letter in lowercased {
+//            if !letter.isWhitespace {
+//                let index = Int(letter.asciiValue!) - asciiOfA
+//                array[index] += 1
+//            }
+//        }
+//        for count in array {
+//            if count == 0 {
+//                isPangrams = false
+//            }
+//        }
+//        return isPangrams ? "pangram" : "not pangram"
+//    }
+//}
+
+//MARK: - twoArrays ( sort A increasing order, sort B decreasing order,  checking positions add up greater than k or not )
+//class Solution {
+//    func twoArrays(k: Int, A: [Int], B: [Int]) -> String {
+//        // Write your code here
+//        let A = A.sorted()
+//        var B = B.sorted()
+//        B.reverse()
+//
+//        for i in 0..<A.count {
+//            if A[i] + B[i] < k {
+//                return "NO"
+//            }
+//        }
+//        return "YES"
+//    }
+//}
+
+//MARK: - birthday (SlidingWindow)
+//class Solution {
+//    func birthday(s: [Int], d: Int, m: Int) -> Int {
+//        // Write your code here
+//        var res = 0, left = 0, right = 0, sum = 0
+//        while right < s.count {
+//            sum += s[right]
+//            right += 1
+//            if right - left == m && sum == d {
+//                res += 1
+//            }
+//            while right - left >= m || sum > d {
+//                sum -= s[left]
+//                left += 1
+//            }
+//        }
+//        return res
+//    }
+//}
+
+//MARK: - sockMerchant
+//class Solution {
+//    func sockMerchant(n: Int, ar: [Int]) -> Int {
+//        // Write your code here
+//        var map = [Int: Int]()
+//        var res = 0
+//        for color in ar {
+//            if let count = map[color] {
+//                res += count % 2 == 1 ? 1 : 0
+//                map[color] = count + 1
+//            } else {
+//                map[color] = 1
+//            }
+//        }
+//        return res
+//    }
+//}
+
+//MARK: - encryptString
+//class Solution {
+//    func caesarCipher(s: String, k: Int) -> String {
+//        // Write your code here
+//        let s: [Character] = Array(s)
+//        let k = k % 26 //k can be greater than 26
+//        var res = ""
+//        for char in s {
+//            if char.isLetter {
+//                let ascii = Int(char.asciiValue!)
+//                let targetAscii: Int
+//                if char.isUppercase { // 65...90
+//                    targetAscii = ascii + k > 90 ? ascii + k - 26 : ascii + k
+//                } else { // 97...122
+//                    targetAscii = ascii + k > 122 ? ascii + k - 26 : ascii + k
+//                }
+//                print(targetAscii)
+//                let encrypted = UnicodeScalar(targetAscii)!
+//                res += String(encrypted)
+//            } else {
+//                res += String(char)
+//            }
+//        }
+//        return String(res)
+//    }
+//}
+
+//MARK: - mock test 1 (greatest upper left quadrant)
+//MARK: 119 compare to it's possible opponent: 119 VS 112, 62, 108 | 56 VS 49, 43, 15 | same for 125 VS 56, 78, 101
+//M = [
+//   112    42    83   (119)
+//  (56)   (125)  56    49
+//   15     78    101   43
+//   62     98   (114)  108
+//];
+
 let diff = (CFAbsoluteTimeGetCurrent() - start) * 1000
-print("\n\n\(diff) seconds")
+print("\n\n\(diff) ms")
