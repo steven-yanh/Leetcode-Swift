@@ -811,6 +811,41 @@ tNode3.right = tNode7
 //    }
 //}
 
+//MARK: - 70. 🟢Climbing Stairs
+//print(solution.climbStairs(3))
+//class Solution { // iterative (button up) 0ms
+//    func climbStairs(_ n: Int) -> Int {
+//        guard n > 2 else {
+//            return n
+//        }
+//        var n1 = 1, n2 = 2
+//        for _ in 3...n {
+//            let temp = n1 + n2
+//            n1 = n2
+//            n2 = temp
+//        }
+//        return n2
+//    }
+//}
+//class Solution { // recursive (top down) 5ms
+//    var memo = [Int]()
+//    func climbStairs(_ n: Int) -> Int {
+//        memo = Array(repeating: 0, count: n+1)
+//        return dp(n)
+//    }
+//    func dp(_ n: Int) -> Int {
+//        if memo[n] != 0 {
+//            return memo[n]
+//        }
+//        if n == 1 || n == 2 {
+//            memo[n] = n
+//            return n
+//        }
+//        memo[n] = dp(n-1) + dp(n-2)
+//        return memo[n]
+//    }
+//}
+
 //MARK: - 74. Search a 2D Matrix
 //let matrix =  [[1,3,5,7],[10,11,16,20],[23,30,34,60]],target = 34
 //let s = Solution()
@@ -1138,31 +1173,29 @@ tNode3.right = tNode7
 //}
 
 //MARK: - 🟢88. Merge Sorted Array
-var nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
-solution.merge(&nums1, m, nums2, n)
-print(nums1)
-class Solution { //7ms 94%
-    func merge(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
-        var p1 = m-1, p2 = n-1, index = m+n-1
-        while p1 >= 0 && p2 >= 0 {
-            if p2 >= 0 && nums2[p2] > nums1[p1] {
-                nums1[index] = nums2[p2]
-                p2 -= 1
-            } else {
-                nums1[index] = nums1[p1]
-                p1 -= 1
-            }
-            index -= 1
-        }
-        while p2 >= 0 {
-            nums1[index] = nums2[p2]
-            p2 -= 1
-            index -= 1
-        }
-    }
-}
-//MARK: - (Backtrack)🟡90. Subsets II
-//let nums = [1,2,2]
+//var nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+//solution.merge(&nums1, m, nums2, n)
+//print(nums1)
+//class Solution { //7ms 94%
+//    func merge(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
+//        var p1 = m-1, p2 = n-1, index = m+n-1
+//        while p1 >= 0 && p2 >= 0 {
+//            if p2 >= 0 && nums2[p2] > nums1[p1] {
+//                nums1[index] = nums2[p2]
+//                p2 -= 1
+//            } else {
+//                nums1[index] = nums1[p1]
+//                p1 -= 1
+//            }
+//            index -= 1
+//        }
+//        while p2 >= 0 {
+//            nums1[index] = nums2[p2]
+//            p2 -= 1
+//            index -= 1
+//        }
+//    }
+//}
 
 //MARK: - 🟡92. Reverse Linked List II
 //let n1 = ListNode(1)
