@@ -485,19 +485,19 @@ tNode3.right = tNode7
 //}
 
 //MARK: - 🟢(Two pointers)27. Remove Element
-class Solution { //3ms 97%
-    func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
-        var slow = 0, fast = 0
-        while fast < nums.count {
-            if nums[fast] != val {
-                nums[slow] = nums[fast]
-                slow += 1
-            }
-            fast += 1
-        }
-        return slow
-    }
-}
+//class Solution { //3ms 97%
+//    func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
+//        var slow = 0, fast = 0
+//        while fast < nums.count {
+//            if nums[fast] != val {
+//                nums[slow] = nums[fast]
+//                slow += 1
+//            }
+//            fast += 1
+//        }
+//        return slow
+//    }
+//}
 
 
 //MARK: - 33. Search in Rotated Sorted Array
@@ -2384,6 +2384,20 @@ class Solution { //3ms 97%
 //    }
 //
 //}
+
+//MARK: - 🟢283. Move Zeroes
+class Solution { // 151 ms 100%
+    func moveZeroes(_ nums: inout [Int]) {
+        var left = 0, right = 0
+        while right < nums.count {
+            if nums[right] != 0 {
+                nums.swapAt(left, right)
+                left += 1
+            }
+            right += 1
+        }
+    }
+}
 
 //MARK: - 309. Best Time to Buy and Sell Stock with Cooldown
 //let prices = [1,2,3,0,2]
