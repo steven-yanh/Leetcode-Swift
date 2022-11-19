@@ -1117,23 +1117,48 @@ tNode3.right = tNode7
 //}
 
 //MARK: - (Two pointers)(LinkedList)🟢83. Remove Duplicates from Sorted List
-class Solution { //24ms 88%
-    func deleteDuplicates(_ head: ListNode?) -> ListNode? {
-        guard head != nil else {
-            return nil
-        }
-        let dummy:ListNode? = ListNode(Int.min)
-        var p1 = dummy
-        var p2 = head
-        while p2 != nil {
-            if p2?.val != p1?.val {
-                p1?.next = p2
-                p1 = p1?.next
+//class Solution { //24ms 88%
+//    func deleteDuplicates(_ head: ListNode?) -> ListNode? {
+//        guard head != nil else {
+//            return nil
+//        }
+//        let dummy:ListNode? = ListNode(Int.min)
+//        var p1 = dummy
+//        var p2 = head
+//        while p2 != nil {
+//            if p2?.val != p1?.val {
+//                p1?.next = p2
+//                p1 = p1?.next
+//            }
+//            p2 = p2?.next
+//        }
+//        p1?.next = nil
+//        return dummy?.next
+//    }
+//}
+
+//MARK: - 🟢88. Merge Sorted Array
+var nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+solution.merge(&nums1, m, nums2, n)
+print(nums1)
+class Solution { //7ms 94%
+    func merge(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
+        var p1 = m-1, p2 = n-1, index = m+n-1
+        while p1 >= 0 && p2 >= 0 {
+            if p2 >= 0 && nums2[p2] > nums1[p1] {
+                nums1[index] = nums2[p2]
+                p2 -= 1
+            } else {
+                nums1[index] = nums1[p1]
+                p1 -= 1
             }
-            p2 = p2?.next
+            index -= 1
         }
-        p1?.next = nil
-        return dummy?.next
+        while p2 >= 0 {
+            nums1[index] = nums2[p2]
+            p2 -= 1
+            index -= 1
+        }
     }
 }
 //MARK: - (Backtrack)🟡90. Subsets II
