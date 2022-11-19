@@ -463,13 +463,13 @@ tNode3.right = tNode7
 //    }
 //}
 
-//MARK: - 🟢26. Remove Duplicates from Sorted Array
-class Solution { // sample solution 41ms
-    func removeDuplicates(_ nums: inout [Int]) -> Int {
-        nums = Array(Set(nums)).sorted()
-        return nums.count
-    }
-}
+//MARK: - 🟢(Two pointers)26. Remove Duplicates from Sorted Array
+//class Solution { // sample solution 41ms
+//    func removeDuplicates(_ nums: inout [Int]) -> Int {
+//        nums = Array(Set(nums)).sorted()
+//        return nums.count
+//    }
+//}
 //class Solution { // 49ms 97%
 //    func removeDuplicates(_ nums: inout [Int]) -> Int {
 //        var slow = 0, fast = 0
@@ -483,6 +483,22 @@ class Solution { // sample solution 41ms
 //        return slow + 1
 //    }
 //}
+
+//MARK: - 🟢(Two pointers)27. Remove Element
+class Solution { //3ms 97%
+    func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
+        var slow = 0, fast = 0
+        while fast < nums.count {
+            if nums[fast] != val {
+                nums[slow] = nums[fast]
+                slow += 1
+            }
+            fast += 1
+        }
+        return slow
+    }
+}
+
 
 //MARK: - 33. Search in Rotated Sorted Array
 //let nums = [4,5,6,7,0,1,2], target = 5
