@@ -2,7 +2,7 @@
 
 import Foundation
 let start = CFAbsoluteTimeGetCurrent()
-//let solution = Solution()
+let solution = Solution()
 //MARK: playing around anything
 // Stacks && Queue
 //var stack = Stack<Int>()
@@ -2386,18 +2386,18 @@ tNode3.right = tNode7
 //}
 
 //MARK: - 🟢283. Move Zeroes
-class Solution { // 151 ms 100%
-    func moveZeroes(_ nums: inout [Int]) {
-        var left = 0, right = 0
-        while right < nums.count {
-            if nums[right] != 0 {
-                nums.swapAt(left, right)
-                left += 1
-            }
-            right += 1
-        }
-    }
-}
+//class Solution { // 151 ms 100%
+//    func moveZeroes(_ nums: inout [Int]) {
+//        var left = 0, right = 0
+//        while right < nums.count {
+//            if nums[right] != 0 {
+//                nums.swapAt(left, right)
+//                left += 1
+//            }
+//            right += 1
+//        }
+//    }
+//}
 
 //MARK: - 309. Best Time to Buy and Sell Stock with Cooldown
 //let prices = [1,2,3,0,2]
@@ -2446,6 +2446,22 @@ class Solution { // 151 ms 100%
 //        return (withroot, withoutroot)
 //    }
 //}
+
+//MARK: - 🟢344. Reverse String
+var s: [Character] = ["h","e","l","l","o"]
+solution.reverseString(&s)
+print(s)
+class Solution { // 145ms 97%
+    func reverseString(_ s: inout [Character]) {
+        var left = 0
+        var right = s.count - 1
+        while left < right {
+            s.swapAt(left, right)
+            left += 1
+            right -= 1
+        }
+    }
+}
 
 //MARK: - 347. Top K Frequent Elements5
 //var nums = [4,1,-1,2,-1,2,3], k = 2
