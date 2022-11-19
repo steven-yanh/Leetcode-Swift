@@ -1116,7 +1116,27 @@ tNode3.right = tNode7
 //    }
 //}
 
-//MARK: -(Backtrack)🟡90. Subsets II
+//MARK: - (Two pointers)(LinkedList)🟢83. Remove Duplicates from Sorted List
+class Solution { //24ms 88%
+    func deleteDuplicates(_ head: ListNode?) -> ListNode? {
+        guard head != nil else {
+            return nil
+        }
+        let dummy:ListNode? = ListNode(Int.min)
+        var p1 = dummy
+        var p2 = head
+        while p2 != nil {
+            if p2?.val != p1?.val {
+                p1?.next = p2
+                p1 = p1?.next
+            }
+            p2 = p2?.next
+        }
+        p1?.next = nil
+        return dummy?.next
+    }
+}
+//MARK: - (Backtrack)🟡90. Subsets II
 //let nums = [1,2,2]
 
 //MARK: - 🟡92. Reverse Linked List II
@@ -2448,20 +2468,20 @@ tNode3.right = tNode7
 //}
 
 //MARK: - 🟢344. Reverse String
-var s: [Character] = ["h","e","l","l","o"]
-solution.reverseString(&s)
-print(s)
-class Solution { // 145ms 97%
-    func reverseString(_ s: inout [Character]) {
-        var left = 0
-        var right = s.count - 1
-        while left < right {
-            s.swapAt(left, right)
-            left += 1
-            right -= 1
-        }
-    }
-}
+//var s: [Character] = ["h","e","l","l","o"]
+//solution.reverseString(&s)
+//print(s)
+//class Solution { // 145ms 97%
+//    func reverseString(_ s: inout [Character]) {
+//        var left = 0
+//        var right = s.count - 1
+//        while left < right {
+//            s.swapAt(left, right)
+//            left += 1
+//            right -= 1
+//        }
+//    }
+//}
 
 //MARK: - 347. Top K Frequent Elements5
 //var nums = [4,1,-1,2,-1,2,3], k = 2
