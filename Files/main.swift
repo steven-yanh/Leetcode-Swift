@@ -846,6 +846,57 @@ tNode3.right = tNode7
 //    }
 //}
 
+//MARK: - 🟢746. Min Cost Climbing Stairs
+// cost = [10, 15, 20]
+//                  0  1  2   3
+//                       begin
+//
+//                /                     \
+//               0,0                    1,0
+//           /       \                  / \
+//         1,10      2,10            2,15  3,15
+//         / \        /  \            / \  *res
+//      2,25 3,25   3,30 4,30       3 | 4,35
+//      /\    *      *    *          *  *
+//     3|4,45
+//     *  *
+//let cost = [10,15,20]
+//print("res ",solution.minCostClimbingStairs(cost))
+//class Solution { // 0ms 100%
+//    func minCostClimbingStairs(_ cost: [Int]) -> Int {
+//        var dp = cost
+//        dp.append(0)
+//        for i in stride(from: cost.count - 2, through: 0, by: -1) {
+//            dp[i] = cost[i] + min(dp[i+1], dp[i+2])
+//        }
+//        return min(dp[0], dp[1])
+//    }
+//}
+
+//class Solution { // bad Time complexity // incomplete
+//    var res = Int.max
+//    func minCostClimbingStairs(_ cost: [Int]) -> Int {
+//        let fromZero = dp(cost, 0, 0)
+//        let fromOne = dp(cost, 1, 0)
+//        return res
+//    }
+//    func dp(_ cost: [Int], _ position: Int,_ accum: Int) -> Int {
+//        if position == cost.count - 1 { //reached last item, still counting cost
+//            res = min(accum+cost[position], res)
+//            return cost[position]
+//        } else if position >= cost.count {
+//            res = min(res, accum)
+//            return 0
+//        }
+//        let currentCost = accum + cost[position]
+//        let res1 = currentCost + dp(cost, position+1, currentCost)
+//        let res2 = currentCost + dp(cost, position+2, currentCost)
+//        let res = min(res1, res2)
+//        return res
+//    }
+//}
+
+
 //MARK: - 74. Search a 2D Matrix
 //let matrix =  [[1,3,5,7],[10,11,16,20],[23,30,34,60]],target = 34
 //let s = Solution()
@@ -2032,23 +2083,35 @@ tNode3.right = tNode7
 //}
 
 //MARK: - 🟡198. House Robber
-//let nums = [2,1,1,2] // res: 4
+//let nums = [2,1,1,2] // res: 4     //rob:    skip:3   ifRob:4
 //print(solution.rob(nums))
-class Solution { // 0ms 100% (Recursive)
-    func rob(_ nums: [Int]) -> Int {
-        let res = dp(nums, 0)
-        return max(res.rob, res.skip)
-    }
-    func dp(_ nums: [Int], _ start: Int) -> (rob: Int, skip: Int) {
-        if start == nums.count {
-            return (0, 0)
-        }
-        let next = dp(nums, start+1)
-        let rob = next.skip + nums[start]
-        let skip = next.rob
-        return (max(rob, skip), skip)
-    }
-}
+//class Solution { // 0ms 100% interative (better?)
+//    func rob(_ nums: [Int]) -> Int {
+//        var rob = 0, skip = 0
+//        for num in nums {
+//            let ifRob = max(num + skip, skip)
+//            skip = rob
+//            rob = max(ifRob, rob)
+//        }
+//        return max(rob,skip)
+//    }
+//}
+
+//class Solution { // 0ms 100% (Recursive)
+//    func rob(_ nums: [Int]) -> Int {
+//        let res = dp(nums, 0)
+//        return max(res.rob, res.skip)
+//    }
+//    func dp(_ nums: [Int], _ start: Int) -> (rob: Int, skip: Int) {
+//        if start == nums.count {
+//            return (0, 0)
+//        }
+//        let next = dp(nums, start+1)
+//        let rob = next.skip + nums[start]
+//        let skip = next.rob
+//        return (max(rob, skip), skip)
+//    }
+//}
 
 //MARK: - 🟡199. Binary Tree Right Side View
 //MARK: BFS 1.for each level and append to queue from right to left  2. set a bool or int variable to mark if we appended the level yet or not
@@ -2090,6 +2153,34 @@ class Solution { // 0ms 100% (Recursive)
 //        return res
 //    }
 //}
+
+//MARK: - 🟡213. House Robber II
+//MARK: 1. Follow up from House Robber that the "houses" forms a circle  2. calculate result1 from 0 -> n-1 and result2 from 1 -> n and return max of two   3. This method works because we separated two cases that will `potientially` effect each other, so we come up with the correct answer.
+let nums = [2,3,2] //
+print(solution.rob(nums))
+class Solution { // 0ms 100% can be improved by combine two for loops
+    func rob(_ nums: [Int]) -> Int {
+        guard nums.count >= 2 else {
+            return nums[0]
+        }
+        var rob = 0, skip = 0
+        for i in 0..<nums.count - 1 {
+            let temp = nums[i] + skip
+            skip = rob
+            rob = max(rob, temp)
+        }
+        let res1 = max(rob, skip)
+        rob = 0
+        skip = 0
+        for i in 1..<nums.count {
+            let temp = nums[i] + skip
+            skip = rob
+            rob = max(rob, temp)
+        }
+        let res2 = max(rob, skip)
+        return max(res1, res2)
+    }
+}
 
 //MARK: - 200. Number of Islands
 //let grid: [[Character]] = [
@@ -2278,6 +2369,7 @@ class Solution { // 0ms 100% (Recursive)
 //        return root
 //    }
 //}
+
 
 //MARK: - 🟡230. Kth Smallest Element in a BST
 //MARK: 1. inorder traverse a BST will give you ordered array 2. make helper method to pass around the rank var to keep track of which rank we are now.
