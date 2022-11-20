@@ -862,7 +862,30 @@ tNode3.right = tNode7
 //     *  *
 //let cost = [10,15,20]
 //print("res ",solution.minCostClimbingStairs(cost))
-//class Solution { // 0ms 100%
+//class Solution { // 23ms 95% Acutal DP solution with memo to optimize time complexity
+//    var memo = [Int]()
+//    func minCostClimbingStairs(_ cost: [Int]) -> Int {
+//        memo = Array(repeating: -1, count: cost.count + 2)
+//        return min(dp(cost, 0), dp(cost, 1))
+//    }
+//    func dp(_ cost: [Int], _ position: Int) -> Int {
+//        // if memo exist a cost we don't have to compute again
+//        if memo[position] != -1 {
+//            return memo[position]
+//        }
+//        if position >= cost.count {
+//            return 0
+//        }
+//        let res1 = dp(cost, position+1)
+//        let res2 = dp(cost, position+2)
+//        let returnValue = cost[position] + min(res1, res2)
+//        // store to memo
+//        memo[position] = cost[position] + min(res1, res2)
+//        return returnValue
+//    }
+//}
+
+//class Solution { // 76ms
 //    func minCostClimbingStairs(_ cost: [Int]) -> Int {
 //        var dp = cost
 //        dp.append(0)
@@ -873,28 +896,6 @@ tNode3.right = tNode7
 //    }
 //}
 
-//class Solution { // bad Time complexity // incomplete
-//    var res = Int.max
-//    func minCostClimbingStairs(_ cost: [Int]) -> Int {
-//        let fromZero = dp(cost, 0, 0)
-//        let fromOne = dp(cost, 1, 0)
-//        return res
-//    }
-//    func dp(_ cost: [Int], _ position: Int,_ accum: Int) -> Int {
-//        if position == cost.count - 1 { //reached last item, still counting cost
-//            res = min(accum+cost[position], res)
-//            return cost[position]
-//        } else if position >= cost.count {
-//            res = min(res, accum)
-//            return 0
-//        }
-//        let currentCost = accum + cost[position]
-//        let res1 = currentCost + dp(cost, position+1, currentCost)
-//        let res2 = currentCost + dp(cost, position+2, currentCost)
-//        let res = min(res1, res2)
-//        return res
-//    }
-//}
 
 
 //MARK: - 74. Search a 2D Matrix
@@ -2156,31 +2157,31 @@ tNode3.right = tNode7
 
 //MARK: - 🟡213. House Robber II
 //MARK: 1. Follow up from House Robber that the "houses" forms a circle  2. calculate result1 from 0 -> n-1 and result2 from 1 -> n and return max of two   3. This method works because we separated two cases that will `potientially` effect each other, so we come up with the correct answer.
-let nums = [2,3,2] //
-print(solution.rob(nums))
-class Solution { // 0ms 100% can be improved by combine two for loops
-    func rob(_ nums: [Int]) -> Int {
-        guard nums.count >= 2 else {
-            return nums[0]
-        }
-        var rob = 0, skip = 0
-        for i in 0..<nums.count - 1 {
-            let temp = nums[i] + skip
-            skip = rob
-            rob = max(rob, temp)
-        }
-        let res1 = max(rob, skip)
-        rob = 0
-        skip = 0
-        for i in 1..<nums.count {
-            let temp = nums[i] + skip
-            skip = rob
-            rob = max(rob, temp)
-        }
-        let res2 = max(rob, skip)
-        return max(res1, res2)
-    }
-}
+//let nums = [2,3,2] //
+//print(solution.rob(nums))
+//class Solution { // 0ms 100% can be improved by combine two for loops
+//    func rob(_ nums: [Int]) -> Int {
+//        guard nums.count >= 2 else {
+//            return nums[0]
+//        }
+//        var rob = 0, skip = 0
+//        for i in 0..<nums.count - 1 {
+//            let temp = nums[i] + skip
+//            skip = rob
+//            rob = max(rob, temp)
+//        }
+//        let res1 = max(rob, skip)
+//        rob = 0
+//        skip = 0
+//        for i in 1..<nums.count {
+//            let temp = nums[i] + skip
+//            skip = rob
+//            rob = max(rob, temp)
+//        }
+//        let res2 = max(rob, skip)
+//        return max(res1, res2)
+//    }
+//}
 
 //MARK: - 200. Number of Islands
 //let grid: [[Character]] = [
