@@ -1577,6 +1577,30 @@ tNode3.right = tNode7
 //    }
 //}
 
+//MARK: - 🟡114. Flatten Binary Tree to Linked List
+//MARK: DP 1. convert left nodes to flat and store as temp1 and temp2 (fromLeft, fromRight) (don't attach to right yet, we might lose connection to it's right child) 2. attach left to root's right child, then travel down to the tail of right child and attach right root to the end. *This might not be the optimal solution but in a very clean way.
+class Solution { // 15ms 91%
+    //O(n)
+    func flatten(_ root: TreeNode?) {
+        dp(root)
+    }
+    func dp(_ root: TreeNode?) -> TreeNode? {
+        guard let root = root else {
+            return nil
+        }
+        let rootFromLeft = dp(root.left)
+        let rootFromRight = dp(root.right)
+        
+        root.right = rootFromLeft
+        var p = root
+        while p.right != nil {
+            p = p.right!
+        }
+        p.right = rootFromRight
+        root.left = nil
+        return root
+    }
+}
 
 //MARK: - 121. 🟢Best Time to Buy and Sell Stock (DP)
 //let prices = [7,1,5,3,6]
@@ -2191,35 +2215,35 @@ tNode3.right = tNode7
 //    ["0","0","0","1","1"]
 //  ]
 //let s = Solution()
-//print(s.numIslands(grid))
-//MARK: my solution  (recursive)
-//class Solution {
+//print(s.numIslands(grid)) // 3
+//class Solution { // (recursive) //re attemp: 11/20
 //    func numIslands(_ grid: [[Character]]) -> Int {
-//        let row = grid.count - 1
-//        let column = grid[0].count - 1
-//        var visitied: [[Int]:Int] = [:]
-//        var result = 0
-//        func bfs(_ r: Int,_ c: Int) {
-//            if r <= row && r >= 0 && c <= column && c >= 0 && grid[r][c] == "1" && visitied[[r,c]] == nil{
-//                visitied[[r,c]] = 1
-//                let directions = [[0,1],[0,-1],[1,0],[-1,0]]
-//                for direction in directions {
-//                    bfs(r + direction[0], c + direction[1])
-//                }
-//            }
-//        }
-//        for r in 0...row {
-//            for c in 0...column {
-//                if grid[r][c] == "1" && visitied[[r,c]] == nil{
-//                    result += 1
-//                    bfs(r, c)
-//                }
-//            }
-//        }
-//        return result
+//        let row = grid.count, col = grid[0].count
+//        var visited = Array(repeating: Array(repeating: false, count: col), count: row)
+//        var res = 0
 //
+//        func dfs(_ r: Int, _ c: Int) { // marking all neighbors // **Upgraded version is delete neighbor "1"s to "0"
+//            if 0..<row ~= r && 0..<col ~= c && grid[r][c] == "1" && visited[r][c] == false { // inrange notation
+//                visited[r][c] = true
+//                dfs(r+1, c)
+//                dfs(r-1, c)
+//                dfs(r, c+1)
+//                dfs(r, c-1)
+//            }
+//        }
+//
+//        for r in 0..<row {
+//            for c in 0..<col {
+//                if visited[r][c] == false && grid[r][c] == "1" {
+//                    res += 1
+//                    dfs(r, c)
+//                }
+//            }
+//        }
+//        return res
 //    }
 //}
+
 //MARK: my solution (hinted) (BFS) (Iterative using Queue)
 //class Solution {
 //    func numIslands(_ grid: [[Character]]) -> Int {
