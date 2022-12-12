@@ -2,7 +2,7 @@
 
 import Foundation
 let start = CFAbsoluteTimeGetCurrent()
-//let solution = Solution()
+let solution = Solution()
 //MARK: playing around anything
 // Stacks && Queue
 //var stack = Stack<Int>()
@@ -108,7 +108,7 @@ let start = CFAbsoluteTimeGetCurrent()
 //    }
 //}
 
-//MARK: - (Sliding Window)🟡3. Longest Substring Without Repeating Characters
+//MARK: - 🟡3.(Sliding Window) Longest Substring Without Repeating Characters
 //let s = "bbbbbbb"
 //let solution = Solution()
 //print(solution.lengthOfLongestSubstring(s))
@@ -240,42 +240,42 @@ let start = CFAbsoluteTimeGetCurrent()
 //}
 
 //MARK: my solution (great) traditional way by reversing list twice
-class Solution {
-    func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
-        //reverse entire LinkedList
-        var prev:ListNode? = nil
-        var travelNode = head
-        while travelNode?.next != nil {
-            let temp = travelNode?.next
-            travelNode?.next = prev
-            prev = travelNode
-            travelNode = temp
-        }
-        var newHead = travelNode
-        travelNode?.next = prev
-        if n == 1 {
-            newHead = newHead?.next
-        } else {
-            var count = 1
-            prev = nil
-            while count < n {
-                prev = travelNode
-                travelNode = travelNode?.next
-                count += 1
-            }
-            prev?.next = travelNode?.next
-        }
-        //reverse entire list back
-        prev = nil
-        while newHead?.next != nil {
-            let temp = newHead?.next
-            newHead?.next = prev
-            prev = newHead
-            newHead = temp
-        }
-        newHead?.next = prev
-        return newHead
-    }
+//class Solution {
+//    func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
+//        //reverse entire LinkedList
+//        var prev:ListNode? = nil
+//        var travelNode = head
+//        while travelNode?.next != nil {
+//            let temp = travelNode?.next
+//            travelNode?.next = prev
+//            prev = travelNode
+//            travelNode = temp
+//        }
+//        var newHead = travelNode
+//        travelNode?.next = prev
+//        if n == 1 {
+//            newHead = newHead?.next
+//        } else {
+//            var count = 1
+//            prev = nil
+//            while count < n {
+//                prev = travelNode
+//                travelNode = travelNode?.next
+//                count += 1
+//            }
+//            prev?.next = travelNode?.next
+//        }
+//        //reverse entire list back
+//        prev = nil
+//        while newHead?.next != nil {
+//            let temp = newHead?.next
+//            newHead?.next = prev
+//            prev = newHead
+//            newHead = temp
+//        }
+//        newHead?.next = prev
+//        return newHead
+//    }
 //    func reverseList(_ head: ListNode?) -> ListNode? {
 //        var prev: ListNode? = nil
 //        var p = head
@@ -287,7 +287,7 @@ class Solution {
 //        }
 //        return p
 //    }
-}
+//}
 
 //MARK: - 🟢20. Valid Parentheses
 //let s = "()[]{{}"
@@ -532,7 +532,7 @@ class Solution {
 //    }
 //}
 
-//MARK: -(Backtrack)🟡39. Combination Sum
+//MARK: - 🟡39.(Backtrack) Combination Sum
 //MARK: 1. sometimes we need to sort the input but we don't need it for this question.    2.the real optimized is starting from current position instead of using previous all over again
 //let candidates = [6,2,3,7], target = 7
 //print(solution.combinationSum(candidates, target))
@@ -984,7 +984,7 @@ class Solution {
 //    }
 //}
 
-//MARK: -(Backtrack)🟡77. Combinations
+//MARK: - 🟡77(Backtrack). Combinations
 //MARK: classical combinational problem it's also a tree structure but think of it as the result is on the K level
 //let n = 4, k = 2
 //print(solution.combine(n, k))
@@ -1010,7 +1010,7 @@ class Solution {
 //    }
 //}
 
-//MARK: - (BackTrack)🟡78. Subsets
+//MARK: - 🟡78(BackTrack). Subsets
 //MARK: DFS 1. think of it as tree   2. element not duplicated and can be selected only once
 //let nums = [1,2,3]
 //print(solution.subsets(nums))
@@ -1527,7 +1527,7 @@ class Solution {
 //    }
 //}
 
-//MARK: - 🟢(Tree) 112. Path Sum
+//MARK: - 🟢112.(Tree) Path Sum
 //class Solution { // 29ms 98%
 //    func hasPathSum(_ root: TreeNode?, _ targetSum: Int) -> Bool {
 //        traverse(root, targetSum, 0)
@@ -1777,7 +1777,7 @@ class Solution {
 //    }
 //}
 
-//MARK: - (Backtrack)🟡131. Palindrome Partitioning
+//MARK: - 🟡131.(Backtrack) Palindrome Partitioning
 //MARK: - DFS from starting position. key points: 1. Cut a word based on a range(start to iterating i) 2. check if word is palindrome
 //let s = "aab"
 //print(solution.partition(s))
@@ -2418,6 +2418,38 @@ class Solution {
 //            return res
 //        }
 //        return nil
+//    }
+//}
+
+//MARK: - 🟢234. Palindrome Linked List
+//class Solution {
+//    func isPalindrome(_ head: ListNode?) -> Bool { //tc O(n) sc O(1)
+//        //fast-slow pointer
+//        var slow = head, fast = head
+//        while fast?.next != nil {
+//            slow = slow?.next
+//            fast = fast?.next?.next
+//        }
+//        //reverse second half list from slow(mid)
+//        var prev: ListNode? = nil
+//        while slow?.next != nil {
+//            let temp = slow?.next
+//            slow?.next = prev
+//            prev = slow
+//            slow = temp
+//        }
+//        slow?.next = prev
+//
+//        //start cheking
+//        var left = head, right = slow
+//        while left != nil && right != nil {
+//            if left?.val != right?.val {
+//                return false
+//            }
+//            left = left?.next
+//            right = right?.next
+//        }
+//        return true
 //    }
 //}
 
