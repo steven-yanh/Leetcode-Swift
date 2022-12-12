@@ -2,7 +2,7 @@
 
 import Foundation
 let start = CFAbsoluteTimeGetCurrent()
-let solution = Solution()
+//let solution = Solution()
 //MARK: playing around anything
 // Stacks && Queue
 //var stack = Stack<Int>()
@@ -51,55 +51,47 @@ let solution = Solution()
 
 // Tree
 // initTree
-let tNode1 = TreeNode(1)
-let tNode2 = TreeNode(2)
-let tNode3 = TreeNode(3)
-let tNode4 = TreeNode(4)
-let tNode5 = TreeNode(5)
-let tNode6 = TreeNode(6)
-let tNode7 = TreeNode(7)
-tNode1.left = tNode2
-tNode1.right = tNode3
-tNode2.left = tNode4
-tNode2.right = tNode5
-tNode3.left = tNode6
-tNode3.right = tNode7
+//let tNode1 = TreeNode(1)
+//let tNode2 = TreeNode(2)
+//let tNode3 = TreeNode(3)
+//let tNode4 = TreeNode(4)
+//let tNode5 = TreeNode(5)
+//let tNode6 = TreeNode(6)
+//let tNode7 = TreeNode(7)
+//tNode1.left = tNode2
+//tNode1.right = tNode3
+//tNode2.left = tNode4
+//tNode2.right = tNode5
+//tNode3.left = tNode6
+//tNode3.right = tNode7
 
 
 
 
-//MARK: - 1. Two Sum
+//MARK: - (Array)1. Two Sum
 //let nums = [3,2,4], target = 6
 //let solotion = Solution()
 //print(solotion.twoSum(nums, target))
-//MARK: sample version
-//class Solution {
+//class Solution { // sample answer
 //    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
-//
 //        var check: [Int:Int] = [:]
 //        for (index, item) in nums.enumerated(){
 //            let diff = target - item
 //            // print("target = \(target), item = \(item), diff = \(diff)")
 //            // print(String(describing: check[item]))
-//
 //            if let pre_index = check[item] {
 //                return [pre_index, index]
 //            } else {
 //                check[diff] = index
 //            }
-//
-//            // print(check)
 //        }
-//
 //        return []
-//
 //    }
 //}
 
 //MARK: my solution: passed
 //class Solution {
 //    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
-//
 //        var ans = [Int]()
 //        for i in 0..<nums.count {
 //            if ans.count == 0 {
@@ -112,13 +104,11 @@ tNode3.right = tNode7
 //                }
 //            }
 //        }
-//
-//
 //        return ans
 //    }
 //}
 
-//MARK: - 3. Longest Substring Without Repeating Characters
+//MARK: - (Sliding Window)🟡3. Longest Substring Without Repeating Characters
 //let s = "bbbbbbb"
 //let solution = Solution()
 //print(solution.lengthOfLongestSubstring(s))
@@ -126,7 +116,7 @@ tNode3.right = tNode7
 //MARK: my solution (passed)
 //class Solution {
 //    func lengthOfLongestSubstring(_ s: String) -> Int {
-//        guard s.count > 1 else { return s.count}
+//        guard s.count > 1 else { return s.count }
 //        var maxLen = 0
 //        var counter = 0
 //        var arr = [Character]()
@@ -143,11 +133,11 @@ tNode3.right = tNode7
 //                arr.append(char)
 //            }
 //        }
-//
 //        maxLen = max(maxLen,counter)
 //        return maxLen
 //    }
 //}
+
 //MARK: retry with frame work
 //class Solution {
 //    func lengthOfLongestSubstring(_ s: String) -> Int {
@@ -159,7 +149,7 @@ tNode3.right = tNode7
 //            let rightChar = array[right]
 //            right += 1
 //            window[rightChar, default: 0] += 1
-//            while window[rightChar]! > 1 {
+//            while window[rightChar]! > 1 { //shrink window
 //                let leftChar = array[left]
 //                window[leftChar, default: 0] -= 1
 //                left += 1
@@ -169,7 +159,8 @@ tNode3.right = tNode7
 //        return res
 //    }
 //}
-//MARK: - 11. Container With Most Water
+
+//MARK: - (Two pointers)🟡11. Container With Most Water
 //let height = [1,8,6,2,5,4,8,25,7]
 //let solution = Solution()
 //print(solution.maxArea(height))
@@ -193,77 +184,26 @@ tNode3.right = tNode7
 //        return maxArea
 //    }
 //}
-//MARK: - 15. 3 Sum
+//MARK: - 🟡15. 3 Sum
 //let nums = [-1,0,1,2,-1,-4]
 //let solution = Solution()
 //print(solution.threeSum(nums))
-//MARK: Sample solution
-//class Solution {
-//    func threeSum(_ nums: [Int]) -> [[Int]] {
-//        guard nums.count >= 3 else {
-//            return []
-//        }
-//
-//        let nums = nums.sorted()
-//        var answer: [[Int]] = []
-//
-//        var previousFirstNum: Int?
-//        for first in 0...(nums.endIndex-3) {
-//            if nums[first] > 0 {
-//                break // Everything after that will be even larger because the array is sorted
-//            } else if nums[first] == previousFirstNum {
-//                continue // Duplicate triplet? Why?
-//            } else {
-//                previousFirstNum = nums[first]
-//            }
-//
-//            var second = first + 1
-//            var third = nums.endIndex - 1
-//            while second < third {
-//                let sum = nums[first] + nums[second] + nums[third]
-//                if sum > 0 {
-//                    third -= 1
-//                } else if sum < 0 {
-//                    second += 1
-//                } else {
-//                    answer.append([nums[first], nums[second], nums[third]])
-//
-//                    let previousSecondNum = nums[second]
-//                    while second < third && nums[second] == previousSecondNum {
-//                        second += 1
-//                    }
-//
-//                    let previousThirdNum = nums[third]
-//                    while second < third && nums[third] == previousThirdNum {
-//                        third -= 1
-//                    }
-//                }
-//            }
-//        }
-//
-//        return answer
-//    }
-//}
 //MARK: my solution (passed)
 //class Solution {
 //    func threeSum(_ nums: [Int]) -> [[Int]] {
 //        var ans = [[Int]]()
-//
 //        for (index,num) in nums.enumerated() {
 //            let target = num
 //            var dict = [Int:Int]()
-//            if index+1 != nums.count {
-//                for j in index+1..<nums.count {
-//                    let diff = target + nums[j]
-//                    print(diff)
-//                    if let third = dict[nums[j]] {
-//                        let result = [target,nums[j],third].sorted()
-//                        if !ans.contains(result) {
-//                            ans.append(result)
-//                        }
-//                    } else {
-//                        dict[-diff] = nums[j]
+//            for j in index+1..<nums.count {
+//                let diff = target + nums[j]
+//                if let third = dict[nums[j]] {
+//                    let result = [target,nums[j],third].sorted()
+//                    if !ans.contains(result) {
+//                        ans.append(result)
 //                    }
+//                } else {
+//                    dict[-diff] = nums[j]
 //                }
 //            }
 //        }
@@ -273,7 +213,7 @@ tNode3.right = tNode7
 //}
 //
 
-//MARK: - 19. Remove Nth Node From End of List
+//MARK: - (LinkedList)🟡19. Remove Nth Node From End of List
 
 //MARK: my solution (great) put all nodes in array
 //class Solution {
@@ -298,47 +238,58 @@ tNode3.right = tNode7
 //        return head
 //    }
 //}
-//MARK: my solution (great) traditional way by reversing list twice
-//class Solution {
-//    func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
-//        //reverse LinkedList
-//        var prev:ListNode? = nil
-//        var travelNode = head
-//        while travelNode?.next != nil {
-//            let temp = travelNode?.next
-//            travelNode?.next = prev
-//            prev = travelNode
-//            travelNode = temp
-//        }
-//        var newHead = travelNode
-//        travelNode?.next = prev
-//        if n == 1 {
-//            newHead = newHead?.next
-//        } else {
-//            var count = 1
-//            prev = nil
-//            while count < n {
-//                prev = travelNode
-//                travelNode = travelNode?.next
-//                count += 1
-//            }
-//            prev?.next = travelNode?.next
-//        }
-//        //reverse back
-//        prev = nil
-//        //        travelNode = newHead
-//        while newHead?.next != nil {
-//            let temp = newHead?.next
-//            newHead?.next = prev
-//            prev = newHead
-//            newHead = temp
-//        }
-//        newHead?.next = prev
-//        return newHead
-//    }
-//}
 
-//MARK: - 20. Valid Parentheses
+//MARK: my solution (great) traditional way by reversing list twice
+class Solution {
+    func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
+        //reverse entire LinkedList
+        var prev:ListNode? = nil
+        var travelNode = head
+        while travelNode?.next != nil {
+            let temp = travelNode?.next
+            travelNode?.next = prev
+            prev = travelNode
+            travelNode = temp
+        }
+        var newHead = travelNode
+        travelNode?.next = prev
+        if n == 1 {
+            newHead = newHead?.next
+        } else {
+            var count = 1
+            prev = nil
+            while count < n {
+                prev = travelNode
+                travelNode = travelNode?.next
+                count += 1
+            }
+            prev?.next = travelNode?.next
+        }
+        //reverse entire list back
+        prev = nil
+        while newHead?.next != nil {
+            let temp = newHead?.next
+            newHead?.next = prev
+            prev = newHead
+            newHead = temp
+        }
+        newHead?.next = prev
+        return newHead
+    }
+//    func reverseList(_ head: ListNode?) -> ListNode? {
+//        var prev: ListNode? = nil
+//        var p = head
+//        while p?.next != nil {
+//            let temp = p?.next
+//            p?.next = prev
+//            prev = p
+//            p = temp
+//        }
+//        return p
+//    }
+}
+
+//MARK: - 🟢20. Valid Parentheses
 //let s = "()[]{{}"
 //let solution = Solution()
 //print(solution.isValid(s))
@@ -360,8 +311,8 @@ tNode3.right = tNode7
 //    }
 //}
 
-//MARK: - 21. Merge Two Sorted Lists
-//
+//MARK: - 🟢21. Merge Two Sorted Lists
+
 //MARK: my solution
 //public class ListNode {
 //    public var val: Int
@@ -426,7 +377,7 @@ tNode3.right = tNode7
 //    }
 //}
 
-//MARK: - 22. Generate Parentheses
+//MARK: - 🟡(DP)22. Generate Parentheses
 //let n = 3
 //// ["((()))","(()())","(())()","()(())","()()()"]
 //let s = Solution()
@@ -439,7 +390,6 @@ tNode3.right = tNode7
 //        let close = 0
 //        let string = ""
 //        generate(open: open, close: close,n: n ,string: string, ans: &ans)
-//
 //        return ans
 //    }
 //    func generate(open: Int, close: Int,n: Int, string: String, ans: inout [String]) {
@@ -449,16 +399,12 @@ tNode3.right = tNode7
 //        if open < n {
 //            var str = string
 //            str.append("(")
-//            var o = open
-//            o += 1
-//            generate(open: o, close: close, n: n, string: str, ans: &ans)
+//            generate(open: open+1, close: close, n: n, string: str, ans: &ans)
 //        }
 //        if close < open {
 //            var str = string
 //            str.append(")")
-//            var c = close
-//            c += 1
-//            generate(open: open, close: c, n: n, string: str, ans: &ans)
+//            generate(open: open, close: close+1, n: n, string: str, ans: &ans)
 //        }
 //    }
 //}
@@ -1249,6 +1195,30 @@ tNode3.right = tNode7
 //    }
 //}
 
+//MARK: - 90. Subsets II
+//let nums = [1,2,2] //[[],[1],[1,2],[1,2,2],[2],[2,2]]
+//class Solution { 11ms 87%
+//    func subsetsWithDup(_ nums: [Int]) -> [[Int]] {
+//        var res = [[Int]]()
+//        var track = [Int]()
+//        let nums = nums.sorted()
+//        func backtrack(_ start: Int) {
+//            res.append(track)
+//            for i in start..<nums.count {
+//                if i > start && nums[i] == nums[i - 1] {
+//                    print(i,start)
+//                    continue
+//                }
+//                track.append(nums[i])
+//                backtrack(i+1)
+//                track.removeLast()
+//            }
+//        }
+//        backtrack(0)
+//        return res
+//    }
+//}
+
 //MARK: - 🟡92. Reverse Linked List II
 //let n1 = ListNode(1)
 //let n2 = ListNode(2)
@@ -1579,28 +1549,28 @@ tNode3.right = tNode7
 
 //MARK: - 🟡114. Flatten Binary Tree to Linked List
 //MARK: DP 1. convert left nodes to flat and store as temp1 and temp2 (fromLeft, fromRight) (don't attach to right yet, we might lose connection to it's right child) 2. attach left to root's right child, then travel down to the tail of right child and attach right root to the end. *This might not be the optimal solution but in a very clean way.
-class Solution { // 15ms 91%
-    //O(n)
-    func flatten(_ root: TreeNode?) {
-        dp(root)
-    }
-    func dp(_ root: TreeNode?) -> TreeNode? {
-        guard let root = root else {
-            return nil
-        }
-        let rootFromLeft = dp(root.left)
-        let rootFromRight = dp(root.right)
-        
-        root.right = rootFromLeft
-        var p = root
-        while p.right != nil {
-            p = p.right!
-        }
-        p.right = rootFromRight
-        root.left = nil
-        return root
-    }
-}
+//class Solution { // 15ms 91%
+//    //O(n)
+//    func flatten(_ root: TreeNode?) {
+//        dp(root)
+//    }
+//    func dp(_ root: TreeNode?) -> TreeNode? {
+//        guard let root = root else {
+//            return nil
+//        }
+//        let rootFromLeft = dp(root.left)
+//        let rootFromRight = dp(root.right)
+//
+//        root.right = rootFromLeft
+//        var p = root
+//        while p.right != nil {
+//            p = p.right!
+//        }
+//        p.right = rootFromRight
+//        root.left = nil
+//        return root
+//    }
+//}
 
 //MARK: - 121. 🟢Best Time to Buy and Sell Stock (DP)
 //let prices = [7,1,5,3,6]
@@ -1644,17 +1614,17 @@ class Solution { // 15ms 91%
 //class Solution {
 //    func maxProfit(_ prices: [Int]) -> Int {
 //        let n = prices.count
-//        var dp_i_0 = 0, dp_i_1 = Int.min
+//        var sell = 0, buy = Int.min
 //        for i in 0..<n {
-//            dp_i_0 = max(dp_i_0, dp_i_1 + prices[i])
-//            dp_i_1 = max(dp_i_1, -prices[i])
+//            sell = max(sell, buy + prices[i])
+//            buy = max(buy, -prices[i])
 //        }
 //
-//        return dp_i_0
+//        return sell
 //    }
 //}
 //MARK: - 122. Best Time to Buy and Sell Stock II
-//MARK: my solution *dp (great)
+//MARK: DP
 //class Solution {
 //    func maxProfit(_ prices: [Int]) -> Int {
 //        let n = prices.count
@@ -3758,13 +3728,40 @@ class Solution { // 15ms 91%
 //}
 
 //MARK: - mock test 1 (greatest upper left quadrant)
-//MARK: 119 compare to it's possible opponent: 119 VS 112, 62, 108 | 56 VS 49, 43, 15 | same for 125 VS 56, 78, 101
+//MARK: 119 compare to it's possible opponent: 119(0,3) VS 112(0,0), 62(3,0), 108(3,3) | 56 VS 49, 43, 15 | same for 125 VS 56, 78, 101
 //M = [
 //   112    42    83   (119)
 //  (56)   (125)  56    49
 //   15     78    101   43
 //   62     98   (114)  108
 //];
-
-let diff = (CFAbsoluteTimeGetCurrent() - start) * 1000
-print("\n\n\(diff) ms")
+//MARK: OA: triangle problem
+//let x1 = 3, y1 = 3     //                          *B(4,5)
+//let x2 = 4, y2 = 5    //                       a            b
+//let x3 = 7, y3 = 3    //                    *A(3,3)   c     C(7,3)
+//let p1x = 4, p1y = 4
+//let p2x = 100, p2y = 100
+//// return 0: not valid triangle,
+////1: point 1 lies within Triangle but not point 2,
+////2: reverse of Option(1)
+////3: both in triangle
+////4: both circle are outside of triangle
+//validPosition(x1: x1, y1: y1, x2: x2, y2: y2, x3: x3, y3: y3, p1x: p1x, p1y: p1y, p2x: p2x, p2y: p2y)
+//func validPosition(x1: Int, y1: Int, x2: Int, y2: Int, x3: Int, y3: Int, p1x: Int, p1y: Int, p2x: Int, p2y: Int) -> Int {
+//    let A = (x: x1,y: y1)
+//    let B = (x: x2,y: y2)
+//    let C = (x: x3,y: y3)
+//    let P1 = (x: p1x,y: p1y)
+//    let P2 = (x: p2x,y: p2y)
+//    let a = getLength(x1: A.x, y1: A.y, x2: B.x, y2: B.y)//line between AB
+//    let b = getLength(x1: B.x, y1: B.y, x2: C.x, y2: C.y)//line between BC
+//    let c = getLength(x1: C.x, y1: C.y, x2: A.x, y2: A.y)//line between CA
+//    print(a,b,c)
+//
+//    return 0
+//}
+//func getArea(x1: Int, y1: Int, x2: Int, y2: Int, x3: Int, y3: Int) -> Double {
+//    return Double(1/2)/Double(x1)
+//}
+//let diff = (CFAbsoluteTimeGetCurrent() - start) * 1000
+//print("\n\n\(diff) ms")
