@@ -409,6 +409,86 @@ let solution = Solution()
 //    }
 //}
 
+//MARK: - 🔴23. Merge k Sorted Lists
+//let head1 = ListNode(1)
+//head1.next = ListNode(2, .init(3))
+//
+//let head2 = ListNode(4)
+//head2.next = ListNode(5, .init(6))
+//
+//let head3 = ListNode(7)
+//head3.next = ListNode(8, .init(9))
+//
+//let list = [head1, head2, head3]
+//
+//solution.mergeKLists(list)?.print()
+//
+//class Solution { 
+//    func mergeKLists(_ lists: [ListNode?]) -> ListNode? {
+//        var lists = lists
+//        //find the first
+//        guard !lists.isEmpty else { return nil }
+//        var resultHead: ListNode? = nil
+//        var travalNode: ListNode? = nil
+//        var minHead: ListNode? = nil
+//        var minIndex: Int? = nil
+//        for (index, head) in lists.enumerated() {
+//            if let head = head {
+//                if head.val <= minHead?.val ?? Int.max {
+//                    minHead = head
+//                    minIndex = index
+//                }
+//            }
+//        }
+//        if let minHead = minHead, let minIndex = minIndex {
+//            let temp = minHead.next
+//            minHead.next = nil
+//            resultHead = minHead
+//            travalNode = resultHead
+//
+//            lists[minIndex] = temp
+//        } else {
+//            return nil
+//        }
+//
+//        while shouldContinue(lists) {
+//            minHead = nil
+//            minIndex = nil
+//            print(shouldContinue(lists))
+//            for (index, head) in lists.enumerated() {
+//                if let head = head {
+//                    if head.val <= minHead?.val ?? Int.max {
+//                        minHead = head
+//                        minIndex = index
+//                    }
+//                }
+//            }
+//            if let minHead = minHead, let minIndex = minIndex {
+//                let temp = minHead.next
+//                minHead.next = nil
+//                travalNode?.next = minHead
+//                travalNode = travalNode?.next
+//
+//                lists[minIndex] = temp
+//            } else {
+//                return nil
+//            }
+//        }
+//
+//        return resultHead
+//    }
+//
+//    func shouldContinue(_ lists: [ListNode?]) -> Bool {
+//        for head in lists {
+//            if head != nil {
+//                return true
+//            }
+//        }
+//        return false
+//    }
+//}
+
+
 //MARK: - 🟢(Two pointers)26. Remove Duplicates from Sorted Array
 //class Solution { // sample solution 41ms
 //    func removeDuplicates(_ nums: inout [Int]) -> Int {
@@ -2368,6 +2448,21 @@ let solution = Solution()
 
 //MARK: - 🟡230. Kth Smallest Element in a BST
 //MARK: 1. inorder traverse a BST will give you ordered array 2. make helper method to pass around the rank var to keep track of which rank we are now.
+//class Solution { // 54ms 98.9 %
+//    var rank = 0
+//    func kthSmallest(_ root: TreeNode?, _ k: Int) -> Int {
+//        guard let root = root else {
+//            return -1
+//        }
+//        let leftResult = kthSmallest(root.left,k)
+//        rank += 1
+//        if rank == k {
+//            return root.val
+//        }
+//        let rightResult = kthSmallest(root.right,k)
+//        return max(leftResult, rightResult)
+//    }
+//}
 //class Solution { // return by Int
 //    func kthSmallest(_ root: TreeNode?, _ k: Int) -> Int {
 //        var rank = 0
@@ -3797,3 +3892,36 @@ let solution = Solution()
 //}
 //let diff = (CFAbsoluteTimeGetCurrent() - start) * 1000
 //print("\n\n\(diff) ms")
+
+
+//MARK: - Basta-GSWEP
+//Example:
+//Input:  ATTAG
+//Output: TAATC
+//public func correspondDNA(_ input: String) -> String {
+//    var res = ""
+//    for char in input {
+//        switch char {
+//        case "A":
+//            res += "T"
+//        case "T":
+//            res += "A"
+//        case "C":
+//            res += "G"
+//        case "G":
+//            res += "C"
+//        default:
+//            fatalError("Unexpected input")
+//        }
+//    }
+//    return res
+//}
+//Examples:
+//A = abc|xyz
+//B = pqr|cba
+//Answer: true (cut after index 2).
+//
+//A = abccb|z
+//B = pqrsw|a
+//Answer: true (cut after index 4).
+
