@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B55A8AF29C5267500803D63 /* merge_k_sorted_list.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B55A8AE29C5267500803D63 /* merge_k_sorted_list.swift */; };
 		3B71874B29272FE800347B01 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B71874A29272FE800347B01 /* Note.swift */; };
 		3BA8480828E216C90076DDF4 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA8480428E216C90076DDF4 /* Queue.swift */; };
 		3BA8480928E216C90076DDF4 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA8480528E216C90076DDF4 /* Stack.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		3B4B854E28B07C7800669D85 /* Leetcode-swift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Leetcode-swift"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B55A8AE29C5267500803D63 /* merge_k_sorted_list.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = merge_k_sorted_list.swift; sourceTree = "<group>"; };
 		3B71874A29272FE800347B01 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		3BA8480328E216C90076DDF4 /* Leetcode-swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Leetcode-swift-Bridging-Header.h"; sourceTree = "<group>"; };
 		3BA8480428E216C90076DDF4 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				3BA8480728E216C90076DDF4 /* main.swift */,
+				3B55A8AE29C5267500803D63 /* merge_k_sorted_list.swift */,
 				3BA8480628E216C90076DDF4 /* Node.swift */,
 				3BA8480428E216C90076DDF4 /* Queue.swift */,
 				3BA8480528E216C90076DDF4 /* Stack.swift */,
@@ -140,6 +143,7 @@
 				3BA8480928E216C90076DDF4 /* Stack.swift in Sources */,
 				3BA8480B28E216C90076DDF4 /* main.swift in Sources */,
 				3BA8480828E216C90076DDF4 /* Queue.swift in Sources */,
+				3B55A8AF29C5267500803D63 /* merge_k_sorted_list.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

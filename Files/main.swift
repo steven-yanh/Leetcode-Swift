@@ -3471,6 +3471,37 @@ let solution = Solution()
 //    }
 //}
 
+//MARK: - 🟡1415. The k-th Lexicographical String of All Happy Strings of Length n
+print("result: \(solution.getHappyString(3, 9))")
+class Solution {
+    func getHappyString(_ n: Int, _ k: Int) -> String {
+        var happyStrings = [String]()
+        func generateAllStrings(_ aCount: Int, _ bCount: Int,_ cCount: Int,_ currentString: String) {
+            if aCount + bCount + cCount == n {
+                happyStrings.append(currentString)
+                return
+            }
+            if let lastLetter = currentString.last {
+                if lastLetter != "a" {
+                    generateAllStrings(aCount+1,bCount,cCount,"\(currentString)a")
+                }
+                if lastLetter != "b" {
+                    generateAllStrings(aCount,bCount+1,cCount,"\(currentString)b")
+                }
+                if lastLetter != "c" {
+                    generateAllStrings(aCount,bCount,cCount+1,"\(currentString)c")
+                }
+            } else {
+                generateAllStrings(aCount+1,bCount,cCount,"\(currentString)a")
+                generateAllStrings(aCount,bCount+1,cCount,"\(currentString)b")
+                generateAllStrings(aCount,bCount,cCount+1,"\(currentString)c")
+            }
+        }
+        generateAllStrings(0, 0, 0, "")
+        happyStrings.sort()
+        return k <= happyStrings.count ? happyStrings[k-1] : ""
+    }
+}
 //MARK: - 🟡1448. Count Good Nodes in Binary Tree
 //MARK: 1.inorder traversal if current node is a goode node and plus the left total good node and right total good node
 //print(solution.goodNodes(nil))
