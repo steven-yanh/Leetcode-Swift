@@ -3472,59 +3472,59 @@ let solution = Solution()
 //}
 
 //MARK: - 🟢1370. Increasing Decreasing String
-print(solution.sortString("aaaabbbbcccc"))
-class Solution { // 46ms 100%
-    func sortString(_ s: String) -> String {
-        guard !s.isEmpty else {
-            return ""
-        }
-        var s: [Character] = s.sorted()
-        var picked = Array(repeating: false, count: s.count)
-        var result = [Character]()
-        while result.count < s.count {
-            increasing(&s, &result, &picked)
-            decreasing(&s, &result, &picked)
-        }
-        return String(result)
-    }
-    func increasing(_ s: inout [Character], _ result: inout [Character], _ picked: inout [Bool]) {
-        var currentSmall: Character?
-        for (index, char) in s.enumerated() {
-            if !picked[index] {
-                if let smallest = currentSmall {
-                    if char > smallest {
-                        picked[index] = true
-                        currentSmall = char
-                        result.append(char)
-                    }
-                } else {
-                    picked[index] = true
-                    currentSmall = char
-                    result.append(char)
-                }
-            }
-        }
-    }
-    func decreasing(_ s: inout [Character], _ result: inout [Character], _ picked: inout [Bool]) {
-        var currentLarge: Character?
-        for index in stride(from: s.count-1, through: 0, by: -1) {
-            if !picked[index] {
-                let char = s[index]
-                if let largest = currentLarge {
-                    if char < largest {
-                        picked[index] = true
-                        currentLarge = char
-                        result.append(char)
-                    }
-                } else {
-                    picked[index] = true
-                    currentLarge = char
-                    result.append(char)
-                }
-            }
-        }
-    }
-}
+//print(solution.sortString("aaaabbbbcccc"))
+//class Solution { // 46ms 100%
+//    func sortString(_ s: String) -> String {
+//        guard !s.isEmpty else {
+//            return ""
+//        }
+//        var s: [Character] = s.sorted()
+//        var picked = Array(repeating: false, count: s.count)
+//        var result = [Character]()
+//        while result.count < s.count {
+//            increasing(&s, &result, &picked)
+//            decreasing(&s, &result, &picked)
+//        }
+//        return String(result)
+//    }
+//    func increasing(_ s: inout [Character], _ result: inout [Character], _ picked: inout [Bool]) {
+//        var currentSmall: Character?
+//        for (index, char) in s.enumerated() {
+//            if !picked[index] {
+//                if let smallest = currentSmall {
+//                    if char > smallest {
+//                        picked[index] = true
+//                        currentSmall = char
+//                        result.append(char)
+//                    }
+//                } else {
+//                    picked[index] = true
+//                    currentSmall = char
+//                    result.append(char)
+//                }
+//            }
+//        }
+//    }
+//    func decreasing(_ s: inout [Character], _ result: inout [Character], _ picked: inout [Bool]) {
+//        var currentLarge: Character?
+//        for index in stride(from: s.count-1, through: 0, by: -1) {
+//            if !picked[index] {
+//                let char = s[index]
+//                if let largest = currentLarge {
+//                    if char < largest {
+//                        picked[index] = true
+//                        currentLarge = char
+//                        result.append(char)
+//                    }
+//                } else {
+//                    picked[index] = true
+//                    currentLarge = char
+//                    result.append(char)
+//                }
+//            }
+//        }
+//    }
+//}
 
 //MARK: - 🟡1415. The k-th Lexicographical String of All Happy Strings of Length n
 //print("result: \(solution.getHappyString(3, 9))")
@@ -3668,6 +3668,128 @@ class Solution { // 46ms 100%
 //            }
 //        }
 //        return res
+//    }
+//}
+
+//MARK: - 🟡2516. Take K of Each Character From Left and Right
+print(solution.takeCharacters("aabaaaacaabc", 2))
+
+class Solution {
+    func takeCharacters(_ s: String, _ k: Int) -> Int {
+        guard k != 0 else {
+            return 0
+        }
+        let s: [Character] = Array(s)
+        var lettersFromRightAt = [Int: [Int]]()
+        //Validate possible output
+        var a = 0, b = 0, c = 0
+        var shouldProceed = false
+        for index in stride(from: s.count-1, through: 0, by: -1) {
+            let char = s[index]
+            switch char {
+            case "a":
+                a += 1
+            case "b":
+                b += 1
+            case "c":
+                c += 1
+            default:
+                break
+            }
+            lettersFromRightAt[index] = [a, b, c]
+            if a >= k && b >= k && c >= k {
+                shouldProceed = true
+            }
+        }
+        print(lettersFromRightAt)
+        
+        if !shouldProceed {
+            return -1
+        }
+        //Actual solution
+        a = 0; b = 0; c = 0
+        var result = Int.max
+        func minRequiredMinuteFrom(left: Int, right: Int) -> Int {
+            if a >= k && b >= k && c >= k {
+                return left
+            }
+            print(a,b,c)
+            let index = left
+            var targetIndex = 0, left = left, right = right
+            while left <= right {
+                targetIndex = (left+right)/2
+                print("left: \(left) mid: \(targetIndex) right: \(right)")
+                let letterCounts = lettersFromRightAt[targetIndex]!
+                if a+letterCounts[0] >= k && b+letterCounts[1] >= k && c+letterCounts[2] >= k {
+                    left = targetIndex + 1
+                } else {
+                    right = targetIndex - 1
+                }
+            }
+            targetIndex = (left+right)/2
+            print("target\(targetIndex)")
+            print("min \((s.count-targetIndex)+index)")
+            return (s.count-targetIndex)+index
+        }
+        for index in 0..<s.count {
+            let char = s[index]
+            result = min(result, minRequiredMinuteFrom(left: index, right: s.count - 1))
+            switch char {
+            case "a":
+                a += 1
+            case "b":
+                b += 1
+            case "c":
+                c += 1
+            default:
+                break
+            }
+        }
+        return result
+    }
+}
+
+//class Solution { //Backtracking solution: Does work but Time Limit Exceeded
+//    func takeCharacters(_ s: String, _ k: Int) -> Int {
+//        let s: [Character] = Array(s)
+//        func backtrack(_ a: Int, _ b: Int, _ c: Int, _ left: Int, _ right: Int, _ minute: Int) -> Int {
+//            if a >= k && b >= k && c >= k {
+//                if minute <= 8 {
+//                    print(a,b,c, "min: \(minute)")
+//                }
+//                return minute
+//            }
+//            if left > right {
+//                return -1
+//            }
+//            var result = Int.max
+//
+//            let leftChar = s[left]
+//            switch leftChar {
+//            case "a":
+//                result = min(result, backtrack(a+1, b, c, left+1, right, minute+1))
+//            case "b":
+//                result = min(result, backtrack(a, b+1, c, left+1, right, minute+1))
+//            case "c":
+//                result = min(result, backtrack(a, b, c+1, left+1, right, minute+1))
+//            default:
+//                break
+//            }
+//
+//            let rightChar = s[right]
+//            switch rightChar {
+//            case "a":
+//                result = min(result, backtrack(a+1, b, c, left, right-1, minute+1))
+//            case "b":
+//                result = min(result, backtrack(a, b+1, c, left, right-1, minute+1))
+//            case "c":
+//                result = min(result, backtrack(a, b, c+1, left, right-1, minute+1))
+//            default:
+//                break
+//            }
+//            return result
+//        }
+//        return backtrack(0, 0, 0, 0, s.count-1, 0)
 //    }
 //}
 
