@@ -2801,7 +2801,22 @@ let solution = Solution()
 //        return ans
 //    }
 //}
-//MARK: - 424. Longest Repeating Character Replacement
+
+//MARK: - 🟢414. Third Maximum Numbe
+print(solution.thirdMax([3,2,1]))
+
+class Solution { //23ms beats 91%
+    func thirdMax(_ nums: [Int]) -> Int {
+        let set = Set(nums)
+        let sortedSet = set.sorted()
+        guard sortedSet.count >= 3 else {
+            return sortedSet.last! //force unwrap since guaranteed have at least one number
+        }
+        return sortedSet[sortedSet.count-3]
+    }
+}
+
+//MARK: - 🟡424. Longest Repeating Character Replacement
 //let s = "AABABBA", k = 1
 //let solution = Solution()
 //print(solution.characterReplacement(s, k))
@@ -3814,24 +3829,24 @@ let solution = Solution()
 //}
 
 //MARK: - 🟢2574. Left and Right Sum Differences
-print(solution.leftRigthDifference([10,4,8,3]))
-
-class Solution { //42ms beats 96%
-    func leftRigthDifference(_ nums: [Int]) -> [Int] {
-        var leftSum = [Int]()
-        var rightSum = Array(repeating: 0, count: nums.count)
-        nums.reduce(0) {
-            leftSum.append($0)
-            return $0 + $1
-        }
-        var sum = 0
-        for i in stride(from: nums.count-1, through: 0, by: -1) {
-            rightSum[i] = sum
-            sum += nums[i]
-        }
-        return nums.indices.map { abs(leftSum[$0] - rightSum[$0]) }
-    }
-}
+//print(solution.leftRigthDifference([10,4,8,3]))
+//
+//class Solution { //42ms beats 96%
+//    func leftRigthDifference(_ nums: [Int]) -> [Int] {
+//        var leftSum = [Int]()
+//        var rightSum = Array(repeating: 0, count: nums.count)
+//        nums.reduce(0) {
+//            leftSum.append($0)
+//            return $0 + $1
+//        }
+//        var sum = 0
+//        for i in stride(from: nums.count-1, through: 0, by: -1) {
+//            rightSum[i] = sum
+//            sum += nums[i]
+//        }
+//        return nums.indices.map { abs(leftSum[$0] - rightSum[$0]) }
+//    }
+//}
 
 //MARK: - Other Practice
 //MARK: Amazon OA question 2 | sliding window question 
