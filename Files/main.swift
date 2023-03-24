@@ -3441,25 +3441,24 @@ let solution = Solution()
  */
 
 //MARK: - 🟢1128. Number of Equivalent Domino Pairs
-print(solution.numEquivDominoPairs([[1,2],[1,2],[1,1],[1,2],[2,2]]))
-class Solution { //160ms beats 100%
-    func numEquivDominoPairs(_ dominoes: [[Int]]) -> Int {
-        //          Pair:frequency
-        var hashMap = [[Int]: Int]()
-        var result = 0
-        for pair in dominoes {
-            let sortedPair = pair.sorted()
-            if let frequency = hashMap[sortedPair] {
-                result += frequency
-                hashMap[sortedPair] = frequency + 1
-            } else {
-                hashMap[sortedPair] = 1
-            }
-        }
-        return result
-    }
-}
-
+//print(solution.numEquivDominoPairs([[1,2],[1,2],[1,1],[1,2],[2,2]]))
+//class Solution { //160ms beats 100%
+//    func numEquivDominoPairs(_ dominoes: [[Int]]) -> Int {
+//        //          Pair:frequency
+//        var hashMap = [[Int]: Int]()
+//        var result = 0
+//        for pair in dominoes {
+//            let sortedPair = pair.sorted()
+//            if let frequency = hashMap[sortedPair] {
+//                result += frequency
+//                hashMap[sortedPair] = frequency + 1
+//            } else {
+//                hashMap[sortedPair] = 1
+//            }
+//        }
+//        return result
+//    }
+//}
 
 //MARK: - 🟢1221. Split a String in Balanced Strings
 //MARK: intuitive and easy. make left and right counter
@@ -3814,8 +3813,27 @@ class Solution { //160ms beats 100%
 //    }
 //}
 
-//MARK: - Other Practice
+//MARK: - 🟢2574. Left and Right Sum Differences
+print(solution.leftRigthDifference([10,4,8,3]))
 
+class Solution { //42ms beats 96%
+    func leftRigthDifference(_ nums: [Int]) -> [Int] {
+        var leftSum = [Int]()
+        var rightSum = Array(repeating: 0, count: nums.count)
+        nums.reduce(0) {
+            leftSum.append($0)
+            return $0 + $1
+        }
+        var sum = 0
+        for i in stride(from: nums.count-1, through: 0, by: -1) {
+            rightSum[i] = sum
+            sum += nums[i]
+        }
+        return nums.indices.map { abs(leftSum[$0] - rightSum[$0]) }
+    }
+}
+
+//MARK: - Other Practice
 //MARK: Amazon OA question 2 | sliding window question 
 //let stockPrice = [1,2,7,7,4,3,6], k = 3
 //let s = Solution()
