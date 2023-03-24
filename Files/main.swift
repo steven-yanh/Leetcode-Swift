@@ -2158,20 +2158,20 @@ let solution = Solution()
 //}
 
 //MARK: - 🟢191. Number of 1 Bits
-print(solution.hammingWeight(00000000000000000000001000001000))
-
-class Solution { //0ms beats 100%
-    func hammingWeight(_ n: Int) -> Int {
-        var res = 0
-        var n = n
-        while n > 0 {
-            print("n: \(n)")
-            res += n % 2
-            n /= 2
-        }
-        return res
-    }
-}
+//print(solution.hammingWeight(00000000000000000000001000001000))
+//
+//class Solution { //0ms beats 100%
+//    func hammingWeight(_ n: Int) -> Int {
+//        var res = 0
+//        var n = n
+//        while n > 0 {
+//            print("n: \(n)")
+//            res += n % 2
+//            n /= 2
+//        }
+//        return res
+//    }
+//}
 
 //MARK: - 🟡198. House Robber
 //let nums = [2,1,1,2] // res: 4     //rob:    skip:3   ifRob:4
@@ -3721,6 +3721,38 @@ class Solution { //0ms beats 100%
 //        return res
 //    }
 //}
+
+//MARK: - 🟢2325. Decode the Message
+print(solution.decodeMessage("the quick brown fox jumps over the lazy dog", "vkbs bs t suepuv"))
+
+class Solution { //11ms beats 97%
+    func decodeMessage(_ key: String, _ message: String) -> String {
+        let key = Array(key)
+        var secret = [Character: Character]()
+        var result = ""
+        var index = 0
+        var unicodeIndex = 0
+        while secret.count < 26 {
+            let char = key[index]
+            guard char != " " && secret[char] == nil else {
+                index += 1
+                continue
+            }
+            let value = Character(Unicode.Scalar(unicodeIndex + 97)!)
+            unicodeIndex += 1
+            secret[char] = value
+            index += 1
+        }
+        for char in message {
+            if let value = secret[char] {
+                result.append(value)
+            } else {
+                result.append(" ")
+            }
+        }
+        return result
+    }
+}
 
 //MARK: - 🟡2516. Take K of Each Character From Left and Right
 //print(solution.takeCharacters("aabaaaacaabc", 2))
