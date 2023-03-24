@@ -2157,6 +2157,22 @@ let solution = Solution()
 //    }
 //}
 
+//MARK: - 🟢191. Number of 1 Bits
+print(solution.hammingWeight(00000000000000000000001000001000))
+
+class Solution { //0ms beats 100%
+    func hammingWeight(_ n: Int) -> Int {
+        var res = 0
+        var n = n
+        while n > 0 {
+            print("n: \(n)")
+            res += n % 2
+            n /= 2
+        }
+        return res
+    }
+}
+
 //MARK: - 🟡198. House Robber
 //let nums = [2,1,1,2] // res: 4     //rob:    skip:3   ifRob:4
 //print(solution.rob(nums))
@@ -2803,18 +2819,18 @@ let solution = Solution()
 //}
 
 //MARK: - 🟢414. Third Maximum Numbe
-print(solution.thirdMax([3,2,1]))
-
-class Solution { //23ms beats 91%
-    func thirdMax(_ nums: [Int]) -> Int {
-        let set = Set(nums)
-        let sortedSet = set.sorted()
-        guard sortedSet.count >= 3 else {
-            return sortedSet.last! //force unwrap since guaranteed have at least one number
-        }
-        return sortedSet[sortedSet.count-3]
-    }
-}
+//print(solution.thirdMax([3,2,1]))
+//
+//class Solution { //23ms beats 91%
+//    func thirdMax(_ nums: [Int]) -> Int {
+//        let set = Set(nums)
+//        let sortedSet = set.sorted()
+//        guard sortedSet.count >= 3 else {
+//            return sortedSet.last! //force unwrap since guaranteed have at least one number
+//        }
+//        return sortedSet[sortedSet.count-3]
+//    }
+//}
 
 //MARK: - 🟡424. Longest Repeating Character Replacement
 //let s = "AABABBA", k = 1
