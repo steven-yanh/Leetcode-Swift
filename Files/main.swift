@@ -496,7 +496,7 @@ let solution = Solution()
 //        return nums.count
 //    }
 //}
-//class Solution { // 49ms 97%
+//class Solution { // 49ms beats 97%
 //    func removeDuplicates(_ nums: inout [Int]) -> Int {
 //        var slow = 0, fast = 0
 //        while fast < nums.count {
@@ -511,7 +511,7 @@ let solution = Solution()
 //}
 
 //MARK: - 🟢(Two pointers)27. Remove Element
-//class Solution { //3ms 97%
+//class Solution { //3ms beats 97%
 //    func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
 //        var slow = 0, fast = 0
 //        while fast < nums.count {
@@ -616,7 +616,7 @@ let solution = Solution()
 //MARK: 1. sometimes we need to sort the input but we don't need it for this question.    2.the real optimized is starting from current position instead of using previous all over again
 //let candidates = [6,2,3,7], target = 7
 //print(solution.combinationSum(candidates, target))
-//class Solution { // 14ms 90% the real optimized is starting from current position instead of using previous all over again
+//class Solution { // 14ms beats 90% the real optimized is starting from current position instead of using previous all over again
 //    func combinationSum(_ candidates: [Int], _ target: Int) -> [[Int]] {
 //        var res = [[Int]]()
 //        var track = [Int]() // tracking path
@@ -644,7 +644,7 @@ let solution = Solution()
 //MARK: -🟡40. Combination Sum II
 //let candidates = [10,1,2,7,6,1,5], target = 8
 //print(solution.combinationSum2(candidates, target))
-//class Solution { // 14ms 86% by using break will increse speed; was 300 ms
+//class Solution { // 14ms beats 86% by using break will increse speed; was 300 ms
 //    func combinationSum2(_ candidates: [Int], _ target: Int) -> [[Int]] {
 //        var res = [[Int]]()
 //        var track = [Int]()
@@ -715,7 +715,7 @@ let solution = Solution()
 //MARK: (Backtrack) think of it as a tree and traverse the whole tree, for each dicision(go to next level) check if selection is already used.
 //let nums = [1,2,3]
 //print(solution.permute(nums))
-//class Solution { // 16ms 77%
+//class Solution { // 16ms beats 77%
 //    var res = [[Int]]()
 //    func permute(_ nums: [Int]) -> [[Int]] {
 //        var visited = Array(repeating: false, count: nums.count)
@@ -888,7 +888,7 @@ let solution = Solution()
 //     *  *
 //let cost = [10,15,20]
 //print("res ",solution.minCostClimbingStairs(cost))
-//class Solution { // 23ms 95% Acutal DP solution with memo to optimize time complexity
+//class Solution { // 23ms beats 95% Acutal DP solution with memo to optimize time complexity
 //    var memo = [Int]()
 //    func minCostClimbingStairs(_ cost: [Int]) -> Int {
 //        memo = Array(repeating: -1, count: cost.count + 2)
@@ -1068,7 +1068,7 @@ let solution = Solution()
 //MARK: classical combinational problem it's also a tree structure but think of it as the result is on the K level
 //let n = 4, k = 2
 //print(solution.combine(n, k))
-//class Solution { //64ms 93%    improved by passing inout variable instead of creating data members
+//class Solution { //64ms beats 93%    improved by passing inout variable instead of creating data members
 //    // O(n!)
 //    func combine(_ n: Int, _ k: Int) -> [[Int]] {
 //        var res = [[Int]]()
@@ -1094,7 +1094,7 @@ let solution = Solution()
 //MARK: DFS 1. think of it as tree   2. element not duplicated and can be selected only once
 //let nums = [1,2,3]
 //print(solution.subsets(nums))
-//class Solution { // 3ms 99%
+//class Solution { // 3ms beats 99%
 //    // O(n!)
 //    var res = [[Int]]()
 //    var track = [Int]()
@@ -1230,7 +1230,7 @@ let solution = Solution()
 //}
 
 //MARK: - (Two pointers)(LinkedList)🟢83. Remove Duplicates from Sorted List
-//class Solution { //24ms 88%
+//class Solution { //24ms beats 88%
 //    func deleteDuplicates(_ head: ListNode?) -> ListNode? {
 //        guard head != nil else {
 //            return nil
@@ -1254,7 +1254,7 @@ let solution = Solution()
 //var nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
 //solution.merge(&nums1, m, nums2, n)
 //print(nums1)
-//class Solution { //7ms 94%
+//class Solution { //7ms beats 94%
 //    func merge(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
 //        var p1 = m-1, p2 = n-1, index = m+n-1
 //        while p1 >= 0 && p2 >= 0 {
@@ -1277,7 +1277,7 @@ let solution = Solution()
 
 //MARK: - 90. Subsets II
 //let nums = [1,2,2] //[[],[1],[1,2],[1,2,2],[2],[2,2]]
-//class Solution { 11ms 87%
+//class Solution { 11ms beats 87%
 //    func subsetsWithDup(_ nums: [Int]) -> [[Int]] {
 //        var res = [[Int]]()
 //        var track = [Int]()
@@ -1608,7 +1608,7 @@ let solution = Solution()
 //}
 
 //MARK: - 🟢112.(Tree) Path Sum
-//class Solution { // 29ms 98%
+//class Solution { // 29ms beats 98%
 //    func hasPathSum(_ root: TreeNode?, _ targetSum: Int) -> Bool {
 //        traverse(root, targetSum, 0)
 //    }
@@ -1629,7 +1629,7 @@ let solution = Solution()
 
 //MARK: - 🟡114. Flatten Binary Tree to Linked List
 //MARK: DP 1. convert left nodes to flat and store as temp1 and temp2 (fromLeft, fromRight) (don't attach to right yet, we might lose connection to it's right child) 2. attach left to root's right child, then travel down to the tail of right child and attach right root to the end. *This might not be the optimal solution but in a very clean way.
-//class Solution { // 15ms 91%
+//class Solution { // 15ms beats 91%
 //    //O(n)
 //    func flatten(_ root: TreeNode?) {
 //        dp(root)
@@ -1833,7 +1833,7 @@ let solution = Solution()
 
 //MARK: - 🟡129. Sum Root to Leaf Numbers
 //MARK: 1. DFS the entire tree and calculate the result when reach the leaf    2. find a way to transfer Int to String and concatenate with another "Int" and convert it back to int ie. 1+2 = "1" + "2" = "12" = 12
-//class Solution { // 0ms 100%
+//class Solution { // 0ms beats 100%
 //    var res = 0
 //    func sumNumbers(_ root: TreeNode?) -> Int {
 //        guard let root = root else {
@@ -1861,7 +1861,7 @@ let solution = Solution()
 //MARK: - DFS from starting position. key points: 1. Cut a word based on a range(start to iterating i) 2. check if word is palindrome
 //let s = "aab"
 //print(solution.partition(s))
-//class Solution { // 773ms 98%
+//class Solution { // 773ms beats 98%
 //    var res = [[String]]()
 //    var path = [String]()
 //    var word = [Character]()
@@ -2160,7 +2160,7 @@ let solution = Solution()
 //MARK: - 🟡198. House Robber
 //let nums = [2,1,1,2] // res: 4     //rob:    skip:3   ifRob:4
 //print(solution.rob(nums))
-//class Solution { // 0ms 100% interative (better?)
+//class Solution { // 0ms beats 100% interative (better?)
 //    func rob(_ nums: [Int]) -> Int {
 //        var rob = 0, skip = 0
 //        for num in nums {
@@ -2172,7 +2172,7 @@ let solution = Solution()
 //    }
 //}
 
-//class Solution { // 0ms 100% (Recursive)
+//class Solution { // 0ms beats 100% (Recursive)
 //    func rob(_ nums: [Int]) -> Int {
 //        let res = dp(nums, 0)
 //        return max(res.rob, res.skip)
@@ -2233,7 +2233,7 @@ let solution = Solution()
 //MARK: 1. Follow up from House Robber that the "houses" forms a circle  2. calculate result1 from 0 -> n-1 and result2 from 1 -> n and return max of two   3. This method works because we separated two cases that will `potientially` effect each other, so we come up with the correct answer.
 //let nums = [2,3,2] //
 //print(solution.rob(nums))
-//class Solution { // 0ms 100% can be improved by combine two for loops
+//class Solution { // 0ms beats 100% can be improved by combine two for loops
 //    func rob(_ nums: [Int]) -> Int {
 //        guard nums.count >= 2 else {
 //            return nums[0]
@@ -2448,7 +2448,7 @@ let solution = Solution()
 
 //MARK: - 🟡230. Kth Smallest Element in a BST
 //MARK: 1. inorder traverse a BST will give you ordered array 2. make helper method to pass around the rank var to keep track of which rank we are now.
-//class Solution { // 54ms 98.9 %
+//class Solution { // 54ms beats 98.9 %
 //    var rank = 0
 //    func kthSmallest(_ root: TreeNode?, _ k: Int) -> Int {
 //        guard let root = root else {
@@ -2698,7 +2698,7 @@ let solution = Solution()
 //}
 
 //MARK: - 🟢283. Move Zeroes
-//class Solution { // 151 ms 100%
+//class Solution { // 151 ms beats 100%
 //    func moveZeroes(_ nums: inout [Int]) {
 //        var left = 0, right = 0
 //        while right < nums.count {
@@ -2737,7 +2737,7 @@ let solution = Solution()
 //MARK: - 🟡337. House Robber III
 //MARK: DFS this is actually a dp question that we need to do the smaller problem to solve the bigger one.
 //print(solution.rob(tNode1)) //res: 23
-//class Solution { //33ms 97%
+//class Solution { //33ms beats 97%
 //    func rob(_ root: TreeNode?) -> Int {
 //        guard let root = root else {
 //            return 0
@@ -2763,7 +2763,7 @@ let solution = Solution()
 //var s: [Character] = ["h","e","l","l","o"]
 //solution.reverseString(&s)
 //print(s)
-//class Solution { // 145ms 97%
+//class Solution { // 145ms beats 97%
 //    func reverseString(_ s: inout [Character]) {
 //        var left = 0
 //        var right = s.count - 1
@@ -3121,7 +3121,7 @@ let solution = Solution()
 //MARK: - 🟢606. Construct String from Binary Tree
 // Input: root = [1,2,3,4]
 // Output: "1(2(4))(3)"
-//class Solution { // 63ms 100%
+//class Solution { // 63ms beats 100%
 //    func tree2str(_ root: TreeNode?) -> String {
 //        guard let root = root else {
 //            return ""
@@ -3144,7 +3144,7 @@ let solution = Solution()
 
 
 //MARK: - 🟢617. Merge Two Binary Trees
-//class Solution { // 97 ms 82%
+//class Solution { // 97 ms beats 82%
 //    func mergeTrees(_ root1: TreeNode?, _ root2: TreeNode?) -> TreeNode? {
 //        if root1 == nil && root2 == nil {
 //            return nil
@@ -3200,7 +3200,7 @@ let solution = Solution()
 //MARK: 1.dfs for each node to find a possible path to last node of the graph(n-1)   2. for if statement(checking correct result) there are three things to be sure a)reached last node. b)starting node is 0. c)Path is not empty otherwise it will crash when checking first node
 //let graph = [[4,3,1],[3,2,4],[3],[4],[]]
 //print(solution.allPathsSourceTarget(graph))
-//class Solution { // 79ms 82%
+//class Solution { // 79ms beats 82%
 //    var res = [[Int]]()
 //    var onPath = [Int]()
 //    func allPathsSourceTarget(_ graph: [[Int]]) -> [[Int]] {
@@ -3440,6 +3440,27 @@ let solution = Solution()
  * let ret_2: String = obj.get(key, timestamp)
  */
 
+//MARK: - 🟢1128. Number of Equivalent Domino Pairs
+print(solution.numEquivDominoPairs([[1,2],[1,2],[1,1],[1,2],[2,2]]))
+class Solution { //160ms beats 100%
+    func numEquivDominoPairs(_ dominoes: [[Int]]) -> Int {
+        //          Pair:frequency
+        var hashMap = [[Int]: Int]()
+        var result = 0
+        for pair in dominoes {
+            let sortedPair = pair.sorted()
+            if let frequency = hashMap[sortedPair] {
+                result += frequency
+                hashMap[sortedPair] = frequency + 1
+            } else {
+                hashMap[sortedPair] = 1
+            }
+        }
+        return result
+    }
+}
+
+
 //MARK: - 🟢1221. Split a String in Balanced Strings
 //MARK: intuitive and easy. make left and right counter
 //let s = "RLRRLLRLRL"
@@ -3473,7 +3494,7 @@ let solution = Solution()
 
 //MARK: - 🟢1370. Increasing Decreasing String
 //print(solution.sortString("aaaabbbbcccc"))
-//class Solution { // 46ms 100%
+//class Solution { // 46ms beats 100%
 //    func sortString(_ s: String) -> String {
 //        guard !s.isEmpty else {
 //            return ""
@@ -3528,7 +3549,7 @@ let solution = Solution()
 
 //MARK: - 🟡1415. The k-th Lexicographical String of All Happy Strings of Length n
 //print("result: \(solution.getHappyString(3, 9))")
-//class Solution { //20ms 100%
+//class Solution { //20ms beats 100%
 //    func getHappyString(_ n: Int, _ k: Int) -> String {
 //        var happyStrings = [String]()
 //        func generateAllStrings(_ aCount: Int, _ bCount: Int,_ cCount: Int,_ currentString: String) {
@@ -3672,82 +3693,82 @@ let solution = Solution()
 //}
 
 //MARK: - 🟡2516. Take K of Each Character From Left and Right
-print(solution.takeCharacters("aabaaaacaabc", 2))
-
-class Solution {
-    func takeCharacters(_ s: String, _ k: Int) -> Int {
-        guard k != 0 else {
-            return 0
-        }
-        let s: [Character] = Array(s)
-        var lettersFromRightAt = [Int: [Int]]()
-        //Validate possible output
-        var a = 0, b = 0, c = 0
-        var shouldProceed = false
-        for index in stride(from: s.count-1, through: 0, by: -1) {
-            let char = s[index]
-            switch char {
-            case "a":
-                a += 1
-            case "b":
-                b += 1
-            case "c":
-                c += 1
-            default:
-                break
-            }
-            lettersFromRightAt[index] = [a, b, c]
-            if a >= k && b >= k && c >= k {
-                shouldProceed = true
-            }
-        }
-        print(lettersFromRightAt)
-        
-        if !shouldProceed {
-            return -1
-        }
-        //Actual solution
-        a = 0; b = 0; c = 0
-        var result = Int.max
-        func minRequiredMinuteFrom(left: Int, right: Int) -> Int {
-            if a >= k && b >= k && c >= k {
-                return left
-            }
-            print(a,b,c)
-            let index = left
-            var targetIndex = 0, left = left, right = right
-            while left <= right {
-                targetIndex = (left+right)/2
-                print("left: \(left) mid: \(targetIndex) right: \(right)")
-                let letterCounts = lettersFromRightAt[targetIndex]!
-                if a+letterCounts[0] >= k && b+letterCounts[1] >= k && c+letterCounts[2] >= k {
-                    left = targetIndex + 1
-                } else {
-                    right = targetIndex - 1
-                }
-            }
-            targetIndex = (left+right)/2
-            print("target\(targetIndex)")
-            print("min \((s.count-targetIndex)+index)")
-            return (s.count-targetIndex)+index
-        }
-        for index in 0..<s.count {
-            let char = s[index]
-            result = min(result, minRequiredMinuteFrom(left: index, right: s.count - 1))
-            switch char {
-            case "a":
-                a += 1
-            case "b":
-                b += 1
-            case "c":
-                c += 1
-            default:
-                break
-            }
-        }
-        return result
-    }
-}
+//print(solution.takeCharacters("aabaaaacaabc", 2))
+//
+//class Solution {
+//    func takeCharacters(_ s: String, _ k: Int) -> Int {
+//        guard k != 0 else {
+//            return 0
+//        }
+//        let s: [Character] = Array(s)
+//        var lettersFromRightAt = [Int: [Int]]()
+//        //Validate possible output
+//        var a = 0, b = 0, c = 0
+//        var shouldProceed = false
+//        for index in stride(from: s.count-1, through: 0, by: -1) {
+//            let char = s[index]
+//            switch char {
+//            case "a":
+//                a += 1
+//            case "b":
+//                b += 1
+//            case "c":
+//                c += 1
+//            default:
+//                break
+//            }
+//            lettersFromRightAt[index] = [a, b, c]
+//            if a >= k && b >= k && c >= k {
+//                shouldProceed = true
+//            }
+//        }
+//        print(lettersFromRightAt)
+//
+//        if !shouldProceed {
+//            return -1
+//        }
+//        //Actual solution
+//        a = 0; b = 0; c = 0
+//        var result = Int.max
+//        func minRequiredMinuteFrom(left: Int, right: Int) -> Int {
+//            if a >= k && b >= k && c >= k {
+//                return left
+//            }
+//            print(a,b,c)
+//            let index = left
+//            var targetIndex = 0, left = left, right = right
+//            while left <= right {
+//                targetIndex = (left+right)/2
+//                print("left: \(left) mid: \(targetIndex) right: \(right)")
+//                let letterCounts = lettersFromRightAt[targetIndex]!
+//                if a+letterCounts[0] >= k && b+letterCounts[1] >= k && c+letterCounts[2] >= k {
+//                    left = targetIndex + 1
+//                } else {
+//                    right = targetIndex - 1
+//                }
+//            }
+//            targetIndex = (left+right)/2
+//            print("target\(targetIndex)")
+//            print("min \((s.count-targetIndex)+index)")
+//            return (s.count-targetIndex)+index
+//        }
+//        for index in 0..<s.count {
+//            let char = s[index]
+//            result = min(result, minRequiredMinuteFrom(left: index, right: s.count - 1))
+//            switch char {
+//            case "a":
+//                a += 1
+//            case "b":
+//                b += 1
+//            case "c":
+//                c += 1
+//            default:
+//                break
+//            }
+//        }
+//        return result
+//    }
+//}
 
 //class Solution { //Backtracking solution: Does work but Time Limit Exceeded
 //    func takeCharacters(_ s: String, _ k: Int) -> Int {
