@@ -3677,6 +3677,29 @@ let solution = Solution()
 //    }
 //}
 
+//MARK: - 🟢(DP)1646. Get Maximum in Generated Array
+print(solution.getMaximumGenerated(3))
+
+class Solution { //0ms beats 100%
+    func getMaximumGenerated(_ n: Int) -> Int {
+        guard n >= 2 else {
+            return n
+        }
+        var arr = Array(repeating: -1, count: n+1)
+        arr[0] = 0
+        arr[1] = 1
+        for index in 2..<arr.count {
+            if index % 2 == 0 { //even
+                arr[index] = arr[index/2]
+            } else {
+                arr[index] = arr[index/2] + arr[(index/2)+1]
+            }
+        }
+        return arr.max()!
+    }
+}
+
+
 //MARK: - 1838. Frequency of the Most Frequent Element
 //let nums = [1,4,8,13], k = 5
 //let s = Solution()
@@ -3723,36 +3746,36 @@ let solution = Solution()
 //}
 
 //MARK: - 🟢2325. Decode the Message
-print(solution.decodeMessage("the quick brown fox jumps over the lazy dog", "vkbs bs t suepuv"))
-
-class Solution { //11ms beats 97%
-    func decodeMessage(_ key: String, _ message: String) -> String {
-        let key = Array(key)
-        var secret = [Character: Character]()
-        var result = ""
-        var index = 0
-        var unicodeIndex = 0
-        while secret.count < 26 {
-            let char = key[index]
-            guard char != " " && secret[char] == nil else {
-                index += 1
-                continue
-            }
-            let value = Character(Unicode.Scalar(unicodeIndex + 97)!)
-            unicodeIndex += 1
-            secret[char] = value
-            index += 1
-        }
-        for char in message {
-            if let value = secret[char] {
-                result.append(value)
-            } else {
-                result.append(" ")
-            }
-        }
-        return result
-    }
-}
+//print(solution.decodeMessage("the quick brown fox jumps over the lazy dog", "vkbs bs t suepuv"))
+//
+//class Solution { //11ms beats 97%
+//    func decodeMessage(_ key: String, _ message: String) -> String {
+//        let key = Array(key)
+//        var secret = [Character: Character]()
+//        var result = ""
+//        var index = 0
+//        var unicodeIndex = 0
+//        while secret.count < 26 {
+//            let char = key[index]
+//            guard char != " " && secret[char] == nil else {
+//                index += 1
+//                continue
+//            }
+//            let value = Character(Unicode.Scalar(unicodeIndex + 97)!)
+//            unicodeIndex += 1
+//            secret[char] = value
+//            index += 1
+//        }
+//        for char in message {
+//            if let value = secret[char] {
+//                result.append(value)
+//            } else {
+//                result.append(" ")
+//            }
+//        }
+//        return result
+//    }
+//}
 
 //MARK: - 🟡2516. Take K of Each Character From Left and Right
 //print(solution.takeCharacters("aabaaaacaabc", 2))
