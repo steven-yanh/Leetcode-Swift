@@ -2943,6 +2943,38 @@ let solution = Solution()
 //        return res.count
 //    }
 //}
+
+//MARK: - 🟢461. Hamming Distance
+print(solution.hammingDistance(1, 4))
+
+class Solution { //0ms beats 100%
+    func hammingDistance(_ x: Int, _ y: Int) -> Int {
+        //generate hamming code
+        let hammingX = convertToArray(x)
+        let hammingY = convertToArray(y)
+        var difference = 0
+        for index in 0..<hammingY.count {
+            difference += hammingX[index] != hammingY[index] ? 1 : 0
+        }
+        return difference
+    }
+
+    func convertToArray(_ number: Int) -> [Int] {
+        var number = number
+        var array = Array(repeating: 0, count: 32)
+        for index in stride(from: 31, through: 0, by: -1) {
+            let remainder = number % 2
+            array[index] = remainder
+            number /= 2
+            if number == 0 {
+                break
+            }
+        }
+        return array
+    }
+
+}
+
 //MARK: - 567. Permutation in String
 //let s1 = "adc", s2 = "dcda"
 //let s = Solution()
@@ -3678,26 +3710,26 @@ let solution = Solution()
 //}
 
 //MARK: - 🟢(DP)1646. Get Maximum in Generated Array
-print(solution.getMaximumGenerated(3))
-
-class Solution { //0ms beats 100%
-    func getMaximumGenerated(_ n: Int) -> Int {
-        guard n >= 2 else {
-            return n
-        }
-        var arr = Array(repeating: -1, count: n+1)
-        arr[0] = 0
-        arr[1] = 1
-        for index in 2..<arr.count {
-            if index % 2 == 0 { //even
-                arr[index] = arr[index/2]
-            } else {
-                arr[index] = arr[index/2] + arr[(index/2)+1]
-            }
-        }
-        return arr.max()!
-    }
-}
+//print(solution.getMaximumGenerated(3))
+//
+//class Solution { //0ms beats 100%
+//    func getMaximumGenerated(_ n: Int) -> Int {
+//        guard n >= 2 else {
+//            return n
+//        }
+//        var arr = Array(repeating: -1, count: n+1)
+//        arr[0] = 0
+//        arr[1] = 1
+//        for index in 2..<arr.count {
+//            if index % 2 == 0 { //even
+//                arr[index] = arr[index/2]
+//            } else {
+//                arr[index] = arr[index/2] + arr[(index/2)+1]
+//            }
+//        }
+//        return arr.max()!
+//    }
+//}
 
 
 //MARK: - 1838. Frequency of the Most Frequent Element
