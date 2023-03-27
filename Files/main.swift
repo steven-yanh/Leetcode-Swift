@@ -2945,35 +2945,35 @@ let solution = Solution()
 //}
 
 //MARK: - 🟢461. Hamming Distance
-print(solution.hammingDistance(1, 4))
-
-class Solution { //0ms beats 100%
-    func hammingDistance(_ x: Int, _ y: Int) -> Int {
-        //generate hamming code
-        let hammingX = convertToArray(x)
-        let hammingY = convertToArray(y)
-        var difference = 0
-        for index in 0..<hammingY.count {
-            difference += hammingX[index] != hammingY[index] ? 1 : 0
-        }
-        return difference
-    }
-
-    func convertToArray(_ number: Int) -> [Int] {
-        var number = number
-        var array = Array(repeating: 0, count: 32)
-        for index in stride(from: 31, through: 0, by: -1) {
-            let remainder = number % 2
-            array[index] = remainder
-            number /= 2
-            if number == 0 {
-                break
-            }
-        }
-        return array
-    }
-
-}
+//print(solution.hammingDistance(1, 4))
+//
+//class Solution { //0ms beats 100%
+//    func hammingDistance(_ x: Int, _ y: Int) -> Int {
+//        //generate hamming code
+//        let hammingX = convertToArray(x)
+//        let hammingY = convertToArray(y)
+//        var difference = 0
+//        for index in 0..<hammingY.count {
+//            difference += hammingX[index] != hammingY[index] ? 1 : 0
+//        }
+//        return difference
+//    }
+//
+//    func convertToArray(_ number: Int) -> [Int] {
+//        var number = number
+//        var array = Array(repeating: 0, count: 32)
+//        for index in stride(from: 31, through: 0, by: -1) {
+//            let remainder = number % 2
+//            array[index] = remainder
+//            number /= 2
+//            if number == 0 {
+//                break
+//            }
+//        }
+//        return array
+//    }
+//
+//}
 
 //MARK: - 567. Permutation in String
 //let s1 = "adc", s2 = "dcda"
@@ -3221,6 +3221,30 @@ class Solution { //0ms beats 100%
 //        return root
 //    }
 //}
+
+//MARK: - 🟢645. Set Mismatch
+print(solution.findErrorNums([2,2]))
+
+class Solution { //173ms beats 75%
+    func findErrorNums(_ nums: [Int]) -> [Int] {
+        var appear = [Int: Int]()
+        var result = [-1, -1]
+        for num in nums {
+            appear[num, default: 0] += 1
+        }
+        for num in 1...nums.count {
+            if let count = appear[num] {
+                if count == 2 {
+                    result[0] = num
+                }
+            } else {
+                result[1] = num
+            }
+        }
+        return result
+    }
+}
+
 
 //MARK: - 739. Daily Temperatures
 //let temperatures = [73,74,75,71,69,72,76,73]
