@@ -3223,27 +3223,27 @@ let solution = Solution()
 //}
 
 //MARK: - 🟢645. Set Mismatch
-print(solution.findErrorNums([2,2]))
-
-class Solution { //173ms beats 75%
-    func findErrorNums(_ nums: [Int]) -> [Int] {
-        var appear = [Int: Int]()
-        var result = [-1, -1]
-        for num in nums {
-            appear[num, default: 0] += 1
-        }
-        for num in 1...nums.count {
-            if let count = appear[num] {
-                if count == 2 {
-                    result[0] = num
-                }
-            } else {
-                result[1] = num
-            }
-        }
-        return result
-    }
-}
+//print(solution.findErrorNums([2,2]))
+//
+//class Solution { //173ms beats 75%
+//    func findErrorNums(_ nums: [Int]) -> [Int] {
+//        var appear = [Int: Int]()
+//        var result = [-1, -1]
+//        for num in nums {
+//            appear[num, default: 0] += 1
+//        }
+//        for num in 1...nums.count {
+//            if let count = appear[num] {
+//                if count == 2 {
+//                    result[0] = num
+//                }
+//            } else {
+//                result[1] = num
+//            }
+//        }
+//        return result
+//    }
+//}
 
 
 //MARK: - 739. Daily Temperatures
@@ -3833,6 +3833,73 @@ class Solution { //173ms beats 75%
 //    }
 //}
 
+//MARK: - 🟢2515. Shortest Distance to Target String in a Circular Array˛
+print(solution.closetTarget(["a","b","leetcode"]
+                            , "leetcode", 0))
+
+//class Solution { //95ms beats 93% Iterative solution
+//    func closetTarget(_ words: [String], _ target: String, _ startIndex: Int) -> Int {
+//        var indices = [Int]()
+//        for (index, word) in words.enumerated() {
+//            if word == target {
+//                indices.append(index)
+//            }
+//        }
+//        guard indices.count > 0 else {
+//            return -1
+//        }
+//        var shortest = Int.max
+//        for index in indices {
+//            let lower = min(index, startIndex)
+//            let high = max(index, startIndex)
+//            let dif1 = abs(index - startIndex)
+//            let dif2 = abs(lower+words.count - high)
+//
+//            let difference = min(dif1, dif2)
+//            if difference == 0 {
+//                return 0
+//            }
+//            shortest = min(shortest, difference)
+//        }
+//        return shortest
+//    }
+//}
+
+//class Solution { //96ms beats 93% O(2n)
+//    func closetTarget(_ words: [String], _ target: String, _ startIndex: Int) -> Int {
+//        var result: Int?
+//        let length = words.count
+//        func moveToRight() {
+//            var targetIndex = startIndex
+//            var dif = 0
+//            for _ in 0..<length {
+//                if words[targetIndex] == target {
+//                    result = min(result ?? Int.max, dif)
+//                    return
+//                }
+//                targetIndex = targetIndex + 1 == words.count ? 0 : targetIndex + 1
+//                dif += 1
+//            }
+//        }
+//        func moveToLeft() {
+//            var targetIndex = startIndex
+//            var dif = 0
+//            for _ in 0..<length {
+//                if words[targetIndex] == target {
+//                    print(targetIndex, dif)
+//                    result = min(result ?? Int.max, dif)
+//                    return
+//                }
+//                targetIndex = targetIndex - 1 == -1 ? length-1 : targetIndex - 1
+//                dif += 1
+//            }
+//        }
+//        moveToLeft()
+//        moveToRight()
+//        return result ?? -1
+//    }
+//}
+
 //MARK: - 🟡2516. Take K of Each Character From Left and Right
 //print(solution.takeCharacters("aabaaaacaabc", 2))
 //
@@ -4279,8 +4346,8 @@ class Solution { //173ms beats 75%
 //func getArea(x1: Int, y1: Int, x2: Int, y2: Int, x3: Int, y3: Int) -> Double {
 //    return Double(1/2)/Double(x1)
 //}
-//let diff = (CFAbsoluteTimeGetCurrent() - start) * 1000
-//print("\n\n\(diff) ms")
+let diff = (CFAbsoluteTimeGetCurrent() - start) * 1000
+print("\n\nThe program runs in \(diff) ms")
 
 
 //MARK: - Basta-GSWEP
