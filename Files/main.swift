@@ -3833,10 +3833,30 @@ let solution = Solution()
 //    }
 //}
 
-//MARK: - 🟢2515. Shortest Distance to Target String in a Circular Array˛
-print(solution.closetTarget(["a","b","leetcode"]
-                            , "leetcode", 0))
+//MARK: - 🟢2455. Average Value of Even Numbers That Are Divisible by Three
+print(solution.averageValue([4,4,9,10]))
 
+class Solution { //47ms beats 90%
+    func averageValue(_ nums: [Int]) -> Int {
+        var sum = 0
+        var count = 0
+        for num in nums {
+            if num % 3 == 0 && num % 2 == 0 {
+                sum += num
+                count += 1
+            }
+        }
+        if count == 0 {
+            return 0
+        }
+        return sum/count
+    }
+}
+
+//MARK: - 🟢2515. Shortest Distance to Target String in a Circular Array˛
+//print(solution.closetTarget(["a","b","leetcode"]
+//                            , "leetcode", 0))
+//
 //class Solution { //95ms beats 93% Iterative solution
 //    func closetTarget(_ words: [String], _ target: String, _ startIndex: Int) -> Int {
 //        var indices = [Int]()
