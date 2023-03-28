@@ -3311,8 +3311,37 @@ let solution = Solution()
 //    }
 //}
 
+//MARK: - 🟢830. Positions of Large Groups
+print(solution.largeGroupPositions("abcdddeeeeaabbbcd"))
 
-//MARK: - 853. Car Fleet
+class Solution { //6ms beats 92%
+    func largeGroupPositions(_ s: String) -> [[Int]] {
+        let s = Array(s)
+        var left = 0, right = 0, count = 0
+        var prevChar: Character = "!"
+        var result = [[Int]]()
+        while right < s.count {
+            let currentChar = s[right]
+            if prevChar != currentChar {
+                if count >= 3 {
+                    result.append([left, right-1])
+                }
+                left = right
+                prevChar = currentChar
+                count = 1
+            } else {
+                count += 1
+            }
+            right += 1
+        }
+        if count >= 3 {
+            result.append([left, right-1])
+        }
+        return result
+    }
+}
+
+//MARK: - 🟡853. Car Fleet
 //let target = 10, position = [6,8], speed = [3,2]
 //let s = Solution()
 //print(s.carFleet(target, position, speed))
@@ -3834,24 +3863,24 @@ let solution = Solution()
 //}
 
 //MARK: - 🟢2455. Average Value of Even Numbers That Are Divisible by Three
-print(solution.averageValue([4,4,9,10]))
-
-class Solution { //47ms beats 90%
-    func averageValue(_ nums: [Int]) -> Int {
-        var sum = 0
-        var count = 0
-        for num in nums {
-            if num % 3 == 0 && num % 2 == 0 {
-                sum += num
-                count += 1
-            }
-        }
-        if count == 0 {
-            return 0
-        }
-        return sum/count
-    }
-}
+//print(solution.averageValue([4,4,9,10]))
+//
+//class Solution { //47ms beats 90%
+//    func averageValue(_ nums: [Int]) -> Int {
+//        var sum = 0
+//        var count = 0
+//        for num in nums {
+//            if num % 3 == 0 && num % 2 == 0 {
+//                sum += num
+//                count += 1
+//            }
+//        }
+//        if count == 0 {
+//            return 0
+//        }
+//        return sum/count
+//    }
+//}
 
 //MARK: - 🟢2515. Shortest Distance to Target String in a Circular Array˛
 //print(solution.closetTarget(["a","b","leetcode"]
