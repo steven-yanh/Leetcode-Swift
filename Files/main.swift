@@ -2423,6 +2423,52 @@ let solution = Solution()
 //    }
 //}
 
+//MARK: - 🟡207. Course Schedule
+print(solution.canFinish(2, [[1,0],[0,1]]))
+
+class Solution { //69ms beats 93%
+    func canFinish(_ numCourses: Int, _ prerequisites: [[Int]]) -> Bool {
+        var adjacency = [Int: [Int]]()
+        var visited = Array(repeating: false, count: numCourses)
+        var onPath = Array(repeating: false, count: numCourses)
+        for prerequisite in prerequisites {
+            adjacency[prerequisite[0], default: []].append(prerequisite[1])
+        }
+        func dfs(_ courseLabel: Int) -> Bool {
+            if onPath[courseLabel] {
+                return false
+            }
+            
+            onPath[courseLabel] = true
+            visited[courseLabel] = true
+            if let preCourses = adjacency[courseLabel] {
+                for preCourse in preCourses {
+                    if onPath[preCourse] {
+                        return false
+                    } else {
+                        if !visited[preCourse] {
+                            if !dfs(preCourse) { return false }
+                        }
+                    }
+                    
+                }
+            }
+            onPath[courseLabel] = false
+            return true
+        }
+        
+        for courseLabel in 0..<numCourses {
+            if !visited[courseLabel] {
+                if !dfs(courseLabel) {
+                    return false
+                }
+            }
+        }
+        
+        return true
+    }
+}
+
 //MARK: - 🟡209. Minimum Size Subarray Sum
 //MARK: very typical sliding window question maintain the framework and make shrink condition.
 //let target = 11, nums = [1,1,1,1,1,1,1,1]
@@ -3312,34 +3358,34 @@ let solution = Solution()
 //}
 
 //MARK: - 🟢830. Positions of Large Groups
-print(solution.largeGroupPositions("abcdddeeeeaabbbcd"))
-
-class Solution { //6ms beats 92%
-    func largeGroupPositions(_ s: String) -> [[Int]] {
-        let s = Array(s)
-        var left = 0, right = 0, count = 0
-        var prevChar: Character = "!"
-        var result = [[Int]]()
-        while right < s.count {
-            let currentChar = s[right]
-            if prevChar != currentChar {
-                if count >= 3 {
-                    result.append([left, right-1])
-                }
-                left = right
-                prevChar = currentChar
-                count = 1
-            } else {
-                count += 1
-            }
-            right += 1
-        }
-        if count >= 3 {
-            result.append([left, right-1])
-        }
-        return result
-    }
-}
+//print(solution.largeGroupPositions("abcdddeeeeaabbbcd"))
+//
+//class Solution { //6ms beats 92%
+//    func largeGroupPositions(_ s: String) -> [[Int]] {
+//        let s = Array(s)
+//        var left = 0, right = 0, count = 0
+//        var prevChar: Character = "!"
+//        var result = [[Int]]()
+//        while right < s.count {
+//            let currentChar = s[right]
+//            if prevChar != currentChar {
+//                if count >= 3 {
+//                    result.append([left, right-1])
+//                }
+//                left = right
+//                prevChar = currentChar
+//                count = 1
+//            } else {
+//                count += 1
+//            }
+//            right += 1
+//        }
+//        if count >= 3 {
+//            result.append([left, right-1])
+//        }
+//        return result
+//    }
+//}
 
 //MARK: - 🟡853. Car Fleet
 //let target = 10, position = [6,8], speed = [3,2]
