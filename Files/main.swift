@@ -837,7 +837,40 @@ let solution = Solution()
 //    }
 //}
 
-//MARK: - 70. 🟢Climbing Stairs
+//MARK: - 🟡56. Merge Intervals
+print(solution.merge([[1,4],[4,5]]))
+
+class Solution {
+    func merge(_ intervals: [[Int]]) -> [[Int]] {
+        //sort
+        guard intervals.count > 0 else {
+            return []
+        }
+        let intervals = intervals.sorted( by: {
+            return $0[0] < $1[0]
+        })
+        var currentInterval = intervals[0]
+        var result = [[Int]]()
+        //loop through array
+        for index in 1..<intervals.count {
+            let interval = intervals[index]
+            if interval[0] <= currentInterval[1] {
+                if interval[1] >= currentInterval[1] {
+                    currentInterval[1] = interval[1]
+                }
+            } else {
+                result.append(currentInterval)
+                currentInterval = interval
+            }
+        }
+        result.append(currentInterval)
+        return result
+        //current Interval 1& compare with the interval we looking at
+        
+    }
+}
+
+//MARK: - 🟢70. Climbing Stairs
 //print(solution.climbStairs(3))
 //class Solution { // iterative (button up) 0ms
 //    func climbStairs(_ n: Int) -> Int {
@@ -2424,50 +2457,47 @@ let solution = Solution()
 //}
 
 //MARK: - 🟡207. Course Schedule
-print(solution.canFinish(2, [[1,0],[0,1]]))
-
-class Solution { //69ms beats 93%
-    func canFinish(_ numCourses: Int, _ prerequisites: [[Int]]) -> Bool {
-        var adjacency = [Int: [Int]]()
-        var visited = Array(repeating: false, count: numCourses)
-        var onPath = Array(repeating: false, count: numCourses)
-        for prerequisite in prerequisites {
-            adjacency[prerequisite[0], default: []].append(prerequisite[1])
-        }
-        func dfs(_ courseLabel: Int) -> Bool {
-            if onPath[courseLabel] {
-                return false
-            }
-            
-            onPath[courseLabel] = true
-            visited[courseLabel] = true
-            if let preCourses = adjacency[courseLabel] {
-                for preCourse in preCourses {
-                    if onPath[preCourse] {
-                        return false
-                    } else {
-                        if !visited[preCourse] {
-                            if !dfs(preCourse) { return false }
-                        }
-                    }
-                    
-                }
-            }
-            onPath[courseLabel] = false
-            return true
-        }
-        
-        for courseLabel in 0..<numCourses {
-            if !visited[courseLabel] {
-                if !dfs(courseLabel) {
-                    return false
-                }
-            }
-        }
-        
-        return true
-    }
-}
+//print(solution.canFinish(2, [[1,0],[0,1]]))
+//
+//class Solution { //69ms beats 93%
+//    func canFinish(_ numCourses: Int, _ prerequisites: [[Int]]) -> Bool {
+//        var adjacency = [Int: [Int]]()
+//        var visited = Array(repeating: false, count: numCourses)
+//        var onPath = Array(repeating: false, count: numCourses)
+//        for prerequisite in prerequisites {
+//            adjacency[prerequisite[0], default: []].append(prerequisite[1])
+//        }
+//        func dfs(_ courseLabel: Int) -> Bool {
+//            if onPath[courseLabel] {
+//                return false
+//            }
+//            onPath[courseLabel] = true
+//            visited[courseLabel] = true
+//            if let preCourses = adjacency[courseLabel] {
+//                for preCourse in preCourses {
+//                    if onPath[preCourse] {
+//                        return false
+//                    } else {
+//                        if !visited[preCourse] {
+//                            if !dfs(preCourse) { return false }
+//                        }
+//                    }
+//
+//                }
+//            }
+//            onPath[courseLabel] = false
+//            return true
+//        }
+//        for courseLabel in 0..<numCourses {
+//            if !visited[courseLabel] {
+//                if !dfs(courseLabel) {
+//                    return false
+//                }
+//            }
+//        }
+//        return true
+//    }
+//}
 
 //MARK: - 🟡209. Minimum Size Subarray Sum
 //MARK: very typical sliding window question maintain the framework and make shrink condition.
