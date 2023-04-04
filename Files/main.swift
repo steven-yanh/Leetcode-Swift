@@ -838,37 +838,35 @@ let solution = Solution()
 //}
 
 //MARK: - 🟡56. Merge Intervals
-print(solution.merge([[1,4],[4,5]]))
-
-class Solution {
-    func merge(_ intervals: [[Int]]) -> [[Int]] {
-        //sort
-        guard intervals.count > 0 else {
-            return []
-        }
-        let intervals = intervals.sorted( by: {
-            return $0[0] < $1[0]
-        })
-        var currentInterval = intervals[0]
-        var result = [[Int]]()
-        //loop through array
-        for index in 1..<intervals.count {
-            let interval = intervals[index]
-            if interval[0] <= currentInterval[1] {
-                if interval[1] >= currentInterval[1] {
-                    currentInterval[1] = interval[1]
-                }
-            } else {
-                result.append(currentInterval)
-                currentInterval = interval
-            }
-        }
-        result.append(currentInterval)
-        return result
-        //current Interval 1& compare with the interval we looking at
-        
-    }
-}
+//print(solution.merge([[1,4],[4,5]]))
+//
+//class Solution {
+//    func merge(_ intervals: [[Int]]) -> [[Int]] {
+//        //sort
+//        guard intervals.count > 0 else {
+//            return []
+//        }
+//        let intervals = intervals.sorted( by: {
+//            return $0[0] < $1[0]
+//        })
+//        var currentInterval = intervals[0]
+//        var result = [[Int]]()
+//        //loop through array
+//        for index in 1..<intervals.count {
+//            let interval = intervals[index]
+//            if interval[0] <= currentInterval[1] {
+//                if interval[1] >= currentInterval[1] {
+//                    currentInterval[1] = interval[1]
+//                }
+//            } else {
+//                result.append(currentInterval)
+//                currentInterval = interval
+//            }
+//        }
+//        result.append(currentInterval)
+//        return result
+//    }
+//}
 
 //MARK: - 🟢70. Climbing Stairs
 //print(solution.climbStairs(3))
@@ -1935,6 +1933,72 @@ class Solution {
 //        return true
 //    }
 //}
+
+//MARK: - 133. Clone Graph
+
+let node1 = Node(1)
+let node2 = Node(2)
+let node3 = Node(3)
+let node4 = Node(4)
+
+node1.neighbors = [node2, node4]
+node2.neighbors = [node1, node3]
+node3.neighbors = [node2, node4]
+node4.neighbors = [node1, node3]
+
+let s = solution.cloneGraph(node1)!
+var visit = Array(repeating: false, count: 101)
+//printGraph(s)
+//func printGraph(_ node: Node) {
+//    if visit[node.val] {
+//        return
+//    }
+//    print(node.val)
+//    print("count\(node.neighbors.count)")
+//    for neighbor in node.neighbors {
+//        if let neighbor = neighbor {
+//            printGraph(neighbor)
+//        }
+//    }
+//}
+
+
+class Solution { //6ms beats 97%
+    func cloneGraph(_ node: Node?) -> Node? {
+        var visited = Array(repeating: false, count: 101)
+        var map = [Int: Node]() //Hashmap to store the reference of the node
+        
+        guard let node = node else {
+            return nil
+        }
+        
+        let copyNode = Node(node.val)
+        map[node.val] = copyNode
+        
+        func dfs(_ node: Node) {
+            if visited[node.val] {
+                return
+            }
+            visited[node.val] = true
+            let copyNode = map[node.val, default: Node(node.val)]
+            for neighbor in node.neighbors {
+                if let neighbor = neighbor {
+                    if let existingNode = map[neighbor.val] {
+                        copyNode.neighbors.append(existingNode)
+                    } else {
+                        let newNode = Node(neighbor.val)
+                        map[neighbor.val] = newNode
+                        copyNode.neighbors.append(newNode)
+                    }
+                    dfs(neighbor)
+                }
+            }
+            
+        }
+        dfs(node)
+        return copyNode
+    }
+}
 
 //MARK: - 🟡138. Copy List with Random Pointer
 //MARK: my solution ( two pointer compare operater === )
@@ -3632,6 +3696,42 @@ class Solution {
  * let ret_2: String = obj.get(key, timestamp)
  */
 
+//MARK: - 🟡(DP)983. Minimum Cost For Tickets
+//print(solution.mincostTickets([1,4,6,7,8,20], [2,7,15]))
+//
+//class Solution {
+//    func mincostTickets(_ days: [Int], _ costs: [Int]) -> Int {
+//        var memo = Array(repeating: -1, count: 366)
+//        var buyTicket = Array(repeating: false, count: 366)
+//        for day in days {
+//            buyTicket[day] = true
+//        }
+//        let lastDay = days.last!
+//
+//        func dp(_ day: Int, _ totalCost: Int)  {
+//            if day > lastDay {
+//                return
+//            }
+//            if day == lastDay {
+//                print("day:\(day)   cost:\(totalCost)")
+//                memo[day] = min(memo[day], totalCost)
+//                return
+//            }
+//            dp(day+1, totalCost+costs[0])
+//            dp(day+7, totalCost+costs[1])
+//            dp(day+30, totalCost+costs[2])
+//        }
+//
+//        dp(1, costs[0])
+//        dp(8, costs[1])
+//        dp(31, costs[2])
+//
+//        return memo[lastDay]
+//    }
+//
+//}
+
+
 //MARK: - 🟢1128. Number of Equivalent Domino Pairs
 //print(solution.numEquivDominoPairs([[1,2],[1,2],[1,1],[1,2],[2,2]]))
 //class Solution { //160ms beats 100%
@@ -4471,9 +4571,6 @@ class Solution {
 //func getArea(x1: Int, y1: Int, x2: Int, y2: Int, x3: Int, y3: Int) -> Double {
 //    return Double(1/2)/Double(x1)
 //}
-let diff = (CFAbsoluteTimeGetCurrent() - start) * 1000
-print("\n\nThe program runs in \(diff) ms")
-
 
 //MARK: - Basta-GSWEP
 //Example:
